@@ -5,15 +5,19 @@ import { KatexModule } from 'ng-katex';
 
 import { AppComponent } from './app.component';
 import { CardViewerComponent } from './card-viewer/card-viewer.component';
+import { CardsetSelectorComponent } from './cardset-selector/cardset-selector.component';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CardViewerComponent
+    CardViewerComponent,
+    CardsetSelectorComponent
   ],
   imports: [
     BrowserModule,
-    KatexModule
+    KatexModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

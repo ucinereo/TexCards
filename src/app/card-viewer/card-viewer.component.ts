@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 @Component({
   selector: 'app-card-viewer',
@@ -15,12 +16,16 @@ export class CardViewerComponent implements OnInit {
 
   equation: string = '\\sum_{i=1}^nx_i';
 
-  constructor() {
+  public setName: String = "";
+
+  constructor(private route: ActivatedRoute) {
   
   }
 
   ngOnInit(): void {
-
+    this.route.queryParams.subscribe(params => {
+      this.setName = params['set-name'];
+    });
   }
 
   flip(): void {
