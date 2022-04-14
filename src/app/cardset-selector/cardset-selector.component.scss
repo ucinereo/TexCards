@@ -1,12 +1,13 @@
+@use '../../styles' as v;
+
 .sets-div {
     position: relative;
-    margin: auto;
-    width: 50%;
-    height: 500px;
-    border: 3px solid green;
-    padding: 10px;
+    width: 100%;
+    height: 800px;
     text-align: center;
-    outline: dashed 1px black;
+    background-color: v.$dcon;
+    border-radius: 10px;
+    box-shadow: 0px 6px 10px v.$shad;
 }
 
 .set-list {
@@ -14,7 +15,6 @@
     display: flex;
     justify-content: center;
     text-align: center;
-    border: 1px solid blue;
 }
 
 /* List */
@@ -31,6 +31,9 @@ ul {
     align-items: center;
     padding: 12px 0;
     box-sizing: border-box;
+    color: v.$main;
+    font-family: v.$pfont;
+    font-size: x-large;
   }
   
   

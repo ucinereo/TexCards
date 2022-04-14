@@ -1,12 +1,13 @@
+@use '../../styles' as v;
+
 .card {
     position: relative;
-    margin: auto;
-    width: 50%;
-    height: 500px;
-    border: 3px solid green;
-    padding: 10px;
+    width: 100%;
+    height: 800px;
     text-align: center;
-    outline: dashed 1px black;
+    background-color: v.$dcon;
+    border-radius: 10px;
+    box-shadow: 0px 6px 10px v.$shad;
 }
 
 .card-text {
@@ -15,13 +16,15 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    border: 1px solid blue;
 }
 
 .text-span {
     display: inline-block;
     vertical-align: middle;
     line-height: normal;
+    color: v.$txt;
+    font-family: v.$pfont;
+    font-size: xx-large;
 }
 
 .card-nav {
@@ -29,5 +32,25 @@
     bottom: 0;
     width: 100%;
     height: 10%;
-    border: 1px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.card-nav-icon {
+    width: 33%;
+    float: left;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+}
+
+.nav-icon {
+    color: v.$main;
+    font-size: xx-large;
+    border-radius: 50%;
+    border: 3px solid v.$main;
+    padding: 10px;
+    text-align: center;
 }

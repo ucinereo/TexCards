@@ -1,2 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~katex/dist/katex.css';
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
+
+/*** VARIABLES ***/
+/* Colors */
+$dark: #112334;
+$dcon: #182B3E;
+$shad: #1b1620;
+$txt: #BBBBBB;
+$main: #2EAD69;
+$mcon1: #215f3e;
+
+/* Fonts */
+$pfont: 'Roboto';
+
+body {
+    background-color: $dark;
+}

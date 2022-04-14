@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CardsetSelectorComponent implements OnInit {
 
-  public sets: String[] = ["Fruits", "Math"];
+  public sets: String[] = ["Fruits", "Math", "ParaProg", "AlgoWahr"];
 
   constructor() { }
 
