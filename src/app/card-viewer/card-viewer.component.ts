@@ -4,7 +4,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 @Component({
   selector: 'app-card-viewer',
   templateUrl: './card-viewer.component.html',
-  styleUrls: ['./card-viewer.component.css']
+  styleUrls: ['./card-viewer.component.scss']
 })
 export class CardViewerComponent implements OnInit {
 
