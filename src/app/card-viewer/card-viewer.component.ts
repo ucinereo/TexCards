@@ -14,8 +14,6 @@ export class CardViewerComponent implements OnInit {
   public currentCardIndex: number = 0;
   public displayTerm: boolean = true; 
 
-  equation: string = '\\sum_{i=1}^nx_i';
-
   public setName: String = "";
 
   constructor(private route: ActivatedRoute) {

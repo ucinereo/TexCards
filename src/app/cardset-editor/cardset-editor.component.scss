@@ -1,0 +1,136 @@
+@use '../../styles' as v;
+
+.ftextarea {
+  text-align: left;
+  border-bottom: 2px solid v.$main;
+  font-family: v.$pfont;
+  font-weight: 300;
+  font-size: large;
+  display: block;
+  width: 90%;
+  overflow: hidden;
+  resize: none;
+  caret-color: v.$txt;
+  color: v.$txt;
+}
+
+.div-rm {
+    color: v.$main;
+    float: right;
+    vertical-align: top;
+}
+
+.ftextarea-t[contenteditable]:empty::before {
+  content: "Term";
+  color: v.$txtcon;
+}
+
+.ftextarea-d[contenteditable]:empty::before {
+    content: "Definition";
+    color: v.$txtcon;
+  }
+
+.item {
+    margin: 20px;
+    margin-top: 20px;
+    background-color: v.$dark;
+    border-radius: 10px;
+    padding: 20px;
+    overflow: hidden;
+}
+
+.card-input-div {
+    width: 45%;
+    float: left;
+}
+
+.txt-input {
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  width: 40%;
+  float: left;
+  border: none;
+  border-bottom: 1px solid v.$txtcon;
+  background-color: transparent;
+  color: v.$main;
+  font-family: v.$pfont;
+  font-size: x-large;
+  font-weight: 300;
+  caret-color: v.$txt;
+}
+
+input:focus{
+  outline: none;
+}
+*:focus {
+  outline: none;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: v.$txtcon;
+  opacity: 1; /* Firefox */
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: v.$txtcon;
+}
+
+.header-div {
+    float: left;
+    width: 100%;
+}
+
+.card {
+    position: relative;
+    width: 100%;
+    height: 800px;
+    text-align: center;
+    background-color: v.$dcon;
+    border-radius: 10px;
+    box-shadow: 0px 6px 10px v.$shad;
+}
+
+.card-text {
+    height: 90%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.text-span {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+    color: v.$txt;
+    font-family: v.$pfont;
+    font-size: xx-large;
+}
+
+.card-nav {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 10%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.div-nav-icon {
+    margin: 20px;
+    float: right;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+  }
+  
+  .nav-icon {
+    color: v.$main;
+    font-size: xx-large;
+    border-radius: 50%;
+    border: 3px solid v.$main;
+    padding: 10px;
+    text-align: center;
+  }

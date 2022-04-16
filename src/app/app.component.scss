@@ -19,8 +19,8 @@ $shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
 
 @mixin main-gradient {
   background: v.$main;
-  background: -webkit-linear-gradient(45deg, v.$main, v.$mcon1);
-  background: linear-gradient(45deg, v.$main, v.$mcon1);
+  background: -webkit-linear-gradient(45deg, v.$main, v.$main);
+  background: linear-gradient(45deg, v.$main, v.$main);
 }
 
 @mixin shadow-box {
