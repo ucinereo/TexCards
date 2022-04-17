@@ -4,7 +4,22 @@
     position: relative;
     text-align: center;
     margin: auto;
-    width: 50%;
+    width: 1200px;
+    height: -webkit-calc(100% - 50px);
+    height:    -moz-calc(100% - 50px);
+    height:         calc(100% - 50px);
+    max-height:  -webkit-calc(100% - 50px);
+    max-height:     -moz-calc(100% - 50px);
+    max-height:          calc(100% - 50px);
+    padding-top: 10px;
+    flex: 1;
+    background-color: red;
+}
+@media screen and (max-width: 1200px), (orientation: portrait) {
+  .main-div {
+    width: 100%;
+    padding-top: 0px;
+  }
 }
 
 $color-primary: #f857a8;
@@ -70,9 +85,10 @@ html {
   top: 0;
   left: 0;
   z-index: 100;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   border-radius: 10px;
   box-shadow: 0px 6px 10px v.$shad;
+  height: 50px;
 }
 
 #nav {
@@ -80,8 +96,8 @@ html {
   display: flex;
   flex-direction: column;
   font-family: $headings-font;
-  height: 4em;
   overflow: hidden;
+  line-height: 8px;
 
   &.nav-visible {
     height: 100%;
@@ -91,8 +107,6 @@ html {
 
 .nav {
   display: flex;
-  height: 4em;
-  line-height: 4em;
   flex-grow: 1;
 }
 
@@ -119,7 +133,6 @@ span.gradient {
 h1.logo {
   font-weight: 300;
   font-size: 1.75em;
-  line-height: 0.75em;
   color: v.$dcon;
 }
 
@@ -172,13 +185,6 @@ h1.logo #{$a-tags} {
     display: none;
   }
 
-  .nav #{$a-tags-no-hov} {
-    &.active {
-      @include main-gradient;
-      color: #fff;
-    }
-  }
-
   .nav-link-span {
     @include unskew;
     display: inline-block;
@@ -207,5 +213,11 @@ h1.logo #{$a-tags} {
   }
   100% {
     padding-right: 5em;
+  }
+}
+
+@media screen and (max-width: 1200px), (orientation: portrait) {
+  #nav-wrapper {
+    border-radius: 0px;
   }
 }

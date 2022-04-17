@@ -16,6 +16,8 @@ $mcon1: #215f3e;
 /* Fonts */
 $pfont: 'Roboto';
 
-body {
+html, body {
     background-color: $dark;
+    height: 100%;
+    margin: 0;
 }
