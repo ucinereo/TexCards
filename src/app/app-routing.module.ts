@@ -7,8 +7,8 @@ import { CardsetEditorComponent } from './cardset-editor/cardset-editor.componen
 const routes: Routes = [
   { path: '', redirectTo: '/sets', pathMatch: 'full'},
   { path: 'sets', component: CardsetSelectorComponent },
-  { path: 'editor', component: CardsetEditorComponent},
-  { path: 'cards/:set-name', component: CardViewerComponent }
+  { path: 'editor/:id', component: CardsetEditorComponent},
+  { path: 'cards/:id', component: CardViewerComponent }
 ];
 
 

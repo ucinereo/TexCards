@@ -1,8 +1,15 @@
 <div class="card">
-    <div (click)="flip()" class="card-text">
-        <span class="text-span">
-            <ng-katex-paragraph [paragraph]="displayTerm? terms[currentCardIndex] : definitions[currentCardIndex]"></ng-katex-paragraph>
-        </span>
+    <div (click)="flip()" class="card-text" [@cardFlip]="cardState">
+        <div class="face front">
+            <span *ngIf="flashcardsLoaded && flashcardSet != undefined && currentCardIndex >= 0" class="text-span">
+                <ng-katex-paragraph [paragraph]="flashcardSet.terms[currentCardIndex]"></ng-katex-paragraph>
+            </span>
+        </div>
+        <div class="face back">
+            <span *ngIf="flashcardsLoaded && flashcardSet != undefined && currentCardIndex >= 0" class="text-span">
+                <ng-katex-paragraph [paragraph]="flashcardSet.definitions[currentCardIndex]"></ng-katex-paragraph>
+            </span>
+        </div>
     </div>
     <div class="card-nav">
         <div class="prev div-nav-icon">
@@ -14,8 +21,8 @@
         <div class="next div-nav-icon">
             <i (click)="next()" class="material-icons nav-icon">arrow_forward_ios</i>
         </div>
-        <div class="prev div-nav-icon">
-            <i class="material-icons nav-icon">edit</i>
+        <div *ngIf="flashcardSet != undefined && flashcardSet != null" class="prev div-nav-icon">
+            <i routerLink="/editor/{{ flashcardSet.id }}" class="material-icons nav-icon">edit</i>
         </div>
     </div>
 </div>

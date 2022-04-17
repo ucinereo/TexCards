@@ -1,20 +1,24 @@
 <div class="sets-div">
     <div class="set-list">
         <ul>
-            <li *ngFor="let set of sets" routerLink="/cards/{{ set }}">{{ set }} </li>
+            <li *ngFor="let set of flashcardsSets?.names let i = index" routerLink="/cards/{{ flashcardsSets!.ids[i] }}">{{ set }}
+              <!--<div *ngIf="flashcardsSets != undefined && flashcardsSets != null" class="list-edit">
+                <i routerLink="/editor/{{ flashcardsSets.ids[i] }}" class="material-icons edit-icon">edit</i>
+            </div> -->
+            </li>
         </ul>
     </div>
     <div class="button-bar">
         <div class="div-nav-icon">
             <div class="modal-container">
-                <input id="modal-toggle" type="checkbox">
+                <input id="modal-toggle" type="checkbox" (click)="openNewFlashcardSetDialog()">
                 <button><i class="material-icons nav-icon">add</i></button>
                 <div class="modal-backdrop">
                   <div class="modal-content">
                     <label class="modal-close" for="modal-toggle"><i class="material-icons o-icon">close</i></label>
                     <h2>Create new cardset</h2>
-                    <input type="text" class="txt-input" placeholder="Flashcard set name">
-                    <label class="modal-close button" for="modal-toggle"><i class="material-icons o-icon">east</i></label>
+                    <input #newName type="text" class="txt-input" placeholder="Flashcard set name">
+                    <label class="modal-close button" for="modal-toggle"><i class="material-icons o-icon" (click)="createNewFlashcardSet()">east</i></label>
                   </div>
                 </div>
               </div>

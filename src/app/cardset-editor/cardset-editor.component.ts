@@ -1,5 +1,8 @@
 import { ThisReceiver } from '@angular/compiler';
-import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FlashcardSet } from '../flashcard-set';
+import { FlashcardService } from '../services/flashcard.service';
 
 @Component({
   selector: 'app-cardset-editor',
@@ -10,6 +13,7 @@ export class CardsetEditorComponent implements OnInit {
 
   @ViewChildren("tSpans") tSpans!: QueryList<ElementRef>;
   @ViewChildren("dSpans") dSpans!: QueryList<ElementRef>;
+  @ViewChild("name") flashcardSetNameInput!: ElementRef;
 
   public terms: string[] = [""];
   public definitions: string[] = [""];
@@ -20,11 +24,47 @@ export class CardsetEditorComponent implements OnInit {
 
   public setName: string = "ParaProg";
 
-  constructor() {
+  public flashcardSet?: FlashcardSet;
+  public flashcardSetID?: number;
+
+  constructor(private route: ActivatedRoute, private router: Router, private flashcardService: FlashcardService) {
 
    }
 
   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.flashcardSetID = params['id'];
+      this.flashcardService.getFlashcardSet(this.flashcardSetID!).subscribe(data => {
+        this.flashcardSet = data;
+        this.count = this.flashcardSet.terms.length + 1;
+        this.terms = this.flashcardSet.terms;
+        this.definitions = this.flashcardSet.definitions;
+        this.terms.push("");
+        this.definitions.push("");
+        setTimeout(() => this.setupData(), 5);
+      })
+    });
+  }
+
+  setupData(): void {
+    for (var i = 0; i < this.count -1; i++) {
+      this.dSpans.get(i)!.nativeElement.innerText = this.terms[i];
+      this.tSpans.get(i)!.nativeElement.innerText = this.definitions[i];
+    }
+  }
+
+  submit(): void {
+    this.flashcardSet!.definitions= this.definitions;
+    this.flashcardSet!.terms= this.terms;
+    this.flashcardSet?.definitions.pop();
+    this.flashcardSet?.terms.pop();
+    this.flashcardSet!.flashcardSetName = this.flashcardSetNameInput.nativeElement.value;
+    this.flashcardService.editFlashcardSet(this.flashcardSet!).subscribe(data => {
+      if (!data) {
+        console.log("error handling");
+      }
+      this.router.navigate(['cards/' + this.flashcardSet!.id]);
+    });
   }
 
   counter(i: number): number[] {
@@ -53,7 +93,7 @@ export class CardsetEditorComponent implements OnInit {
   }
 
   checkForEmpty(index: number): void {
-    if (index != this.count -1 && this.focusIndex != index && this.terms[index].length == 0 && this.definitions[index].length == 0) {
+    if (index != this.count -1 && index < this.terms.length && this.focusIndex != index && this.terms[index].length == 0 && this.definitions[index].length == 0) {
       this.removeItem(index);
       if (this.focusIndex > index) {
         if (this.termFocus) {

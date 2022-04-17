@@ -1,8 +1,8 @@
 <div class="card">
     <div class="header-div">
-        <input type="text" placeholder="Flashcard set name" value="{{ setName }}" class="txt-input">
+        <input #name type="text" placeholder="Flashcard set name" value="{{ flashcardSet?.flashcardSetName }}" class="txt-input">
     </div>
-    <div class="list">
+    <div class="list" id="edit-list">
         <div class="item" *ngFor="let in of counter(count); let i = index">
             <div class="card-input-div">
                 <span #tSpans class="ftextarea ftextarea-t" role="textbox" contenteditable (input)="update(i, $event, true)" (focus)="onFocusIn(i, true)" (focusout)="onFocusOut(i)"></span>
@@ -16,7 +16,7 @@
         </div>
     </div>
     <div class="card-nav">
-        <div class="div-nav-icon">
+        <div class="div-nav-icon" (click)="submit()">
             <i class="material-icons nav-icon">done</i>
         </div>
         <div class="div-nav-icon">

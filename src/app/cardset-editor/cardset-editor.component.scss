@@ -1,5 +1,34 @@
 @use '../../styles' as v;
 
+
+#edit-list::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 10px;
+	background-color: v.$dark;
+}
+
+#edit-list::-webkit-scrollbar
+{
+	width: 12px;
+	background-color: v.$dcon;
+}
+
+#edit-list::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: v.$main;
+}
+
+
+.list {
+  overflow-y: auto;
+  margin: auto;
+  width: 100%;
+  height: 80%;
+}
+
 .ftextarea {
   text-align: left;
   border-bottom: 2px solid v.$main;
@@ -37,6 +66,7 @@
     border-radius: 10px;
     padding: 20px;
     overflow: hidden;
+
 }
 
 .card-input-div {
@@ -88,6 +118,10 @@ input:focus{
     background-color: v.$dcon;
     border-radius: 10px;
     box-shadow: 0px 6px 10px v.$shad;
+    padding-right: 10px;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;
 }
 
 .card-text {
@@ -115,11 +149,10 @@ input:focus{
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding-bottom: 20px;
 }
 
 .div-nav-icon {
-    margin: 20px;
+    margin: 15px;
     float: right;
     display: inline-block;
     vertical-align: middle;
@@ -131,6 +164,6 @@ input:focus{
     font-size: xx-large;
     border-radius: 50%;
     border: 3px solid v.$main;
-    padding: 10px;
+    padding: 5px;
     text-align: center;
   }

@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { KatexModule } from 'ng-katex';
 
@@ -21,7 +22,8 @@ import { CardsetEditorComponent } from './cardset-editor/cardset-editor.componen
     BrowserModule,
     KatexModule,
     AppRoutingModule,
-    FormsModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
