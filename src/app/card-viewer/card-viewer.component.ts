@@ -3,6 +3,7 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { FlashcardService } from '../services/flashcard.service';
 import { FlashcardSet } from '../flashcard-set';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { FlashcardIndexer } from '../flashcard-indexer';
 
 @Component({
   selector: 'app-card-viewer',
@@ -27,18 +28,17 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 })
 export class CardViewerComponent implements OnInit {
 
-  public currentCardIndex: number = -1;
-
   @Input() cardState: string = "default";
 
   public flashcardSet?: FlashcardSet;
   public flashcardSetID?: number;
 
   public flashcardsLoaded: boolean = false;
-  private length: number = 0;
+  
+  public flashcardIndexer: FlashcardIndexer;
 
   constructor(private route: ActivatedRoute, private flashcardService: FlashcardService) {
-  
+    this.flashcardIndexer = new FlashcardIndexer(0);
   }
 
   ngOnInit(): void {
@@ -47,10 +47,7 @@ export class CardViewerComponent implements OnInit {
       this.flashcardService.getFlashcardSet(this.flashcardSetID!).subscribe(data => {
         this.flashcardSet = data;
         this.flashcardsLoaded = true;
-        this.length = this.flashcardSet.terms.length;
-        if (this.length > 0) {
-          this.currentCardIndex = 0;
-        }
+        this.flashcardIndexer.setLength(this.flashcardSet.terms.length)
       })
     });
   }
@@ -61,14 +58,6 @@ export class CardViewerComponent implements OnInit {
     } else {
       this.cardState = "default";
     }
-  }
-
-  next(): void {
-    this.currentCardIndex = (this.currentCardIndex + 1) % this.length;
-  }
-
-  prev(): void {
-    this.currentCardIndex = (this.currentCardIndex + this.length -1) % this.length;
   }
 
 }

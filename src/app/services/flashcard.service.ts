@@ -9,7 +9,7 @@ import { FlashcardSet } from '../flashcard-set';
 })
 export class FlashcardService {
 
-  private REST_API_SERVER = "http://192.168.178.93:8080/";
+  private REST_API_SERVER = "";
 
   constructor(private httpClient: HttpClient) {
 
