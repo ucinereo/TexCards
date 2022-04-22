@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { KatexModule } from 'ng-katex';
@@ -10,13 +10,17 @@ import { CardViewerComponent } from './card-viewer/card-viewer.component';
 import { CardsetSelectorComponent } from './cardset-selector/cardset-selector.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CardsetEditorComponent } from './cardset-editor/cardset-editor.component';
+import { LoginComponent } from './login/login.component';
+import { BasicAuthInterceptor } from './services/auth/basic-auth.interceptor';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
     AppComponent,
     CardViewerComponent,
     CardsetSelectorComponent,
-    CardsetEditorComponent
+    CardsetEditorComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +29,12 @@ import { CardsetEditorComponent } from './cardset-editor/cardset-editor.componen
     HttpClientModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true
+    },
+    AuthGuard
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
