@@ -6,6 +6,7 @@ export class FlashcardSet {
     definitions!: string[];
     stars!: number[];
     owner!: boolean;
+    editPermission!: boolean;
     
 
 }

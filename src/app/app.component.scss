@@ -149,6 +149,10 @@ h1.logo #{$a-tags} {
   display: flex;
   flex-direction: column;
   height: 100%;
+  text-align: center;
+  float: left;
+  margin-right: 100px;
+  color: v.$main;
 }
 
 .btn-nav {

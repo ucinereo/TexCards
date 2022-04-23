@@ -21,7 +21,7 @@
         <div class="next div-nav-icon">
             <i (click)="flashcardIndexer.next()" class="material-icons nav-icon">arrow_forward_ios</i>
         </div>
-        <div *ngIf="flashcardSet != undefined && flashcardSet != null" class="prev div-nav-icon">
+        <div *ngIf="flashcardSet != undefined && flashcardSet != null && flashcardSet.editPermission" class="prev div-nav-icon">
             <i routerLink="/editor/{{ flashcardSet.id }}" class="material-icons nav-icon">edit</i>
         </div>
         <div *ngIf="flashcardSet != undefined && flashcardSet != null && flashcardSet.owner" class="prev div-nav-icon">

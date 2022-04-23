@@ -16,6 +16,7 @@ export class CardsetShareComponent implements OnInit {
 
   public userPermissions!: UserPermission[];
   private flashcardSetID!: number;
+  public flashcardSetName: string = "Flashcard set name";
 
   constructor(private flashcardService: FlashcardService, private route: ActivatedRoute) { }
 
@@ -25,6 +26,7 @@ export class CardsetShareComponent implements OnInit {
       this.flashcardService.getFlahcardSetPermissions(this.flashcardSetID).subscribe(data => {
         this.userPermissions = data;    
       });
+      this.flashcardService.getFlashcardSetName(this.flashcardSetID).subscribe(data => this.flashcardSetName = data.flashcardSetName);
     });
   }
 

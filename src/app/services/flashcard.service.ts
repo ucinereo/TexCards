@@ -5,6 +5,7 @@ import { FlashcardsSets } from '../flashcards-sets';
 import { FlashcardSet } from '../flashcard-set';
 import { FlashcardStar } from '../flashcard-star';
 import { UserPermission } from '../user-permission';
+import { FlashcardSetName } from '../flashcard-set-name';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,11 @@ export class FlashcardService {
   public getFlashcardSet(id: number): Observable<FlashcardSet> {
     const params = new HttpParams().set("id", id);
     return this.httpClient.get<FlashcardSet>(FlashcardService.REST_API_SERVER + "flashcard-set", {params});
+  }
+
+  public getFlashcardSetName(id: number): Observable<FlashcardSetName> {
+    const params = new HttpParams().set("id", id);
+    return this.httpClient.get<FlashcardSetName>(FlashcardService.REST_API_SERVER + "flashcard-set-name", {params});
   }
 
   public editFlashcardSet(flashcardSet: FlashcardSet): Observable<boolean> {
