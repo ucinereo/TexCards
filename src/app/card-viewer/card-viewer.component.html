@@ -24,5 +24,14 @@
         <div *ngIf="flashcardSet != undefined && flashcardSet != null" class="prev div-nav-icon">
             <i routerLink="/editor/{{ flashcardSet.id }}" class="material-icons nav-icon">edit</i>
         </div>
+        <div *ngIf="flashcardSet != undefined && flashcardSet != null && flashcardSet.owner" class="prev div-nav-icon">
+            <i routerLink="/share/{{ flashcardSet.id }}" class="material-icons nav-icon">share</i>
+        </div>
+        <div *ngIf="flashcardSet != undefined && flashcardSet != null && flashcardSet.stars.includes(flashcardIndexer.getIndex())" class="prev div-nav-icon">
+            <i (click)="toggleStar()" class="material-icons star-icon star-icon-a">star</i>
+        </div>
+        <div *ngIf="flashcardSet != undefined && flashcardSet != null && !flashcardSet.stars.includes(flashcardIndexer.getIndex())" class="prev div-nav-icon">
+            <i (click)="toggleStar()" class="material-icons star-icon star-icon-p">star</i>
+        </div>
     </div>
 </div>

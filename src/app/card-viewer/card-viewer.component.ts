@@ -45,6 +45,7 @@ export class CardViewerComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.flashcardSetID = params['id'];
       this.flashcardService.getFlashcardSet(this.flashcardSetID!).subscribe(data => {
+        console.log(data);
         this.flashcardSet = data;
         this.flashcardsLoaded = true;
         this.flashcardIndexer.setLength(this.flashcardSet.terms.length)
@@ -57,6 +58,21 @@ export class CardViewerComponent implements OnInit {
       this.cardState = "flipped";
     } else {
       this.cardState = "default";
+    }
+  }
+
+  toggleStar(): void {
+    let index = this.flashcardIndexer.getIndex();
+    if (this.flashcardSet!.stars.includes(index)) {
+      this.flashcardService.removeFlashcardStar(this.flashcardSet!.id, this.flashcardSet!.terms[this.flashcardIndexer.getIndex()], this.flashcardSet!.definitions[this.flashcardIndexer.getIndex()]).subscribe(data => {
+        console.log(data);
+      });
+      this.flashcardSet!.stars.splice(this.flashcardSet!.stars.indexOf(index), 1);
+    } else {
+      this.flashcardService.addFlashcardStar(this.flashcardSet!.id, this.flashcardSet!.terms[this.flashcardIndexer.getIndex()], this.flashcardSet!.definitions[this.flashcardIndexer.getIndex()]).subscribe(data => {
+        console.log(data);
+      });
+      this.flashcardSet!.stars.push(index);
     }
   }
 

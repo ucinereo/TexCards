@@ -117,4 +117,8 @@ export class CardsetEditorComponent implements OnInit {
     }
   }
 
+  deleteFlashcardSet(): void {
+    this.flashcardService.deleteFlashcardSet(this.flashcardSet!).subscribe(data => console.log(data));
+  }
+
 }

@@ -1,6 +1,9 @@
 <div class="card">
     <div class="header-div">
         <input #name type="text" placeholder="Flashcard set name" value="{{ flashcardSet?.flashcardSetName }}" class="txt-input">
+        <div class="delete-div" (click)="deleteFlashcardSet()">
+            <i class="material-icons delete-icon">delete</i>
+        </div>
     </div>
     <div class="list" id="edit-list">
         <div class="item" *ngFor="let in of counter(count); let i = index">

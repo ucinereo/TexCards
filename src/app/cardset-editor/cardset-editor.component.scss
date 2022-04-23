@@ -21,6 +21,18 @@
 	background-color: v.$main;
 }
 
+.delete-div {
+  margin: 15px;
+  float: left;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+  color: v.$main;
+}
+
+.delete-icon {
+  font-size: xx-large;
+}
 
 .list {
   overflow-y: auto;

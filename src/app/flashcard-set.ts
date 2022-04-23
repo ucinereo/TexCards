@@ -4,5 +4,8 @@ export class FlashcardSet {
     flashcardSetName!: string;
     terms!: string[];
     definitions!: string[];
+    stars!: number[];
+    owner!: boolean;
+    
 
 }

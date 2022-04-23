@@ -1,0 +1,31 @@
+<p>cardset-share works!</p>
+<div class="outer">
+    <div class="titel-bar">
+        <p>flashcard set name</p>
+    </div>
+    <div class="permission-box">
+        <div class="permission-list-box">
+            <div *ngFor="let user of userPermissions" class="user-permission-box">
+                <span>{{ user.username }}</span>
+                <input type="checkbox" name="read" [checked]="user.readPermission" (change)="changeUserReadPermissionPermission(user.username, $event)">
+                <label for="read">Read permission</label>
+                <input type="checkbox" name="write" [checked]="user.writePermission" (change)="changeUserWritePermissionPermission(user.username, $event)">
+                <label for="write">Write permission</label>
+                <div>
+                    <i (click)="removeUserPermission(user.username)" class="material-icons">delete</i>
+                </div>
+            </div>
+        </div>
+        <div class="new-permission-box">
+            <input #iUsername type="text" placeholder="Username">
+            <input #iRead type="checkbox" name="read">
+            <label for="read">Read permission</label>
+            <input #iWrite type="checkbox" name="write">
+            <label for="write">Write permission</label>
+            <div>
+                <i (click)="addUserPermission()" class="material-icons">add</i>
+            </div>
+        </div>
+    </div>
+
+</div>
