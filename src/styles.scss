@@ -13,11 +13,34 @@ $txtcon: rgba(255,255,255,0.2);
 $main: #2EAD69;
 $mcon1: #215f3e;
 
+/* other stuff */
+$rad: 15px;
+
+
 /* Fonts */
 $pfont: 'Roboto';
 
 html, body {
-    background-color: $dark;
-    height: 100%;
     margin: 0;
+    height: 100%;
+    background-color: $dark;
+}
+
+h1 {
+    font-family: $pfont;
+    font-weight: 300;
+    color: $main;
+    margin: 0;
+}
+
+h2 {
+    font-family: $pfont;
+    font-weight: 300;
+    color: $main;
+    margin: 0;
+}
+
+i {
+    cursor: pointer;
+    color: $main;
 }

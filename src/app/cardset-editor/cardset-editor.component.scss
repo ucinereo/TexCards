@@ -1,26 +1,5 @@
 @use '../../styles' as v;
 
-
-#edit-list::-webkit-scrollbar-track
-{
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-	border-radius: 10px;
-	background-color: v.$dark;
-}
-
-#edit-list::-webkit-scrollbar
-{
-	width: 12px;
-	background-color: v.$dcon;
-}
-
-#edit-list::-webkit-scrollbar-thumb
-{
-	border-radius: 10px;
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: v.$main;
-}
-
 .delete-div {
   margin: 15px;
   float: left;
@@ -35,7 +14,6 @@
 }
 
 .list {
-  overflow-y: auto;
   margin: auto;
   width: 100%;
   height: 80%;
@@ -72,8 +50,8 @@
   }
 
 .item {
-    margin: 20px;
     margin-top: 20px;
+    margin-bottom: 20px;
     background-color: v.$dark;
     border-radius: 10px;
     padding: 20px;
@@ -118,64 +96,59 @@ input:focus{
 }
 
 .header-div {
-    float: left;
-    width: 100%;
+  float: left;
+  width: 100%;
 }
 
 .card {
-    position: relative;
-    width: 100%;
-    height: 800px;
-    text-align: center;
-    background-color: v.$dcon;
-    border-radius: 10px;
-    box-shadow: 0px 6px 10px v.$shad;
-    padding-right: 10px;
-    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
-    box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+  box-sizing: border-box;
+  display: grid;
 }
 
 .card-text {
-    height: 90%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  height: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 .text-span {
-    display: inline-block;
-    vertical-align: middle;
-    line-height: normal;
-    color: v.$txt;
-    font-family: v.$pfont;
-    font-size: xx-large;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+  color: v.$txt;
+  font-family: v.$pfont;
+  font-size: xx-large;
 }
 
 .card-nav {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 10%;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  align-self: end;
 }
 
 .div-nav-icon {
-    margin: 15px;
-    float: right;
-    display: inline-block;
-    vertical-align: middle;
-    line-height: normal;
-  }
+  margin: 15px;
+  float: right;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: normal;
+}
   
-  .nav-icon {
-    color: v.$main;
-    font-size: xx-large;
-    border-radius: 50%;
-    border: 3px solid v.$main;
-    padding: 5px;
-    text-align: center;
-  }
+.nav-icon {
+  color: v.$main;
+  font-size: xx-large;
+  border-radius: 50%;
+  border: 3px solid v.$main;
+  padding: 5px;
+  text-align: center;
+}

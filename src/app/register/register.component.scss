@@ -1,0 +1,52 @@
+@use '../../styles' as v;
+
+.outer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-form {
+    display: grid;
+    width: 200px;
+}
+
+.txt-input {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: none;
+  border-bottom: 1px solid v.$txtcon;
+  background-color: transparent;
+  color: v.$main;
+  font-family: v.$pfont;
+  font-size: x-large;
+  font-weight: 300;
+  caret-color: v.$txt;
+}
+
+input:focus{
+  outline: none;
+}
+*:focus {
+  outline: none;
+}
+
+button {
+    color: v.$main;
+    background-color: v.$dark;
+    border: none;
+    font-size: x-large;
+    padding: 10px;
+    border-radius: 30px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1200px), (orientation: portrait) {
+    .register-form {
+        display: grid;
+        width: 100%;
+    }
+}

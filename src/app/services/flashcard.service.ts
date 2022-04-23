@@ -12,7 +12,7 @@ import { FlashcardSetName } from '../flashcard-set-name';
 })
 export class FlashcardService {
 
-  public static REST_API_SERVER = "http://localhost:8080/";
+  public static REST_API_SERVER = "http://192.168.178.93:8080/";
 
   constructor(private httpClient: HttpClient) {
 

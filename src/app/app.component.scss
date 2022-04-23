@@ -1,226 +1,64 @@
 @use '../styles' as v;
 
 .main-div {
-    position: relative;
-    text-align: center;
-    margin: auto;
-    width: 1200px;
-    height: -webkit-calc(100% - 50px);
-    height:    -moz-calc(100% - 50px);
-    height:         calc(100% - 50px);
-    max-height:  -webkit-calc(100% - 50px);
-    max-height:     -moz-calc(100% - 50px);
-    max-height:          calc(100% - 50px);
-    padding-top: 10px;
-    flex: 1;
+  padding: 20px;
+  box-sizing:border-box;
+  margin: auto;
+  height: 100%;
+  width: 1200px;
 }
+
+.nav-bar {
+  display: flex;
+  border-radius: v.$rad;
+  padding: 10px;
+  height: 40px;
+  background-color: v.$dcon;
+}
+
+#logo-div {
+  width: 50%;
+}
+
+#logo {
+  cursor: pointer;
+  width: fit-content;
+}
+
+#logout-div {
+  width: 50%;
+  text-align: right;
+}
+
+.component-div {
+  border-radius: v.$rad;
+  margin-top: 10px;
+  height: -webkit-calc(100% - 70px);
+  height:    -moz-calc(100% - 70px);
+  height:         calc(100% - 70px);
+  background-color: v.$dcon;
+}
+
+.scroll-div {
+  overflow-y: auto;
+  box-sizing:border-box;
+  padding: 15px;
+  height: 100%;
+}
+
+
 @media screen and (max-width: 1200px), (orientation: portrait) {
   .main-div {
+    padding: 0;
     width: 100%;
-    padding-top: 0px;
-  }
-}
-
-$color-primary: #f857a8;
-$color-secondary: #ff5858;
-$color-neutral-lt: #fff;
-$color-neutral-med: #ddd;
-$color-neutral-dk: #444;
-$a-tags: "a, a:active, a:hover, a:visited";
-$a-tags-no-hov: "a:link, a:visited, a:active";
-$headings-font: "Saira Semi Condensed", sans-serif;
-$shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
-
-@mixin main-gradient {
-  background: v.$main;
-  background: -webkit-linear-gradient(45deg, v.$main, v.$main);
-  background: linear-gradient(45deg, v.$main, v.$main);
-}
-
-@mixin shadow-box {
-  background-color: v.$dcon;
-  box-shadow: $shadow;
-}
-
-@mixin skew {
-  transform: skew(-20deg);
-}
-
-@mixin unskew {
-  transform: skew(20deg);
-}
-
-/*-------------Reset-------------*/
-button {
-  background: none;
-  box-shadow: none;
-  border: none;
-  cursor: pointer;
-}
-
-button:focus,
-input:focus {
-  outline: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-/*-------------Helpers-------------*/
-.skew {
-  @include skew;
-}
-
-.un-skew {
-  @include unskew;
-}
-
-/*-------------Nav-------------*/
-#nav-wrapper {
-  overflow: hidden;
-  width: 100%;
-  margin: 0 auto;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  margin-bottom: 15px;
-  border-radius: 10px;
-  box-shadow: 0px 6px 10px v.$shad;
-  height: 50px;
-}
-
-#nav {
-  @include shadow-box;
-  display: flex;
-  flex-direction: column;
-  font-family: $headings-font;
-  overflow: hidden;
-  line-height: 8px;
-
-  &.nav-visible {
-    height: 100%;
-    overflow: auto;
-  }
-}
-
-.nav {
-  display: flex;
-  flex-grow: 1;
-}
-
-.nav-link,
-.logo {
-  padding: 0 1em;
-}
-
-span.gradient {
-  @include main-gradient;
-  padding: 0 1em;
-  position: relative;
-  right: 1em;
-  margin-right: auto;
-
-  &:hover {
-    animation-name: logo-hover;
-    animation-duration: 0.3s;
-    animation-fill-mode: forwards;
-    animation-timing-function: cubic-bezier(0.17, 0.57, 0.31, 0.85);
-  }
-}
-
-h1.logo {
-  font-weight: 300;
-  font-size: 1.75em;
-  color: v.$dcon;
-}
-
-h1.logo #{$a-tags} {
-  text-decoration: none;
-  color: v.$dcon;
-}
-
-#{$a-tags-no-hov} {
-  text-decoration: none;
-  color: v.$main;
-}
-
-.right {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  text-align: center;
-  float: left;
-  margin-right: 100px;
-  color: v.$main;
-}
-
-.btn-nav {
-  color: v.$main ;
-  padding-left: 2em;
-  padding-right: 2em;
-}
-
-@media (min-width: 800px) {
-  #nav-wrapper {
-    overflow: hidden;
   }
 
-  #nav {
-    overflow: hidden;
-    flex-direction: row;
+  .nav-bar {
+    border-radius: 0;
   }
 
-  .nav-link {
-    border-top: none;
+  .component-div {
+    border-radius: 0;
   }
 
-  .right {
-    overflow: hidden;
-    flex-direction: row;
-    justify-content: flex-end;
-    position: relative;
-    left: 1.5em;
-    height: auto;
-  }
-
-  .btn-nav {
-    display: none;
-  }
-
-  .nav-link-span {
-    @include unskew;
-    display: inline-block;
-  }
-
-  .nav-link {
-    @include skew;
-    color: #777;
-    text-decoration: none;
-
-    &:last-child {
-      padding-right: 3em;
-    }
-  }
-
-  a:hover.nav-link:not(.active) {
-    color: $color-neutral-dk;
-    background: $color-neutral-med;
-    background: linear-gradient(45deg, $color-neutral-lt, #ddd);
-  }
-}
-
-@keyframes logo-hover {
-  20% {
-    padding-right: 0em;
-  }
-  100% {
-    padding-right: 5em;
-  }
-}
-
-@media screen and (max-width: 1200px), (orientation: portrait) {
-  #nav-wrapper {
-    border-radius: 0px;
-  }
 }

@@ -1,6 +1,7 @@
-<p>login works!</p>
-<div>
-    <input #username type="text" value="Gluewein">
-    <input #password type="password" value="superpassword">
-    <button (click)="onSubmit()">Submit</button>
+<div class="outer">
+    <div class="form">
+        <input class="txt-input" #username placeholder="Username" type="text">
+        <input class="txt-input" #password placeholder="Password" type="password">
+        <button (click)="onSubmit()">Login</button>
+    </div>
 </div>

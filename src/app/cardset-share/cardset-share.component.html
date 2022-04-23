@@ -1,27 +1,35 @@
 <div class="outer">
     <div class="titel-bar">
-        <p>{{ flashcardSetName }}</p>
+        <h2>{{ flashcardSetName }}</h2>
     </div>
     <div class="permission-box">
         <div class="permission-list-box">
             <div *ngFor="let user of userPermissions" class="user-permission-box">
-                <span>{{ user.username }}</span>
-                <input type="checkbox" name="read" [checked]="user.readPermission" (change)="changeUserReadPermissionPermission(user.username, $event)">
-                <label for="read">Read permission</label>
-                <input type="checkbox" name="write" [checked]="user.writePermission" (change)="changeUserWritePermissionPermission(user.username, $event)">
-                <label for="write">Write permission</label>
-                <div>
+                <p class="username">{{ user.username }}</p>
+                <div class="r-box-div">
+                    <input class="r-box" type="checkbox" role="switch" name="read" [checked]="user.readPermission" (change)="changeUserReadPermissionPermission(user.username, $event)">
+                    <label class="r-label" for="read">Read permission</label>
+                </div>
+                <div class="w-box-div">
+                    <input class="w-box" type="checkbox" role="switch" name="write" [checked]="user.writePermission" (change)="changeUserWritePermissionPermission(user.username, $event)">
+                    <label class="w-label" for="write">Write permission</label>
+                </div>
+                <div class="rm-div">
                     <i (click)="removeUserPermission(user.username)" class="material-icons">delete</i>
                 </div>
             </div>
         </div>
         <div class="new-permission-box">
-            <input #iUsername type="text" placeholder="Username">
-            <input #iRead type="checkbox" name="read">
-            <label for="read">Read permission</label>
-            <input #iWrite type="checkbox" name="write">
-            <label for="write">Write permission</label>
-            <div>
+            <input #iUsername type="text" class="new-username txt-input" placeholder="Username">
+            <div class="r-box-div">
+                <input #iRead type="checkbox" role="switch" name="read">
+                <label for="read">Read permission</label>
+            </div>
+            <div class="w-box-div">
+                <input #iWrite type="checkbox" role="switch" name="write">
+                <label for="write">Write permission</label>
+            </div>
+            <div class="add-div">
                 <i (click)="addUserPermission()" class="material-icons">add</i>
             </div>
         </div>

@@ -1,14 +1,15 @@
 <div class="main-div">
-    <header id="nav-wrapper">
-        <nav id="nav">
-          <div class="nav left">
-            <span class="gradient skew"><h1 class="logo un-skew"><a routerLink="" >Tex Cards</a></h1></span>
-            <button id="menu" class="btn-nav"><span class="fas fa-bars"></span></button>
-          </div>
-          <div class="nav right">
-            <i class="material-icons o-icon" (click)="onLogout()" routerLink="login">logout</i>
-          </div>
-        </nav>
-      </header>
-    <router-outlet></router-outlet>
+  <div class="nav-bar">
+    <div id="logo-div">
+      <h1 id="logo" a routerLink="">Tex Cards</h1>
+    </div>
+    <div id="logout-div">
+      <h1><i class="material-icons o-icon" (click)="onLogout()" routerLink="login">logout</i></h1>
+    </div>
+  </div>
+  <div class="component-div">
+    <div class="scroll-div">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
 </div>
