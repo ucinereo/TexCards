@@ -73,4 +73,14 @@ export class CardViewerComponent implements OnInit {
     }
   }
 
+  onNext() {
+    this.cardState = "default";
+    this.flashcardIndexer.next();
+  }
+
+  onPrev() {
+    this.cardState = "default";
+    this.flashcardIndexer.prev();
+  }
+
 }

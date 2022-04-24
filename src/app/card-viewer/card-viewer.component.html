@@ -16,10 +16,10 @@
             <i (click)="flashcardIndexer.toggleShuffle()" class="material-icons nav-icon">shuffle</i>
         </div>
         <div class="prev div-nav-icon">
-            <i (click)="flashcardIndexer.prev()" class="material-icons nav-icon">arrow_back_ios_new</i>
+            <i (click)="onPrev()" class="material-icons nav-icon">arrow_back_ios_new</i>
         </div>
         <div class="next div-nav-icon">
-            <i (click)="flashcardIndexer.next()" class="material-icons nav-icon">arrow_forward_ios</i>
+            <i (click)="onNext()" class="material-icons nav-icon">arrow_forward_ios</i>
         </div>
         <div *ngIf="flashcardSet != undefined && flashcardSet != null && flashcardSet.editPermission" class="prev div-nav-icon">
             <i routerLink="/editor/{{ flashcardSet.id }}" class="material-icons nav-icon">edit</i>
