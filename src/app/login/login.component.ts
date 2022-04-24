@@ -12,19 +12,17 @@ export class LoginComponent implements OnInit {
   @ViewChild("username") usernameInput?: ElementRef;
   @ViewChild("password") passwordInput?: ElementRef;
 
+  public wrongCredentials: boolean = false;
+
   constructor(private authService: AuthenticationService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   onSubmit(): void {
-    this.authService.authenticate(this.usernameInput?.nativeElement.value, this.passwordInput?.nativeElement.value).subscribe(data => {
-      if (!data.error) {
-        this.router.navigate(['sets']);
-      } else {
-        console.log("login failed");
-      }
-    });
+    this.authService.authenticate(this.usernameInput?.nativeElement.value, this.passwordInput?.nativeElement.value).subscribe(response => {
+      this.router.navigate(['']);
+    }, (error) => { this.wrongCredentials = true });
   }
 
 }

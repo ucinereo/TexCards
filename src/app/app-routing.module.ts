@@ -7,6 +7,7 @@ import { CardsetShareComponent } from './cardset-share/cardset-share.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './guards/auth.guard';
+import { ErrorViewComponent } from './error-view/error-view.component'
 
 const routes: Routes = [
   { path: '', redirectTo: '/sets', pathMatch: 'full' },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'cards/:id', component: CardViewerComponent , canActivate: [AuthGuard] },
   { path: 'share/:id', component: CardsetShareComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent},
-  { path: 'register', component: RegisterComponent}
+  { path: 'register', component: RegisterComponent},
+  { path: 'error/:id/:txt', component: ErrorViewComponent}
 ];
 
 

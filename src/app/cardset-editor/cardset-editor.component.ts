@@ -34,15 +34,15 @@ export class CardsetEditorComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.flashcardSetID = params['id'];
-      this.flashcardService.getFlashcardSet(this.flashcardSetID!).subscribe(data => {
-        this.flashcardSet = data;
-        this.count = this.flashcardSet.terms.length + 1;
-        this.terms = this.flashcardSet.terms;
-        this.definitions = this.flashcardSet.definitions;
+      this.flashcardService.getFlashcardSet(this.flashcardSetID!).subscribe(response => {
+        this.flashcardSet = response.data;
+        this.count = this.flashcardSet!.terms.length + 1;
+        this.terms = this.flashcardSet!.terms;
+        this.definitions = this.flashcardSet!.definitions;
         this.terms.push("");
         this.definitions.push("");
         setTimeout(() => this.setupData(), 5);
-      })
+      }, (error) => { })
     });
   }
 
@@ -59,12 +59,11 @@ export class CardsetEditorComponent implements OnInit {
     this.flashcardSet?.definitions.pop();
     this.flashcardSet?.terms.pop();
     this.flashcardSet!.flashcardSetName = this.flashcardSetNameInput.nativeElement.value;
-    this.flashcardService.editFlashcardSet(this.flashcardSet!).subscribe(data => {
-      if (!data) {
-        console.log("error handling");
+    this.flashcardService.editFlashcardSet(this.flashcardSet!).subscribe(response => {
+      if (response.data) {
+        this.router.navigate(['cards/' + this.flashcardSet!.id]);
       }
-      this.router.navigate(['cards/' + this.flashcardSet!.id]);
-    });
+    }, (error) => { });
   }
 
   counter(i: number): number[] {
@@ -118,7 +117,11 @@ export class CardsetEditorComponent implements OnInit {
   }
 
   deleteFlashcardSet(): void {
-    this.flashcardService.deleteFlashcardSet(this.flashcardSet!).subscribe(data => console.log(data));
+    this.flashcardService.deleteFlashcardSet(this.flashcardSet!).subscribe(response => {
+      if (response.data) {
+        this.router.navigate(['']);
+      }
+    }, (error) => { });
   }
 
 }

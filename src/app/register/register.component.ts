@@ -12,6 +12,9 @@ export class RegisterComponent implements OnInit {
   @ViewChild("iEmail") iEmail!: ElementRef;
   @ViewChild("iPassword") iPassword!: ElementRef;
   
+  public errorMsg: string = "Error";
+  public registrationError: boolean = false;
+
   constructor(private authService: AuthenticationService) { }
 
   ngOnInit(): void {
@@ -23,7 +26,12 @@ export class RegisterComponent implements OnInit {
     let email = this.iEmail.nativeElement.value;
     let password = this.iPassword.nativeElement.value;
     if (username.length > 0 && email.length > 0 && password.length > 0) {
-      this.authService.register(username, email, password).subscribe(data => console.log(data));
+      this.authService.register(username, email, password).subscribe(data => {
+
+      }, (error) => {
+        this.errorMsg = error.error.message;
+        this.registrationError = true;
+      });
     }
   }
 

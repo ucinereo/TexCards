@@ -15,6 +15,7 @@ import { BasicAuthInterceptor } from './services/auth/basic-auth.interceptor';
 import { AuthGuard } from './guards/auth.guard';
 import { CardsetShareComponent } from './cardset-share/cardset-share.component';
 import { RegisterComponent } from './register/register.component';
+import { ErrorViewComponent } from './error-view/error-view.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { RegisterComponent } from './register/register.component';
     CardsetEditorComponent,
     LoginComponent,
     CardsetShareComponent,
-    RegisterComponent
+    RegisterComponent,
+    ErrorViewComponent
   ],
   imports: [
     BrowserModule,

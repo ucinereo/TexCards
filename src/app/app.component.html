@@ -4,7 +4,8 @@
       <h1 id="logo" a routerLink="">Tex Cards</h1>
     </div>
     <div id="logout-div">
-      <h1><i class="material-icons o-icon" (click)="onLogout()" routerLink="login">logout</i></h1>
+      <h1 *ngIf="authService.isUserLoggedIn()"><i class="material-icons o-icon" (click)="onLogout()" routerLink="login">logout</i></h1>
+      <h1 *ngIf="!authService.isUserLoggedIn()"><i class="material-icons o-icon" (click)="onLogout()" routerLink="login">login</i></h1>
     </div>
   </div>
   <div class="component-div">

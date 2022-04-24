@@ -9,7 +9,7 @@ import { AuthenticationService } from './services/auth/authentication.service';
 export class AppComponent {
   title = 'tex-cards';
 
-  constructor(private authService: AuthenticationService) {
+  constructor(public authService: AuthenticationService) {
 
   }
 

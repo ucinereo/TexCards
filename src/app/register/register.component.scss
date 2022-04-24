@@ -11,6 +11,13 @@
 .register-form {
     display: grid;
     width: 200px;
+    text-align: center;
+}
+
+h3 {
+  font-family: v.$pfont;
+  font-weight: 300;
+  color: red;
 }
 
 .txt-input {

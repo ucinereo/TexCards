@@ -4,5 +4,6 @@
         <input class="txt-input" #iEmail type="email" placeholder="Email">
         <input class="txt-input" #iPassword type="password" placeholder="Password">
         <button (click)="onRegister()">Register</button>
+        <h3 *ngIf="registrationError" class="invalid">{{ errorMsg }}</h3>
     </div>
 </div>

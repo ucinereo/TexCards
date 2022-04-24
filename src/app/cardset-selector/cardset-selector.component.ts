@@ -17,9 +17,9 @@ export class CardsetSelectorComponent implements OnInit {
   constructor(private flashcardService: FlashcardService, private router: Router) { }
 
   ngOnInit(): void {
-    this.flashcardService.getFlashcardsSets().subscribe(data => {
-      this.flashcardsSets = data;
-    });
+    this.flashcardService.getFlashcardsSets().subscribe(response => {
+      this.flashcardsSets = response.data;
+    }, (error) => { });
   }
 
   openNewFlashcardSetDialog(): void {
@@ -27,15 +27,10 @@ export class CardsetSelectorComponent implements OnInit {
   }
 
   createNewFlashcardSet(): void {
-    console.log(this.newFlashcardSetInput.nativeElement.value);
     if (this.newFlashcardSetInput.nativeElement.value.length > 0) {
-      this.flashcardService.createNewFlashcardSet(this.newFlashcardSetInput.nativeElement.value).subscribe(data => {
-        if (data < 0) {
-          console.log("error handling");
-        } else {
-          this.router.navigate(['editor/' + data]);
-        }
-      });
+      this.flashcardService.createNewFlashcardSet(this.newFlashcardSetInput.nativeElement.value).subscribe(response => {
+        this.router.navigate(['editor/' + response.data]);
+      }, (error) => { });
     }
   }
 

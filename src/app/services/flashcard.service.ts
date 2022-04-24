@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs'
+import { Observable } from "rxjs";
 import { FlashcardsSets } from '../flashcards-sets';
 import { FlashcardSet } from '../flashcard-set';
 import { FlashcardStar } from '../flashcard-star';
 import { UserPermission } from '../user-permission';
 import { FlashcardSetName } from '../flashcard-set-name';
+import { AuthenticationService } from './auth/authentication.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -18,26 +20,26 @@ export class FlashcardService {
 
   }
 
-  public getFlashcardsSets(): Observable<FlashcardsSets> {
-    return this.httpClient.get<FlashcardsSets>(FlashcardService.REST_API_SERVER + "flashcard-sets");
+  public getFlashcardsSets() {
+    return this.httpClient.get<any>(FlashcardService.REST_API_SERVER + "flashcard-sets");
   }
 
-  public getFlashcardSet(id: number): Observable<FlashcardSet> {
+  public getFlashcardSet(id: number) {
     const params = new HttpParams().set("id", id);
-    return this.httpClient.get<FlashcardSet>(FlashcardService.REST_API_SERVER + "flashcard-set", {params});
+    return this.httpClient.get<any>(FlashcardService.REST_API_SERVER + "flashcard-set", {params});
   }
 
-  public getFlashcardSetName(id: number): Observable<FlashcardSetName> {
+  public getFlashcardSetName(id: number) {
     const params = new HttpParams().set("id", id);
-    return this.httpClient.get<FlashcardSetName>(FlashcardService.REST_API_SERVER + "flashcard-set-name", {params});
+    return this.httpClient.get<any>(FlashcardService.REST_API_SERVER + "flashcard-set-name", {params});
   }
 
-  public editFlashcardSet(flashcardSet: FlashcardSet): Observable<boolean> {
-    return this.httpClient.put<boolean>(FlashcardService.REST_API_SERVER + "flashcard-set-edit", flashcardSet);
+  public editFlashcardSet(flashcardSet: FlashcardSet) {
+    return this.httpClient.put<any>(FlashcardService.REST_API_SERVER + "flashcard-set-edit", flashcardSet);
   }
 
-  public createNewFlashcardSet(flashcardSetName: string): Observable<number> {
-    return this.httpClient.post<number>(FlashcardService.REST_API_SERVER + "flashcard-set-create", flashcardSetName);
+  public createNewFlashcardSet(flashcardSetName: string) {
+    return this.httpClient.post<any>(FlashcardService.REST_API_SERVER + "flashcard-set-create", flashcardSetName);
   }
 
   public deleteFlashcardSet(flashcardSet: FlashcardSet) {
@@ -52,21 +54,21 @@ export class FlashcardService {
     return this.httpClient.put<any>(FlashcardService.REST_API_SERVER + "flashcard-remove-star", new FlashcardStar(flashcardSetID, flashcardTerm, flashcardDefinition));
   }
 
-  public getFlahcardSetPermissions(flashcardSetID: number): Observable<UserPermission[]> {
+  public getFlahcardSetPermissions(flashcardSetID: number) {
     const params = new HttpParams().set("id", flashcardSetID);
-    return this.httpClient.get<UserPermission[]>(FlashcardService.REST_API_SERVER + "flashcard-set-permissions", {params});
+    return this.httpClient.get<any>(FlashcardService.REST_API_SERVER + "flashcard-set-permissions", {params});
   }
 
-  public editFlashcardSetUserPermission(userPermission: UserPermission): Observable<boolean> {
-    return this.httpClient.put<boolean>(FlashcardService.REST_API_SERVER + "flashcard-set-change-permission", userPermission);
+  public editFlashcardSetUserPermission(userPermission: UserPermission) {
+    return this.httpClient.put<any>(FlashcardService.REST_API_SERVER + "flashcard-set-change-permission", userPermission);
   }
 
-  public removeFlashcardSetUserPermission(userPermission: UserPermission): Observable<boolean> {
-    return this.httpClient.put<boolean>(FlashcardService.REST_API_SERVER + "flashcard-set-remove-permission", userPermission);
+  public removeFlashcardSetUserPermission(userPermission: UserPermission) {
+    return this.httpClient.put<any>(FlashcardService.REST_API_SERVER + "flashcard-set-remove-permission", userPermission);
   }
 
-  public addFlashcardSetUserPermission(userPermission: UserPermission): Observable<boolean> {
-    return this.httpClient.put<boolean>(FlashcardService.REST_API_SERVER + "flashcard-set-add-permission", userPermission);
+  public addFlashcardSetUserPermission(userPermission: UserPermission) {
+    return this.httpClient.put<any>(FlashcardService.REST_API_SERVER + "flashcard-set-add-permission", userPermission);
   }
 
 }

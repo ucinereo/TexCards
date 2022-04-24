@@ -23,34 +23,33 @@ export class CardsetShareComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.flashcardSetID = params['id'];
-      this.flashcardService.getFlahcardSetPermissions(this.flashcardSetID).subscribe(data => {
-        this.userPermissions = data;    
-      });
-      this.flashcardService.getFlashcardSetName(this.flashcardSetID).subscribe(data => this.flashcardSetName = data.flashcardSetName);
+      this.flashcardService.getFlahcardSetPermissions(this.flashcardSetID).subscribe(response => {
+        this.userPermissions = response.data;    
+      }, (error) => { });
+      this.flashcardService.getFlashcardSetName(this.flashcardSetID).subscribe(response => this.flashcardSetName = response.data.flashcardSetName, (error) => { });
     });
   }
 
   changeUserReadPermissionPermission(username: string, e: any): void {
     this.userPermissions.find(element => element.username == username)!.readPermission = e.target.checked;
-    this.flashcardService.editFlashcardSetUserPermission(this.userPermissions.find(element => element.username == username)!).subscribe(data => console.log(data));
+    this.flashcardService.editFlashcardSetUserPermission(this.userPermissions.find(element => element.username == username)!).subscribe(response => { }, (error) => { });
   }
 
   changeUserWritePermissionPermission(username: string, e: any): void {
     this.userPermissions.find(element => element.username == username)!.writePermission = e.target.checked;
-    this.flashcardService.editFlashcardSetUserPermission(this.userPermissions.find(element => element.username == username)!).subscribe(data => console.log(data));
+    this.flashcardService.editFlashcardSetUserPermission(this.userPermissions.find(element => element.username == username)!).subscribe(response => { }, (error) => { });
   }
 
   removeUserPermission(username: string): void {
-    this.flashcardService.removeFlashcardSetUserPermission(this.userPermissions.find(element => element.username == username)!).subscribe(data => {
-      console.log(data);
-      if (data) {
+    this.flashcardService.removeFlashcardSetUserPermission(this.userPermissions.find(element => element.username == username)!).subscribe(response => {
+      if (response.data) {
         this.userPermissions!.forEach((element, index) => {
           if (element.username == username) {
             this.userPermissions.splice(index, 1);
           }
         });
       }
-    });
+    }, (error) => { });
   }
 
   addUserPermission(): void {
@@ -58,12 +57,11 @@ export class CardsetShareComponent implements OnInit {
     let read = this.iRead.nativeElement.checked;
     let write = this.iWrite.nativeElement.checked;
     let userPermission = new UserPermission(username, this.flashcardSetID, read, write);
-    this.flashcardService.addFlashcardSetUserPermission(userPermission).subscribe(data => {
-      console.log(data)
-      if (data) {
+    this.flashcardService.addFlashcardSetUserPermission(userPermission).subscribe(response => {
+      if (response.data) {
         this.userPermissions.push(userPermission);
       }
-    });
+    }, (error) => { });
     this.iUsername.nativeElement.value = "";
   }
 

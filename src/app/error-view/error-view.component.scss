@@ -1,0 +1,25 @@
+@use '../../styles' as v;
+
+.outer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inner {
+    display: grid;
+    text-align: center;
+}
+
+h1 {
+    font-size: 60px;
+}
+
+@media screen and (max-width: 1200px), (orientation: portrait) {
+    .inner {
+        display: grid;
+        width: 100%;
+    }
+}
