@@ -12,8 +12,11 @@
         </div>
     </div>
     <div class="card-nav">
-        <div class="prev div-nav-icon">
-            <i (click)="flashcardIndexer.toggleShuffle()" class="material-icons nav-icon">shuffle</i>
+        <div class="prev div-nav-icon" *ngIf="flashcardIndexer.isShuffled()">
+            <i (click)="flashcardIndexer.toggleShuffle()" class="material-icons nav-icon-a">shuffle</i>
+        </div>
+        <div class="prev div-nav-icon" *ngIf="!flashcardIndexer.isShuffled()">
+            <i (click)="flashcardIndexer.toggleShuffle()" class="material-icons nav-icon-p">shuffle</i>
         </div>
         <div class="prev div-nav-icon">
             <i (click)="onPrev()" class="material-icons nav-icon">arrow_back_ios_new</i>
@@ -28,10 +31,10 @@
             <i routerLink="/share/{{ flashcardSet.id }}" class="material-icons nav-icon">share</i>
         </div>
         <div *ngIf="flashcardSet != undefined && flashcardSet != null && flashcardSet.stars.includes(flashcardIndexer.getIndex())" class="prev div-nav-icon">
-            <i (click)="toggleStar()" class="material-icons star-icon star-icon-a">star</i>
+            <i (click)="toggleStar()" class="material-icons-round star-icon star-icon-a">star</i>
         </div>
         <div *ngIf="flashcardSet != undefined && flashcardSet != null && !flashcardSet.stars.includes(flashcardIndexer.getIndex())" class="prev div-nav-icon">
-            <i (click)="toggleStar()" class="material-icons star-icon star-icon-p">star</i>
+            <i (click)="toggleStar()" class="material-icons-round star-icon star-icon-p">star</i>
         </div>
     </div>
 </div>

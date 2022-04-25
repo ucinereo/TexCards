@@ -74,4 +74,8 @@ export class FlashcardIndexer {
         }
     }
 
+    public isShuffled(): boolean {
+        return this.shuffled;
+    }
+
 }

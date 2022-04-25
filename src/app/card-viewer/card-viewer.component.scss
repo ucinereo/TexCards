@@ -99,6 +99,24 @@
   text-align: center;
 }
 
+.nav-icon-a {
+    color: v.$main;
+    font-size: xx-large;
+    border-radius: 50%;
+    border: 3px solid v.$main;
+    padding: 10px;
+    text-align: center;
+}
+
+.nav-icon-p {
+    color: v.$mcon1;
+    font-size: xx-large;
+    border-radius: 50%;
+    border: 3px solid v.$mcon1;
+    padding: 10px;
+    text-align: center;
+}
+
 .star-icon {
     font-size: xx-large;
     text-align: center;
@@ -113,10 +131,9 @@
 }
 
 @media screen and (max-width: 1200px), (orientation: portrait) {
-    .nav-icon {
+    .nav-icon, .nav-icon-a, .nav-icon-p {
         font-size: 20px;
         border-radius: 50%;
-        border: 3px solid v.$main;
         padding: 10px;
     }
 }
