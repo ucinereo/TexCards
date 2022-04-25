@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -12,7 +13,7 @@ export class ErrorViewComponent implements OnInit {
   public errorMsg: string = "";
   public errorText: string = "";
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private titleService: Title) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -28,6 +29,7 @@ export class ErrorViewComponent implements OnInit {
         this.errorMsg = "Bad request";
       }
     });
+    this.titleService.setTitle("Tex-Cards Error");
   }
 
 }

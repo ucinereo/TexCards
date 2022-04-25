@@ -1,4 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { AuthenticationService } from '../services/auth/authentication.service';
 
 @Component({
@@ -15,12 +16,13 @@ export class RegisterComponent implements OnInit {
   public errorMsg: string = "Error";
   public registrationError: boolean = false;
 
-  constructor(private authService: AuthenticationService) { }
+  constructor(private authService: AuthenticationService, private titleService: Title) { }
 
   ngOnInit(): void {
-
+    this.titleService.setTitle("Tex-Cards Register");
   }
 
+  @HostListener('document:keydown.enter')
   onRegister(): void {
     let username = this.iUsername.nativeElement.value;
     let email = this.iEmail.nativeElement.value;

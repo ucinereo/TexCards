@@ -4,6 +4,7 @@ import { FlashcardService } from '../services/flashcard.service';
 import { FlashcardSet } from '../flashcard-set';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { FlashcardIndexer } from '../flashcard-indexer';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-card-viewer',
@@ -37,7 +38,7 @@ export class CardViewerComponent implements OnInit {
   
   public flashcardIndexer: FlashcardIndexer;
 
-  constructor(private route: ActivatedRoute, private flashcardService: FlashcardService) {
+  constructor(private route: ActivatedRoute, private flashcardService: FlashcardService, private titleService: Title) {
     this.flashcardIndexer = new FlashcardIndexer(0);
   }
 
@@ -47,7 +48,8 @@ export class CardViewerComponent implements OnInit {
       this.flashcardService.getFlashcardSet(this.flashcardSetID!).subscribe(response => {
         this.flashcardSet = response.data;
         this.flashcardsLoaded = true;
-        this.flashcardIndexer.setLength(this.flashcardSet!.terms.length)
+        this.flashcardIndexer.setLength(this.flashcardSet!.terms.length);
+        this.titleService.setTitle("Tex-Cards " + this.flashcardSet!.flashcardSetName);
       })
     }, (error) => { });
   }

@@ -1,5 +1,6 @@
 import { ThisReceiver } from '@angular/compiler';
 import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlashcardSet } from '../flashcard-set';
 import { FlashcardService } from '../services/flashcard.service';
@@ -27,7 +28,7 @@ export class CardsetEditorComponent implements OnInit {
   public flashcardSet?: FlashcardSet;
   public flashcardSetID?: number;
 
-  constructor(private route: ActivatedRoute, private router: Router, private flashcardService: FlashcardService) {
+  constructor(private route: ActivatedRoute, private router: Router, private flashcardService: FlashcardService, private titleService: Title) {
 
    }
 
@@ -41,6 +42,7 @@ export class CardsetEditorComponent implements OnInit {
         this.definitions = this.flashcardSet!.definitions;
         this.terms.push("");
         this.definitions.push("");
+        this.titleService.setTitle("Tex-Cards " + this.flashcardSet!.flashcardSetName);
         setTimeout(() => this.setupData(), 5);
       }, (error) => { })
     });

@@ -1,7 +1,8 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { FlashcardService } from '../services/flashcard.service';
 import { FlashcardsSets } from '../flashcards-sets';
 import { Router } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-cardset-selector',
@@ -14,12 +15,13 @@ export class CardsetSelectorComponent implements OnInit {
 
   public flashcardsSets?: FlashcardsSets;
 
-  constructor(private flashcardService: FlashcardService, private router: Router) { }
+  constructor(private flashcardService: FlashcardService, public router: Router, private titleService: Title) { }
 
   ngOnInit(): void {
     this.flashcardService.getFlashcardsSets().subscribe(response => {
       this.flashcardsSets = response.data;
     }, (error) => { });
+    this.titleService.setTitle("Tex-Cards " + "Flashcard sets")
   }
 
   openNewFlashcardSetDialog(): void {

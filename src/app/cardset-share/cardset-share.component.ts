@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { FlashcardService } from '../services/flashcard.service';
 import { UserPermission } from '../user-permission';
@@ -18,7 +19,7 @@ export class CardsetShareComponent implements OnInit {
   private flashcardSetID!: number;
   public flashcardSetName: string = "Flashcard set name";
 
-  constructor(private flashcardService: FlashcardService, private route: ActivatedRoute) { }
+  constructor(private flashcardService: FlashcardService, private route: ActivatedRoute, private titleService: Title) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -26,7 +27,10 @@ export class CardsetShareComponent implements OnInit {
       this.flashcardService.getFlahcardSetPermissions(this.flashcardSetID).subscribe(response => {
         this.userPermissions = response.data;    
       }, (error) => { });
-      this.flashcardService.getFlashcardSetName(this.flashcardSetID).subscribe(response => this.flashcardSetName = response.data.flashcardSetName, (error) => { });
+      this.flashcardService.getFlashcardSetName(this.flashcardSetID).subscribe(response => {
+        this.flashcardSetName = response.data.flashcardSetName;
+        this.titleService.setTitle("Tex-Cards " + this.flashcardSetName);
+      }, (error) => { });
     });
   }
 
