@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -30,15 +30,15 @@ import { ErrorViewComponent } from './error-view/error-view.component';
   ],
   imports: [
     BrowserModule,
+    HammerModule,
     KatexModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true
-    },
+    { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },
+    { provide: HAMMER_GESTURE_CONFIG, useClass: HammerGestureConfig },
     AuthGuard
   ],
   bootstrap: [AppComponent]

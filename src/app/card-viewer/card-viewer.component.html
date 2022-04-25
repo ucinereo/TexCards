@@ -1,5 +1,5 @@
 <div class="card">
-    <div (click)="flip()" class="card-text" [@cardFlip]="cardState">
+    <div (click)="flip()" (swipeleft)="onNext()" (swiperight)="onPrev()" class="card-text" [@cardFlip]="cardState">
         <div class="face front">
             <span *ngIf="flashcardsLoaded && flashcardSet != undefined && flashcardIndexer.getIndex() >= 0" class="text-span">
                 <ng-katex-paragraph [paragraph]="flashcardSet.terms[flashcardIndexer.getIndex()]"></ng-katex-paragraph>
