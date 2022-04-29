@@ -43,16 +43,24 @@ export class CardsetEditorComponent implements OnInit {
         this.terms.push("");
         this.definitions.push("");
         this.titleService.setTitle("Tex-Cards " + this.flashcardSet!.flashcardSetName);
-        setTimeout(() => this.setupData(), 5);
+        setTimeout(() => this.setupData(), 5);      
       }, (error) => { })
     });
   }
 
   setupData(): void {
     for (var i = 0; i < this.count -1; i++) {
-      this.dSpans.get(i)!.nativeElement.innerText = this.terms[i];
-      this.tSpans.get(i)!.nativeElement.innerText = this.definitions[i];
+      this.tSpans.get(i)!.nativeElement.innerText = this.terms[i];
+      this.dSpans.get(i)!.nativeElement.innerText = this.definitions[i];
     }
+  }
+
+  onPaste(e: any): void {
+    console.log(e);
+    e.preventDefault();
+    const text = e.clipboardData.getData('text/plain');
+    document.execCommand("insertText", false, text);
+    
   }
 
   submit(): void {
@@ -65,7 +73,7 @@ export class CardsetEditorComponent implements OnInit {
       if (response.data) {
         this.router.navigate(['cards/' + this.flashcardSet!.id]);
       }
-    }, (error) => { });
+    }, (error) => { });    
   }
 
   counter(i: number): number[] {
