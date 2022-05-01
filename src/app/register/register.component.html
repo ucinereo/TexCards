@@ -1,8 +1,8 @@
 <div class="outer">
     <div class="register-form">
-        <input class="txt-input" #iUsername type="text" placeholder="Username">
-        <input class="txt-input" #iEmail type="email" placeholder="Email">
-        <input class="txt-input" #iPassword type="password" placeholder="Password">
+        <input class="txt-input" #iUsername type="text" placeholder="Username" id="username" name="username" autocomplete="username" required>
+        <input class="txt-input" #iEmail type="email" placeholder="Email" id="email" name="email" autocomplete="email" required>
+        <input class="txt-input" #iPassword type="password" placeholder="Password" id="current-password" name="current-password" autocomplete="current-password" required>
         <button (click)="onRegister()">Register</button>
         <h3 *ngIf="registrationError" class="invalid">{{ errorMsg }}</h3>
     </div>

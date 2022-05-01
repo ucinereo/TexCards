@@ -1,7 +1,7 @@
 <div class="outer">
     <div class="form">
-        <input class="txt-input" #username placeholder="Username" type="text">
-        <input class="txt-input" #password placeholder="Password" type="password">
+        <input class="txt-input" #username placeholder="Username" type="text" autocomplete="username" required>
+        <input class="txt-input" #password placeholder="Password" type="password" id="current-password" name="current-password" autocomplete="current-password" required>
         <button (click)="onSubmit()">Login</button>
         <h3 *ngIf="wrongCredentials" class="invalid">Wrong username or password</h3>
         <h3 class="register" routerLink="/register">You don't have an account yet, register now</h3>
