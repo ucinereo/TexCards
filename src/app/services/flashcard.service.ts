@@ -8,13 +8,15 @@ import { UserPermission } from '../user-permission';
 import { FlashcardSetName } from '../flashcard-set-name';
 import { AuthenticationService } from './auth/authentication.service';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class FlashcardService {
 
-  public static REST_API_SERVER = "http://localhost:8080/";
+  public static REST_API_SERVER = environment.apiHost;
 
   constructor(private httpClient: HttpClient) {
 
