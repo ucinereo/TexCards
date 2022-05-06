@@ -9,6 +9,7 @@
     backface-visibility: hidden;
     overflow-y: auto;
     overflow-x: auto;
+    touch-action: pan-y !important; // fixes swipe gestures not working with overfow auto
 }
 
 .back,
