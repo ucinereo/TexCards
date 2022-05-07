@@ -1,6 +1,6 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { FlashcardService } from '../services/flashcard.service';
-import { FlashcardsSets } from '../flashcards-sets';
+import { FlashcardsSets } from '../model/flashcards-sets';
 import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 

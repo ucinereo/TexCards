@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { FlashcardService } from '../services/flashcard.service';
-import { FlashcardSet } from '../flashcard-set';
+import { FlashcardSet } from '../model/flashcard-set';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { FlashcardIndexer } from '../flashcard-indexer';
 import { Title } from '@angular/platform-browser';

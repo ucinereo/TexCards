@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from "rxjs";
-import { FlashcardsSets } from '../flashcards-sets';
-import { FlashcardSet } from '../flashcard-set';
-import { FlashcardStar } from '../flashcard-star';
-import { UserPermission } from '../user-permission';
-import { FlashcardSetName } from '../flashcard-set-name';
+import { FlashcardsSets } from '../model/flashcards-sets';
+import { FlashcardSet } from '../model/flashcard-set';
+import { FlashcardStar } from '../model/flashcard-star';
+import { UserPermission } from '../model/user-permission';
+import { FlashcardSetName } from '../model/flashcard-set-name';
 import { AuthenticationService } from './auth/authentication.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';

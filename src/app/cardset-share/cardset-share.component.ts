@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { FlashcardService } from '../services/flashcard.service';
-import { UserPermission } from '../user-permission';
+import { UserPermission } from '../model/user-permission';
 
 @Component({
   selector: 'app-cardset-share',
