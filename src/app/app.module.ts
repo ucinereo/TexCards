@@ -16,6 +16,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { CardsetShareComponent } from './cardset-share/cardset-share.component';
 import { RegisterComponent } from './register/register.component';
 import { ErrorViewComponent } from './error-view/error-view.component';
+import { KatexParagraphComponent } from './katex-paragraph/katex-paragraph.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { ErrorViewComponent } from './error-view/error-view.component';
     LoginComponent,
     CardsetShareComponent,
     RegisterComponent,
-    ErrorViewComponent
+    ErrorViewComponent,
+    KatexParagraphComponent
   ],
   imports: [
     BrowserModule,

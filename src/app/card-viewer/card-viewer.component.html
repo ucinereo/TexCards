@@ -2,12 +2,12 @@
     <div (click)="flip()" (swipeleft)="onNext()" (swiperight)="onPrev()" class="card-text" [@cardFlip]="cardState">
         <div class="face front">
             <span *ngIf="flashcardsLoaded && flashcardSet != undefined && flashcardIndexer.getIndex() >= 0" class="text-span">
-                <ng-katex-paragraph [paragraph]="flashcardSet.terms[flashcardIndexer.getIndex()]" class="k-paragraph"></ng-katex-paragraph>
+                <katex-paragraph [paragraph]="flashcardSet.terms[flashcardIndexer.getIndex()]" class="k-paragraph"></katex-paragraph>
             </span>
         </div>
         <div class="face back">
             <span *ngIf="flashcardsLoaded && flashcardSet != undefined && flashcardIndexer.getIndex() >= 0" class="text-span">
-                <ng-katex-paragraph [paragraph]="flashcardSet.definitions[flashcardIndexer.getIndex()]" class="k-paragraph"></ng-katex-paragraph>
+                <katex-paragraph [paragraph]="flashcardSet.definitions[flashcardIndexer.getIndex()]" class="k-paragraph"></katex-paragraph>
             </span>
         </div>
     </div>
