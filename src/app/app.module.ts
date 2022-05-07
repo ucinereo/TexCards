@@ -17,6 +17,9 @@ import { CardsetShareComponent } from './cardset-share/cardset-share.component';
 import { RegisterComponent } from './register/register.component';
 import { ErrorViewComponent } from './error-view/error-view.component';
 import { KatexParagraphComponent } from './katex-paragraph/katex-paragraph.component';
+import { CardsetOverviewComponent } from './cardset-overview/cardset-overview.component';
+
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -28,7 +31,8 @@ import { KatexParagraphComponent } from './katex-paragraph/katex-paragraph.compo
     CardsetShareComponent,
     RegisterComponent,
     ErrorViewComponent,
-    KatexParagraphComponent
+    KatexParagraphComponent,
+    CardsetOverviewComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +40,8 @@ import { KatexParagraphComponent } from './katex-paragraph/katex-paragraph.compo
     KatexModule,
     AppRoutingModule,
     HttpClientModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatMenuModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },

@@ -1,7 +1,32 @@
 <div class="outer-div">
     <div class="set-list">
         <ul>
-          <li *ngFor="let set of flashcardsSets?.names let i = index" routerLink="/cards/{{ flashcardsSets!.ids[i] }}">{{ set }}</li>
+          <li *ngFor="let set of flashcardsSets?.names let i = index">
+            <span routerLink="/cards/{{ flashcardsSets!.ids[i] }}">{{ set }}</span>
+            <button mat-button [matMenuTriggerFor]="menu">
+              <i class="material-icons">more_vert</i>
+            </button>
+            <mat-menu #menu="matMenu" xPosition="before" class="action-menu">
+              <button mat-menu-item class="action-button" routerLink="/editor/{{ flashcardsSets!.ids[i] }}">
+                <div class="action-div">
+                  <i class="material-icons">edit</i>
+                  <span class="action-text">Edit</span>
+                </div>
+              </button>
+              <button mat-menu-item class="action-button" routerLink="/share/{{ flashcardsSets!.ids[i] }}">
+                <div class="action-div">
+                  <i class="material-icons">share</i>
+                  <span class="action-text">Share</span>
+                </div>
+              </button>
+              <button mat-menu-item class="action-button" routerLink="/view/{{ flashcardsSets!.ids[i] }}">
+                <div class="action-div">
+                  <i class="material-icons">list</i>
+                  <span class="action-text">View</span>
+                </div>
+              </button>
+            </mat-menu>
+          </li>
         </ul>
     </div>
     <div class="button-bar">

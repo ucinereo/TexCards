@@ -45,3 +45,10 @@ i {
     color: $main;
     -webkit-tap-highlight-color:  rgba(255, 255, 255, 0);
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-menu-panel.action-menu {
+    background-color: $dark;
+    min-width: 10px;
+}

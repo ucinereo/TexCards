@@ -1,0 +1,22 @@
+<div class="card">
+    <div class="content">
+        <div class="header-div">
+            <span class="name">{{ flashcardSet?.flashcardSetName }}</span>
+        </div>
+        <div class="list">
+            <div class="item" *ngFor="let t of flashcardSet?.terms; let i = index">
+                <div class="card-div card-div-t">
+                    <katex-paragraph class="text-span" [paragraph]="flashcardSet!.terms[i]"></katex-paragraph>
+                </div>
+                <div class="card-div card-div-d">
+                    <katex-paragraph class="text-span" [paragraph]="flashcardSet!.definitions[i]"></katex-paragraph>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-nav">
+        <div class="div-nav-icon">
+            <i class="material-icons nav-icon" routerLink="/cards/{{ flashcardSetID! }}">east</i>
+        </div>
+    </div>
+</div>
