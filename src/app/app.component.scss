@@ -41,6 +41,7 @@
 
 .scroll-div {
   overflow-y: auto;
+  overflow-x: hidden;
   box-sizing:border-box;
   padding: 15px;
   height: 100%;

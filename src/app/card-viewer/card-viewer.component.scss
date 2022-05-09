@@ -1,5 +1,17 @@
 @use '../../styles' as v;
 
+.learn-reset-button {
+    background-color: v.$dcon;
+    font-family: v.$pfont;
+    font-size: xx-large;
+    color: v.$main;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
+    cursor: pointer;
+}
+
 .face {
     display: block;
     position: absolute;
@@ -52,14 +64,13 @@
     cursor: pointer;
     position: relative;
     transform-style: preserve-3d;
-
+    color: v.$txt;
 }
 
 .text-span {
     display: inline-block;
     vertical-align: middle;
     line-height: normal;
-    color: v.$txt;
     font-family: v.$pfont;
     font-size: xx-large;
     position: absolute;
@@ -103,6 +114,13 @@
   text-align: center;
 }
 
+.nav-icon-nb {
+    color: v.$main;
+    font-size: xx-large;
+    padding: 10px;
+    text-align: center;
+}
+
 .nav-icon-a {
     color: v.$main;
     font-size: xx-large;
@@ -142,6 +160,10 @@
     }
 
     .text-span {
+        font-size: 3.5vw;
+    }
+
+    .learn-reset-button {
         font-size: 3.5vw;
     }
 }

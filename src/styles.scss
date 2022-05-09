@@ -52,3 +52,17 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     background-color: $dark;
     min-width: 10px;
 }
+
+.action-button {
+  text-align: start;
+}
+
+.action-text {
+  margin-left: 10px;
+  vertical-align: super;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+}

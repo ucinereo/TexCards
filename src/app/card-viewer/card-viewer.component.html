@@ -1,5 +1,5 @@
 <div class="card">
-    <div (click)="flip()" (swipeleft)="onNext()" (swiperight)="onPrev()" class="card-text" [@cardFlip]="cardState">
+    <div (click)="flip()" (swipeleft)="onNext()" (swiperight)="onPrev()" class="card-text" [@cardAnimation]="cardState" (@cardAnimation.done)="resetAnimationState()">
         <div class="face front">
             <span *ngIf="flashcardsLoaded && flashcardSet != undefined && flashcardIndexer.getIndex() >= 0" class="text-span">
                 <katex-paragraph [paragraph]="flashcardSet.terms[flashcardIndexer.getIndex()]" class="k-paragraph"></katex-paragraph>
@@ -8,6 +8,13 @@
         <div class="face back">
             <span *ngIf="flashcardsLoaded && flashcardSet != undefined && flashcardIndexer.getIndex() >= 0" class="text-span">
                 <katex-paragraph [paragraph]="flashcardSet.definitions[flashcardIndexer.getIndex()]" class="k-paragraph"></katex-paragraph>
+            </span>
+        </div>
+        <div *ngIf="flashcardIndexer.getViewMode() == viewModeEnum.Learn && flashcardIndexer.getIndex() == -2" class="face done">
+            <span class="text-span">
+                <button class="learn-reset-button" (click)="learnAllAgain()">Learn all cards again</button>
+                <br>
+                <button *ngIf="flashcardIndexer.getMissedCount() > 0" (click)="learnMissedAgain()" class="learn-reset-button">Learn the {{ flashcardIndexer.getMissedCount() }} missed cards again</button>
             </span>
         </div>
     </div>
@@ -19,22 +26,46 @@
             <i (click)="flashcardIndexer.toggleShuffle()" class="material-icons nav-icon-p">shuffle</i>
         </div>
         <div class="prev div-nav-icon">
+            <i *ngIf="flashcardIndexer.getViewMode() == viewModeEnum.View" (click)="toggleMode()" class="material-icons nav-icon">visibility</i>
+            <i *ngIf="flashcardIndexer.getViewMode() == viewModeEnum.Learn" (click)="toggleMode()" class="material-icons nav-icon">multiple_stop</i>
+            <i *ngIf="flashcardIndexer.getViewMode() == viewModeEnum.Star" (click)="toggleMode()" class="material-icons-round nav-icon">star</i>
+        </div>
+        <div class="prev div-nav-icon">
             <i (click)="onPrev()" class="material-icons nav-icon">arrow_back_ios_new</i>
         </div>
         <div class="next div-nav-icon">
             <i (click)="onNext()" class="material-icons nav-icon">arrow_forward_ios</i>
-        </div>
-        <div *ngIf="flashcardSet != undefined && flashcardSet != null && flashcardSet.editPermission" class="prev div-nav-icon">
-            <i routerLink="/editor/{{ flashcardSet.id }}" class="material-icons nav-icon">edit</i>
-        </div>
-        <div *ngIf="flashcardSet != undefined && flashcardSet != null && flashcardSet.owner" class="prev div-nav-icon">
-            <i routerLink="/share/{{ flashcardSet.id }}" class="material-icons nav-icon">share</i>
         </div>
         <div *ngIf="flashcardSet != undefined && flashcardSet != null && flashcardSet.stars.includes(flashcardIndexer.getIndex())" class="prev div-nav-icon">
             <i (click)="toggleStar()" class="material-icons-round star-icon star-icon-a">star</i>
         </div>
         <div *ngIf="flashcardSet != undefined && flashcardSet != null && !flashcardSet.stars.includes(flashcardIndexer.getIndex())" class="prev div-nav-icon">
             <i (click)="toggleStar()" class="material-icons-round star-icon star-icon-p">star</i>
+        </div>
+        <div class="next div-nav-icon">
+            <button mat-button [matMenuTriggerFor]="menu">
+                <i class="material-icons nav-icon-nb">more_vert</i>
+            </button>
+            <mat-menu #menu="matMenu" xPosition="before" class="action-menu">
+                <button *ngIf="flashcardSet != undefined && flashcardSet != null && flashcardSet.editPermission" mat-menu-item class="action-button" routerLink="/editor/{{ flashcardSetID }}">
+                  <div class="action-div">
+                    <i class="material-icons">edit</i>
+                    <span class="action-text">Edit</span>
+                  </div>
+                </button>
+                <button *ngIf="flashcardSet != undefined && flashcardSet != null && flashcardSet.owner" mat-menu-item class="action-button" routerLink="/share/{{ flashcardSetID }}">
+                  <div class="action-div">
+                    <i class="material-icons">share</i>
+                    <span class="action-text">Share</span>
+                  </div>
+                </button>
+                <button mat-menu-item class="action-button" routerLink="/view/{{ flashcardSetID }}">
+                  <div class="action-div">
+                    <i class="material-icons">list</i>
+                    <span class="action-text">View</span>
+                  </div>
+                </button>
+              </mat-menu>
         </div>
     </div>
 </div>
