@@ -1,5 +1,10 @@
 @use '../../styles' as v;
 
+.preview-div {
+  display: inline-block;
+  width: 100%;
+}
+
 .delete-div {
   margin: 15px;
   float: left;
@@ -58,7 +63,7 @@
     overflow: hidden;
 }
 
-.card-input-div {
+.card-input-div, .card-preview-div {
     width: 45%;
     float: left;
 }
@@ -124,7 +129,7 @@ input:focus{
   line-height: normal;
   color: v.$txt;
   font-family: v.$pfont;
-  font-size: xx-large;
+  font-size: large;
 }
 
 .card-nav {

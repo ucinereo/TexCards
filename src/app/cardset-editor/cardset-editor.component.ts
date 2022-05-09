@@ -20,7 +20,7 @@ export class CardsetEditorComponent implements OnInit {
   public definitions: string[] = [""];
 
   public count: number = 1;
-  public focusIndex: number = 0;
+  public focusIndex: number = -1;
   public termFocus: boolean = true;
 
   public setName: string = "ParaProg";

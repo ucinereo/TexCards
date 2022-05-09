@@ -31,10 +31,12 @@
             <i *ngIf="flashcardIndexer.getViewMode() == viewModeEnum.Star" (click)="toggleMode()" class="material-icons-round nav-icon">star</i>
         </div>
         <div class="prev div-nav-icon">
-            <i (click)="onPrev()" class="material-icons nav-icon">arrow_back_ios_new</i>
+            <i *ngIf="flashcardIndexer.getViewMode() != viewModeEnum.Learn" (click)="onPrev()" class="material-icons nav-icon">arrow_back_ios_new</i>
+            <i *ngIf="flashcardIndexer.getViewMode() == viewModeEnum.Learn" (click)="onNext()" class="material-icons nav-icon">thumb_down</i>
         </div>
         <div class="next div-nav-icon">
-            <i (click)="onNext()" class="material-icons nav-icon">arrow_forward_ios</i>
+            <i *ngIf="flashcardIndexer.getViewMode() != viewModeEnum.Learn" (click)="onNext()" class="material-icons nav-icon">arrow_forward_ios</i>
+            <i *ngIf="flashcardIndexer.getViewMode() == viewModeEnum.Learn" (click)="onPrev()" class="material-icons nav-icon">thumb_up</i>
         </div>
         <div *ngIf="flashcardSet != undefined && flashcardSet != null && flashcardSet.stars.includes(flashcardIndexer.getIndex())" class="prev div-nav-icon">
             <i (click)="toggleStar()" class="material-icons-round star-icon star-icon-a">star</i>
