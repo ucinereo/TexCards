@@ -32,7 +32,7 @@
     <div class="button-bar">
         <div class="div-nav-icon">
             <div class="modal-container">
-                <input id="modal-toggle" type="checkbox" (click)="openNewFlashcardSetDialog()">
+                <input id="modal-toggle" type="checkbox" (click)="toggleNewFlashcardSetDialog(false)" [checked]="dialogOpen">
                 <button><i class="material-icons add-icon">add</i></button>
                 <div class="modal-backdrop">
                   <div class="modal-content">

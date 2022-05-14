@@ -1,5 +1,5 @@
 
-import { Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, HostListener, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlashcardSet } from '../model/flashcard-set';
@@ -62,6 +62,7 @@ export class CardsetEditorComponent implements OnInit {
     
   }
 
+  @HostListener('document:keydown.control.s')
   submit(): void {
     this.flashcardSet!.definitions= this.definitions;
     this.flashcardSet!.terms= this.terms;

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { FlashcardService } from '../services/flashcard.service';
 import { FlashcardSet } from '../model/flashcard-set';
@@ -45,7 +45,7 @@ export class CardViewerComponent implements OnInit {
   
   public flashcardIndexer: FlashcardIndexer;
 
-  constructor(private route: ActivatedRoute, private flashcardService: FlashcardService, private titleService: Title) {
+  constructor(private route: ActivatedRoute, private router: Router, private flashcardService: FlashcardService, private titleService: Title) {
     this.flashcardIndexer = new FlashcardIndexer();
   }
 
@@ -61,6 +61,7 @@ export class CardViewerComponent implements OnInit {
     }, (error) => { });
   }
 
+  @HostListener('document:keydown.space')
   flip(): void {
     if (this.flashcardIndexer.getIndex() >= 0) {
       if (this.flashcardIndexer.getViewMode() == ViewMode.Learn) {
@@ -79,6 +80,7 @@ export class CardViewerComponent implements OnInit {
     }
   }
 
+  @HostListener('document:keydown.h')
   toggleStar(): void {
     let index = this.flashcardIndexer.getIndex();
     if (this.flashcardSet!.stars.includes(index)) {
@@ -149,6 +151,34 @@ export class CardViewerComponent implements OnInit {
 
   learnMissedAgain(): void {
     setTimeout(() => this.flashcardIndexer.learnMissed(), 5); // handle flip event first
+  }
+
+  @HostListener('document:keydown.arrowright')
+  keyNext(): void {
+    if (this.flashcardIndexer.getViewMode() == ViewMode.Learn) {
+      this.onPrev();
+    } else {
+      this.onNext();
+    }
+  }
+
+  @HostListener('document:keydown.arrowleft')
+  keyPrev(): void {
+    if (this.flashcardIndexer.getViewMode() == ViewMode.Learn) {
+      this.onNext();
+    } else {
+      this.onPrev();
+    }
+  }
+
+  @HostListener('document:keydown.s')
+  toggleShuffle(): void {
+    this.flashcardIndexer.toggleShuffle();
+  }
+
+  @HostListener('document:keydown.e')
+  edit(): void {
+    this.router.navigate(['editor/' + this.flashcardSetID]);
   }
 
 }

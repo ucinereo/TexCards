@@ -23,7 +23,7 @@
             <i (click)="flashcardIndexer.toggleShuffle()" class="material-icons nav-icon-a">shuffle</i>
         </div>
         <div class="prev div-nav-icon" *ngIf="!flashcardIndexer.isShuffled()">
-            <i (click)="flashcardIndexer.toggleShuffle()" class="material-icons nav-icon-p">shuffle</i>
+            <i (click)="toggleShuffle()" class="material-icons nav-icon-p">shuffle</i>
         </div>
         <div class="prev div-nav-icon">
             <i *ngIf="flashcardIndexer.getViewMode() == viewModeEnum.View" (click)="toggleMode()" class="material-icons nav-icon">visibility</i>

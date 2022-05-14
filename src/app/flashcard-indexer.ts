@@ -82,7 +82,9 @@ export class FlashcardIndexer {
     public starUpdate(): void {
         this.starOrder = [];
         this.flashcardSet.stars.forEach(element => this.starOrder.push(element));
-        this.currentIndex = this.currentIndex % this.starOrder.length;
+        if (this.viewMode == ViewMode.Star) {
+            this.currentIndex = this.currentIndex % this.starOrder.length;
+        }
     }
 
     public getIndex(): number {
