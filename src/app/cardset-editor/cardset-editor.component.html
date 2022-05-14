@@ -2,7 +2,7 @@
     <div class="edit-div">
         <div class="header-div">
             <input #name type="text" placeholder="Flashcard set name" value="{{ flashcardSet?.flashcardSetName }}" class="txt-input">
-            <div class="delete-div" (click)="deleteFlashcardSet()">
+            <div class="delete-div" *ngIf="flashcardSet != undefined && flashcardSet != null && flashcardSet.owner" (click)="deleteFlashcardSet()">
                 <i class="material-icons delete-icon">delete</i>
             </div>
         </div>
