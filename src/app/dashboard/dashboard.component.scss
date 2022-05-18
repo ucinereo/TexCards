@@ -1,0 +1,17 @@
+@use '../../styles' as v;
+
+.outer {
+    height: 100%;
+}
+
+.tab-content {
+    height: 100%;
+}
+
+.sets {
+    height: 100%;
+}
+
+::ng-deep .mat-tab-label.mat-tab-label-active {
+    opacity: 1;
+}

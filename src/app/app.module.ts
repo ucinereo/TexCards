@@ -18,8 +18,11 @@ import { RegisterComponent } from './register/register.component';
 import { ErrorViewComponent } from './error-view/error-view.component';
 import { KatexParagraphComponent } from './katex-paragraph/katex-paragraph.component';
 import { CardsetOverviewComponent } from './cardset-overview/cardset-overview.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
 
 import { MatMenuModule } from '@angular/material/menu';
+import { MatTabsModule } from '@angular/material/tabs';
+
 
 @NgModule({
   declarations: [
@@ -32,7 +35,8 @@ import { MatMenuModule } from '@angular/material/menu';
     RegisterComponent,
     ErrorViewComponent,
     KatexParagraphComponent,
-    CardsetOverviewComponent
+    CardsetOverviewComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
@@ -41,7 +45,8 @@ import { MatMenuModule } from '@angular/material/menu';
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatMenuModule
+    MatMenuModule,
+    MatTabsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },

@@ -53,6 +53,21 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     min-width: 10px;
 }
 
+.mat-tab-label {
+    color: $txt;
+    font-family: $pfont;
+    font-weight: 300;;
+    font-size: large;
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar {
+    background-color: $main;
+}
+
+.mat-tab-body-wrapper {
+    flex-grow: 1;
+}
+
 .action-button {
   text-align: start;
 }

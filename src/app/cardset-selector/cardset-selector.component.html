@@ -7,13 +7,13 @@
               <i class="material-icons">more_vert</i>
             </button>
             <mat-menu #menu="matMenu" xPosition="before" class="action-menu">
-              <button mat-menu-item class="action-button" routerLink="/editor/{{ flashcardsSets!.ids[i] }}">
+              <button *ngIf="flashcardsSets!.writePermission[i]" mat-menu-item class="action-button" routerLink="/editor/{{ flashcardsSets!.ids[i] }}">
                 <div class="action-div">
                   <i class="material-icons">edit</i>
                   <span class="action-text">Edit</span>
                 </div>
               </button>
-              <button mat-menu-item class="action-button" routerLink="/share/{{ flashcardsSets!.ids[i] }}">
+              <button *ngIf="flashcardsSets!.owner[i]" mat-menu-item class="action-button" routerLink="/share/{{ flashcardsSets!.ids[i] }}">
                 <div class="action-div">
                   <i class="material-icons">share</i>
                   <span class="action-text">Share</span>
