@@ -28,12 +28,6 @@
   font-weight: 300;
 }
 
-.list {
-  margin: auto;
-  width: 100%;
-  height: 80%;
-}
-
 .item {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -74,27 +68,10 @@
     vertical-align: middle;
     line-height: normal;
 }
-    
-.nav-icon {
-    color: v.$main;
-    font-size: xx-large;
-    border-radius: 50%;
-    border: 3px solid v.$main;
-    padding: 10px;
-    text-align: center;
-}
 
 .text-span {
     color: v.$txt;
     font-family: v.$pfont;
     font-size: large;
     box-sizing: border-box;
-}
-
-@media screen and (max-width: 1200px), (orientation: portrait) {
-    .nav-icon {
-        font-size: 20px;
-        border-radius: 50%;
-        padding: 10px;
-    }
 }

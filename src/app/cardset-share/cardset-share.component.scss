@@ -72,7 +72,7 @@ label {
     margin-left: 5px;
 }
 
-.txt-input {
+.uname-input {
   margin-top: 20px;
   margin-left: 20px;
   margin-bottom: 20px;
@@ -85,14 +85,6 @@ label {
   font-weight: 300;
   caret-color: v.$txt;
 }
-
-input:focus{
-  outline: none;
-}
-*:focus {
-  outline: none;
-}
-
 
 @media screen and (max-width: 1200px), (orientation: portrait) {
     .r-box-div {

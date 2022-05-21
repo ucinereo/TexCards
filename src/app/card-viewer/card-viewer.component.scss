@@ -103,15 +103,6 @@
     display: inline-block;
     vertical-align: middle;
     line-height: normal;
-  }
-  
-.nav-icon {
-  color: v.$main;
-  font-size: xx-large;
-  border-radius: 50%;
-  border: 3px solid v.$main;
-  padding: 10px;
-  text-align: center;
 }
 
 .nav-icon-nb {
@@ -132,7 +123,6 @@
 
 .nav-icon-p {
     color: v.$mcon1;
-    font-size: xx-large;
     border-radius: 50%;
     border: 3px solid v.$mcon1;
     padding: 10px;
@@ -153,12 +143,6 @@
 }
 
 @media screen and (max-width: 1200px), (orientation: portrait) {
-    .nav-icon, .nav-icon-a, .nav-icon-p {
-        font-size: 20px;
-        border-radius: 50%;
-        padding: 10px;
-    }
-
     .text-span {
         font-size: 3.5vw;
     }
