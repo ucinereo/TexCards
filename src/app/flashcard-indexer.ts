@@ -1,4 +1,3 @@
-import { TestScheduler } from "rxjs-compat";
 import { FlashcardSet } from "./model/flashcard-set";
 
 export enum ViewMode { View, Learn, Star };

@@ -1,13 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from "rxjs";
-import { FlashcardsSets } from '../model/flashcards-sets';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { FlashcardSet } from '../model/flashcard-set';
 import { FlashcardStar } from '../model/flashcard-star';
 import { UserPermission } from '../model/user-permission';
-import { FlashcardSetName } from '../model/flashcard-set-name';
-import { AuthenticationService } from './auth/authentication.service';
-import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Router, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { CardsetSelectorComponent } from './cardset-selector/cardset-selector.component';
 import { CardViewerComponent } from './card-viewer/card-viewer.component';
 import { CardsetEditorComponent } from './cardset-editor/cardset-editor.component';
