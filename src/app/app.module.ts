@@ -5,6 +5,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { KatexModule } from 'ng-katex';
 import { MarkdownModule } from 'ngx-markdown';
+import 'prismjs';
+import 'prismjs/components/prism-typescript.min.js';
+import 'prismjs/plugins/line-numbers/prism-line-numbers.js';
+import 'prismjs/plugins/line-highlight/prism-line-highlight.js';
 
 import { AppComponent } from './app.component';
 import { CardViewerComponent } from './card-viewer/card-viewer.component';
@@ -49,7 +53,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatMenuModule,
     MatTabsModule,
     MarkdownModule.forRoot({
-      sanitize: SecurityContext.NONE
+      sanitize: SecurityContext.HTML
     })
   ],
   providers: [

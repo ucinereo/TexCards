@@ -2,13 +2,14 @@ import { Component, ChangeDetectionStrategy, Input, OnInit } from '@angular/core
 import { KatexOptions, MarkdownService } from 'ngx-markdown';
 
 import mermaid from "mermaid";
+
 import katex from "katex";
 
 @Component({
   selector: 'card',
   template: `
     <p>
-      <markdown katex [katexOptions]="options" [data]="_paragraph">
+      <markdown katex lineNumbers [katexOptions]="options" [data]="_paragraph">
       </markdown>
     </p>
   `,
