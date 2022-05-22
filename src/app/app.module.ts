@@ -1,9 +1,10 @@
-import { NgModule } from '@angular/core';
+import { NgModule, SecurityContext } from '@angular/core';
 import { BrowserModule, HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { KatexModule } from 'ng-katex';
+import { MarkdownModule } from 'ngx-markdown';
 
 import { AppComponent } from './app.component';
 import { CardViewerComponent } from './card-viewer/card-viewer.component';
@@ -46,7 +47,10 @@ import { MatTabsModule } from '@angular/material/tabs';
     HttpClientModule,
     BrowserAnimationsModule,
     MatMenuModule,
-    MatTabsModule
+    MatTabsModule,
+    MarkdownModule.forRoot({
+      sanitize: SecurityContext.NONE
+    })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },

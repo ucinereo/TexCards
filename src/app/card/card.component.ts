@@ -1,34 +1,70 @@
-import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
-import { extractMath, Segment } from 'extract-math';
+import { Component, ChangeDetectionStrategy, Input, OnInit } from '@angular/core';
+import { KatexOptions, MarkdownService } from 'ngx-markdown';
+
+import mermaid from "mermaid";
+import katex from "katex";
 
 @Component({
   selector: 'card',
   template: `
     <p>
-      <ng-container *ngFor="let segment of segments">
-        <ng-katex
-          *ngIf="segment.math else text"
-          [equation]="segment.raw"
-          [options]="{ displayMode: segment.type === 'display', throwOnError: false }">
-        </ng-katex>
-        <ng-template #text>{{ segment.value }}</ng-template>
-      </ng-container>
+      <markdown katex [katexOptions]="options" [data]="_paragraph">
+      </markdown>
     </p>
   `,
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CardComponent {
+export class CardComponent implements OnInit {
 
-  segments: Segment[] = [];
+  public options: KatexOptions = {
+    displayMode: false,
+    throwOnError: false,
+  }
 
-  private _paragraph!: string;
+  _paragraph!: string;
 
   @Input() set paragraph(paragraph: string) {
 
-    if (paragraph !== this._paragraph) {
-      this._paragraph = paragraph;
-      this.segments = extractMath(this._paragraph);
+    while (this.countDisplayMathOccurrrences(paragraph) >= 2) {
+      paragraph = paragraph.replace(/\$\$/, '\n```math\n').replace(/\$\$/, '\n```\n');
+    }
+    
+    this._paragraph = paragraph;
+
+    setTimeout(() => {
+      mermaid.init(document.querySelectorAll(".mermaid"));
+      mermaid.initialize({ });
+      MathManager.displayMath.forEach((value: string, key: string) => {
+        let element = document.getElementsByClassName(key)[0] as HTMLElement;
+        if (element != undefined && element != null) {
+          katex.render(value, element, { throwOnError: false, displayMode: true });
+        }
+      });
+    }, 5);
+  }
+
+  constructor(private markdownService: MarkdownService) { }
+
+  ngOnInit(): void {
+    this.markdownService.renderer.code = (code, language) => {
+      if (language?.match('^mermaid')) {
+        return '<div class="mermaid">' + code + '</div>';
+      } else if (language?.match('^math')) {
+        let id = "tex-" + MathManager.mathID++;
+        MathManager.displayMath.set(id, code);
+        return '<div class="' + id + '"></div>';
+      } else {
+        return '<pre><code>' + code + '</code></pre>';
+      }
     }
   }
 
+  private countDisplayMathOccurrrences(input: string): number {
+    return (input.match(/\$\$/g)||[]).length;
+  }
+
+}
+
+class MathManager {
+  public static mathID: number = 0;
+  public static displayMath: Map<string, string> = new Map<string, string>();
 }
