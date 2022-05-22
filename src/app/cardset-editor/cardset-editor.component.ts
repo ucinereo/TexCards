@@ -17,6 +17,7 @@ export class CardsetEditorComponent implements OnInit {
 
   public terms: string[] = [""];
   public definitions: string[] = [""];
+  public alignment: number[] = [2];
 
   public count: number = 1;
   public focusIndex: number = -1;
@@ -39,8 +40,10 @@ export class CardsetEditorComponent implements OnInit {
         this.count = this.flashcardSet!.terms.length + 1;
         this.terms = this.flashcardSet!.terms;
         this.definitions = this.flashcardSet!.definitions;
+        this.alignment = this.flashcardSet!.alignment;
         this.terms.push("");
         this.definitions.push("");
+        this.alignment.push(2);
         this.titleService.setTitle("Tex-Cards " + this.flashcardSet!.flashcardSetName);
         setTimeout(() => this.setupData(), 5);      
       }, (error) => { })
@@ -65,8 +68,10 @@ export class CardsetEditorComponent implements OnInit {
   submit(): void {
     this.flashcardSet!.definitions= this.definitions;
     this.flashcardSet!.terms= this.terms;
+    this.flashcardSet!.alignment = this.alignment;
     this.flashcardSet?.definitions.pop();
     this.flashcardSet?.terms.pop();
+    this.flashcardSet?.alignment.pop();
     this.flashcardSet!.flashcardSetName = this.flashcardSetNameInput.nativeElement.value;
     this.flashcardService.editFlashcardSet(this.flashcardSet!).subscribe(response => {
       if (response.data) {
@@ -86,8 +91,13 @@ export class CardsetEditorComponent implements OnInit {
     if (trigger == this.count -1 && (this.terms[trigger].length != 0 || this.definitions[trigger].length != 0)) {
       this.terms.push("");
       this.definitions.push("");
+      this.alignment.push(2);
       this.count++;
     }
+  }
+
+  setAlignment(index: number, align: number): void {
+    this.alignment[index] = align;
   }
 
   onFocusOut(index: number): void {
@@ -121,6 +131,7 @@ export class CardsetEditorComponent implements OnInit {
       }
       this.terms.splice(index, 1);
       this.definitions.splice(index, 1);
+      this.alignment.splice(index, 1);
       this.count--;
     }
   }

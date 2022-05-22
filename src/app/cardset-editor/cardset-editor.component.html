@@ -15,16 +15,25 @@
                     <div class="card-input-div">
                         <span #dSpans class="ftextarea ftextarea-d" role="textbox" contenteditable (input)="update(i, $event, false)" (focus)="onFocusIn(i, false)" (focusout)="onFocusOut(i)" (paste)="onPaste($event)"></span>
                     </div>
-                    <div class="div-rm" (click)="removeItem(i)">
-                        <i class="material-icons rm-icon">delete</i>
+                    <div class="ico-div" (click)="removeItem(i)">
+                        <i class="material-icons">delete</i>
+                    </div>
+                    <div class="ico-div" (click)="setAlignment(i, 3)">
+                        <i class="material-icons" [ngClass]="{'i-active' : alignment[i] == 3, 'i-passive' : alignment[i] != 3}">format_align_right</i>
+                    </div>
+                    <div class="ico-div" (click)="setAlignment(i, 2)">
+                        <i class="material-icons" [ngClass]="{'i-active' : alignment[i] == 2, 'i-passive' : alignment[i] != 2}">format_align_center</i>
+                    </div>
+                    <div class="ico-div" (click)="setAlignment(i, 1)">
+                        <i class="material-icons" [ngClass]="{'i-active' : alignment[i] == 1, 'i-passive' : alignment[i] != 1}">format_align_left</i>
                     </div>
                 </div>
                 <div *ngIf="focusIndex == i" class="preview-div">
                     <div class="card-preview-div">
-                        <card class="text-span" [paragraph]="terms[i]"></card>
+                        <card class="text-span" [paragraph]="terms[i]" [align]="alignment[i]"></card>
                     </div>
                     <div class="card-preview-div">
-                        <card class="text-span" [paragraph]="definitions[i]"></card>
+                        <card class="text-span" [paragraph]="definitions[i]" [align]="alignment[i]"></card>
                     </div>
                 </div>
             </div>

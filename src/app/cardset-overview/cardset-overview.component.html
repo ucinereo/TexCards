@@ -6,10 +6,10 @@
         <div class="list">
             <div class="item" *ngFor="let t of flashcardSet?.terms; let i = index">
                 <div class="card-div card-div-t">
-                    <card class="text-span" [paragraph]="flashcardSet!.terms[i]"></card>
+                    <card class="text-span" [paragraph]="flashcardSet!.terms[i]" [align]="flashcardSet!.alignment[i]"></card>
                 </div>
                 <div class="card-div card-div-d">
-                    <card class="text-span" [paragraph]="flashcardSet!.definitions[i]"></card>
+                    <card class="text-span" [paragraph]="flashcardSet!.definitions[i]" [align]="flashcardSet!.alignment[i]"></card>
                 </div>
             </div>
         </div>

@@ -32,7 +32,7 @@
   color: v.$txt;
 }
 
-.div-rm {
+.ico-div {
     color: v.$main;
     float: right;
     vertical-align: top;
@@ -55,6 +55,14 @@
     border-radius: 10px;
     padding: 20px;
     overflow: hidden;
+}
+
+.i-active {
+  color: v.$main;
+}
+
+.i-passive {
+  color: v.$mcon1;
 }
 
 .card-input-div, .card-preview-div {

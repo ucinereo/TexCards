@@ -53,7 +53,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatMenuModule,
     MatTabsModule,
     MarkdownModule.forRoot({
-      sanitize: SecurityContext.HTML
+      sanitize: SecurityContext.NONE
     })
   ],
   providers: [

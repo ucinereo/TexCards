@@ -9,7 +9,7 @@ import katex from "katex";
   selector: 'card',
   template: `
     <p>
-      <markdown katex lineNumbers [katexOptions]="options" [data]="_paragraph">
+      <markdown katex lineNumbers [katexOptions]="options" [data]="_paragraph" [style.text-align]="getTextAlignment()">
       </markdown>
     </p>
   `,
@@ -22,6 +22,8 @@ export class CardComponent implements OnInit {
   }
 
   _paragraph!: string;
+
+  @Input() align: number = 2;
 
   @Input() set paragraph(paragraph: string) {
 
@@ -61,6 +63,16 @@ export class CardComponent implements OnInit {
 
   private countDisplayMathOccurrrences(input: string): number {
     return (input.match(/\$\$/g)||[]).length;
+  }
+
+  public getTextAlignment(): string {
+    if (this.align == 1) {
+      return "left";
+    } else if (this.align == 2) {
+      return "center";
+    } else {
+      return "right";
+    }
   }
 
 }
