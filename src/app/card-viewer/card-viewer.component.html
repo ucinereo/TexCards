@@ -2,12 +2,12 @@
     <div (click)="flip()" (swipeleft)="onNext()" (swiperight)="onPrev()" class="card-text" [@cardAnimation]="cardState" (@cardAnimation.done)="resetAnimationState()">
         <div class="face front">
             <span *ngIf="flashcardsLoaded && flashcardSet != undefined && flashcardIndexer.getIndex() >= 0" class="text-span">
-                <katex-paragraph [paragraph]="flashcardSet.terms[flashcardIndexer.getIndex()]" class="k-paragraph"></katex-paragraph>
+                <card [paragraph]="flashcardSet.terms[flashcardIndexer.getIndex()]" class="k-paragraph"></card>
             </span>
         </div>
         <div class="face back">
             <span *ngIf="flashcardsLoaded && flashcardSet != undefined && flashcardIndexer.getIndex() >= 0" class="text-span">
-                <katex-paragraph [paragraph]="flashcardSet.definitions[flashcardIndexer.getIndex()]" class="k-paragraph"></katex-paragraph>
+                <card [paragraph]="flashcardSet.definitions[flashcardIndexer.getIndex()]" class="k-paragraph"></card>
             </span>
         </div>
         <div *ngIf="flashcardIndexer.getViewMode() == viewModeEnum.Learn && flashcardIndexer.getIndex() == -2" class="face done">

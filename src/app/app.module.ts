@@ -16,7 +16,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { CardsetShareComponent } from './cardset-share/cardset-share.component';
 import { RegisterComponent } from './register/register.component';
 import { ErrorViewComponent } from './error-view/error-view.component';
-import { KatexParagraphComponent } from './katex-paragraph/katex-paragraph.component';
+import { CardComponent } from './card/card.component';
 import { CardsetOverviewComponent } from './cardset-overview/cardset-overview.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
@@ -34,7 +34,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     CardsetShareComponent,
     RegisterComponent,
     ErrorViewComponent,
-    KatexParagraphComponent,
+    CardComponent,
     CardsetOverviewComponent,
     DashboardComponent
   ],

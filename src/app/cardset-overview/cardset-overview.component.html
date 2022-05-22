@@ -6,10 +6,10 @@
         <div class="list">
             <div class="item" *ngFor="let t of flashcardSet?.terms; let i = index">
                 <div class="card-div card-div-t">
-                    <katex-paragraph class="text-span" [paragraph]="flashcardSet!.terms[i]"></katex-paragraph>
+                    <card class="text-span" [paragraph]="flashcardSet!.terms[i]"></card>
                 </div>
                 <div class="card-div card-div-d">
-                    <katex-paragraph class="text-span" [paragraph]="flashcardSet!.definitions[i]"></katex-paragraph>
+                    <card class="text-span" [paragraph]="flashcardSet!.definitions[i]"></card>
                 </div>
             </div>
         </div>

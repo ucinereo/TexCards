@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { KatexParagraphComponent } from './katex-paragraph.component';
+import { CardComponent } from './card.component';
 
 describe('KatexParagraphComponent', () => {
-  let component: KatexParagraphComponent;
-  let fixture: ComponentFixture<KatexParagraphComponent>;
+  let component: CardComponent;
+  let fixture: ComponentFixture<CardComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ KatexParagraphComponent ]
+      declarations: [ CardComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(KatexParagraphComponent);
+    fixture = TestBed.createComponent(CardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

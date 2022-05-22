@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, Input } from '@angular/core';
 import { extractMath, Segment } from 'extract-math';
 
 @Component({
-  selector: 'katex-paragraph',
+  selector: 'card',
   template: `
     <p>
       <ng-container *ngFor="let segment of segments">
@@ -17,7 +17,7 @@ import { extractMath, Segment } from 'extract-math';
   `,
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class KatexParagraphComponent {
+export class CardComponent {
 
   segments: Segment[] = [];
 
