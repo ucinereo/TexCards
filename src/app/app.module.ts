@@ -3,7 +3,6 @@ import { BrowserModule, HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { KatexModule } from 'ng-katex';
 import { MarkdownModule } from 'ngx-markdown';
 import 'prismjs';
 import 'prismjs/components/prism-typescript.min.js';
@@ -46,7 +45,6 @@ import { MatTabsModule } from '@angular/material/tabs';
   imports: [
     BrowserModule,
     HammerModule,
-    KatexModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,

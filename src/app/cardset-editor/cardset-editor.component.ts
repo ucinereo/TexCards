@@ -2,6 +2,7 @@ import { Component, ElementRef, HostListener, OnInit, QueryList, ViewChild, View
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlashcardSet } from '../model/flashcard-set';
+import { Card, EditType, FlashcardSetEdit, ModCard } from '../model/flashcard-set-edit';
 import { FlashcardService } from '../services/flashcard.service';
 
 @Component({
@@ -19,11 +20,13 @@ export class CardsetEditorComponent implements OnInit {
   public definitions: string[] = [""];
   public alignment: number[] = [2];
 
+  public deletedCardsTerms: string[] = [];
+  public deletedCardsDefinitions: string[] = [];
+  public deleteHistory: number[] = [];
+
   public count: number = 1;
   public focusIndex: number = -1;
   public termFocus: boolean = true;
-
-  public setName: string = "ParaProg";
 
   public flashcardSet?: FlashcardSet;
   public flashcardSetID?: number;
@@ -38,9 +41,9 @@ export class CardsetEditorComponent implements OnInit {
       this.flashcardService.getFlashcardSet(this.flashcardSetID!).subscribe(response => {
         this.flashcardSet = response.data;
         this.count = this.flashcardSet!.terms.length + 1;
-        this.terms = this.flashcardSet!.terms;
-        this.definitions = this.flashcardSet!.definitions;
-        this.alignment = this.flashcardSet!.alignment;
+        this.terms = [... this.flashcardSet!.terms];
+        this.definitions = [... this.flashcardSet!.definitions];
+        this.alignment = [... this.flashcardSet!.alignment];
         this.terms.push("");
         this.definitions.push("");
         this.alignment.push(2);
@@ -66,14 +69,9 @@ export class CardsetEditorComponent implements OnInit {
 
   @HostListener('document:keydown.control.s')
   submit(): void {
-    this.flashcardSet!.definitions= this.definitions;
-    this.flashcardSet!.terms= this.terms;
-    this.flashcardSet!.alignment = this.alignment;
-    this.flashcardSet?.definitions.pop();
-    this.flashcardSet?.terms.pop();
-    this.flashcardSet?.alignment.pop();
-    this.flashcardSet!.flashcardSetName = this.flashcardSetNameInput.nativeElement.value;
-    this.flashcardService.editFlashcardSet(this.flashcardSet!).subscribe(response => {
+    let flashcardSetEdit = this.buildRequestModel();
+
+    this.flashcardService.editFlashcardSet(flashcardSetEdit).subscribe(response => {
       if (response.data) {
         this.router.navigate(['cards/' + this.flashcardSet!.id]);
       }
@@ -133,6 +131,7 @@ export class CardsetEditorComponent implements OnInit {
       this.definitions.splice(index, 1);
       this.alignment.splice(index, 1);
       this.count--;
+      this.deleteHistory.push(index);
     }
   }
 
@@ -142,6 +141,47 @@ export class CardsetEditorComponent implements OnInit {
         this.router.navigate(['']);
       }
     }, (error) => { });
+  }
+
+  private calculateDeleteIndecies(): number[] {
+    let ind: number[] = [];
+    this.deleteHistory.forEach((element, index) => {
+      let org = element;
+      for (let i = index -1; i >= 0; i--) {
+        if (org >= this.deleteHistory[i]) {
+          org++;
+        }
+      }
+      if (org < this.flashcardSet!.terms.length) {
+        ind.push(org);
+      }
+    });
+    return ind;
+  }
+
+  private buildRequestModel(): FlashcardSetEdit {
+    let deleteInd = this.calculateDeleteIndecies();
+
+    let flashcardSetEdit = new FlashcardSetEdit(this.flashcardSet!.id, this.flashcardSetNameInput.nativeElement.value);
+    let cardCounter = 0; // counts how many cards of the displayed list have been processed
+    for (let i = 0; i < this.flashcardSet!.terms.length; i++) {
+      if (deleteInd.includes(i)) { // delete
+        let card = new Card(this.flashcardSet!.terms[i], this.flashcardSet!.definitions[i], this.flashcardSet!.alignment[i]);
+        flashcardSetEdit.editMap.push(new ModCard(card, card,  EditType.Delete));
+      } else { // modify
+        let oldCard = new Card(this.flashcardSet!.terms[i], this.flashcardSet!.definitions[i], this.flashcardSet!.alignment[i]);
+        let newCard = new Card(this.terms[cardCounter], this.definitions[cardCounter], this.alignment[cardCounter]);
+        cardCounter++;
+        flashcardSetEdit.editMap.push(new ModCard(oldCard, newCard, EditType.Modify));
+      }
+    }
+    for (let i = cardCounter; i < this.terms.length -1; i++) { // add
+      let card = new Card(this.terms[i], this.definitions[i], this.alignment[i]);
+      flashcardSetEdit.editMap.push(new ModCard(new Card("", "", 0), card, EditType.Add));
+    }
+
+    return flashcardSetEdit;
+
   }
 
 }
