@@ -56,7 +56,7 @@ export class CardComponent implements OnInit {
         MathManager.displayMath.set(id, code);
         return '<div class="' + id + '"></div>';
       } else {
-        return '<pre><code>' + code + '</code></pre>';
+        return this.renderCode(code, language!);
       }
     }
   }
@@ -73,6 +73,23 @@ export class CardComponent implements OnInit {
     } else {
       return "right";
     }
+  }
+
+  private renderCode(code: string, language: string) {
+    if (this.markdownService.renderer.options.highlight) {
+      const out = this.markdownService.renderer.options.highlight(code, language);
+      if (out != null && out !== code) {
+        code = out;
+      }
+    }
+
+    code = code.replace(/\n$/, '') + '\n';
+
+    if (!language) {
+      return '<pre><code>' + code + '</code></pre>\n';
+    }
+
+    return '<pre><code class="' + this.markdownService.renderer.options.langPrefix + language + '">' + code + '</code></pre>\n';
   }
 
 }
