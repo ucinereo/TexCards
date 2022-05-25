@@ -36,7 +36,6 @@
 						],
 						"scripts": [
 							"node_modules/marked/marked.min.js",
-							"node_modules/prismjs/prism.js",
 							"node_modules/katex/dist/katex.min.js"
 						]
 					},

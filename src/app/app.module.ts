@@ -5,6 +5,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MarkdownModule } from 'ngx-markdown';
 import 'prismjs';
+import 'prismjs/components/prism-java.min.js';
+import 'prismjs/components/prism-python.min.js';
+import 'prismjs/components/prism-c.min.js';
+import 'prismjs/components/prism-cpp.min.js';
 import 'prismjs/components/prism-typescript.min.js';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.js';
 import 'prismjs/plugins/line-highlight/prism-line-highlight.js';
