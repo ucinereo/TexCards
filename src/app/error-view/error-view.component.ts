@@ -19,17 +19,22 @@ export class ErrorViewComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.errorCode = params['id'];
       this.errorText = params['txt'];
-      if (this.errorCode == 500) {
-        this.errorMsg = "Internal Server Error";
-      } else if (this.errorCode == 403) {
-        this.errorMsg = "Forbidden";
-      } else if (this.errorCode == 404) {
-        this.errorMsg = "Not Found";
-      } else if  (this.errorCode == 400) {
-        this.errorMsg = "Bad request";
-      }
+      this.errorMsg = ErrorViewComponent.getErrorTitle(this.errorCode);
     });
     this.titleService.setTitle("Tex-Cards Error");
+  }
+
+  public static getErrorTitle(status: number): string {
+    if (status == 500) {
+      return "Internal Server Error";
+    } else if (status == 403) {
+      return "Forbidden";
+    } else if (status == 404) {
+      return "Not Found";
+    } else if  (status == 400) {
+      return "Bad request";
+    }
+    return "Error";
   }
 
 }

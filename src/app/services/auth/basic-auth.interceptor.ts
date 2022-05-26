@@ -20,6 +20,10 @@ export class BasicAuthInterceptor implements HttpInterceptor {
     }
     return next.handle(request).pipe(
       catchError((err) => {
+        if (this.router.url.match('.*editor.*') && err.status != 401) {
+          return throwError(err);
+        }
+        
         let errorCode = err.status;
         let errorMsg = err.error.message;
         if (errorMsg == undefined || errorMsg == null || errorMsg == "" || errorMsg.includes('/') || errorMsg.includes('.')) {

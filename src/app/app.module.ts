@@ -13,6 +13,10 @@ import 'prismjs/components/prism-bash.min.js';
 import 'prismjs/plugins/line-numbers/prism-line-numbers.js';
 import 'prismjs/plugins/line-highlight/prism-line-highlight.js';
 
+import { MatMenuModule } from '@angular/material/menu';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatDialogModule } from '@angular/material/dialog';
+
 import { AppComponent } from './app.component';
 import { CardViewerComponent } from './card-viewer/card-viewer.component';
 import { CardsetSelectorComponent } from './cardset-selector/cardset-selector.component';
@@ -27,9 +31,7 @@ import { ErrorViewComponent } from './error-view/error-view.component';
 import { CardComponent } from './card/card.component';
 import { CardsetOverviewComponent } from './cardset-overview/cardset-overview.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-
-import { MatMenuModule } from '@angular/material/menu';
-import { MatTabsModule } from '@angular/material/tabs';
+import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 
 
 @NgModule({
@@ -44,7 +46,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     ErrorViewComponent,
     CardComponent,
     CardsetOverviewComponent,
-    DashboardComponent
+    DashboardComponent,
+    ErrorDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +57,7 @@ import { MatTabsModule } from '@angular/material/tabs';
     BrowserAnimationsModule,
     MatMenuModule,
     MatTabsModule,
+    MatDialogModule,
     MarkdownModule.forRoot({
       sanitize: SecurityContext.NONE
     })

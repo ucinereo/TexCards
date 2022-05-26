@@ -1,9 +1,12 @@
 import { Component, ElementRef, HostListener, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog'
 import { FlashcardSet } from '../model/flashcard-set';
 import { Card, EditType, FlashcardSetEdit, ModCard } from '../model/flashcard-set-edit';
 import { FlashcardService } from '../services/flashcard.service';
+import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
+import { ErrorViewComponent } from '../error-view/error-view.component';
 
 @Component({
   selector: 'app-cardset-editor',
@@ -31,7 +34,7 @@ export class CardsetEditorComponent implements OnInit {
   public flashcardSet?: FlashcardSet;
   public flashcardSetID?: number;
 
-  constructor(private route: ActivatedRoute, private router: Router, private flashcardService: FlashcardService, private titleService: Title) {
+  constructor(private route: ActivatedRoute, private router: Router, private flashcardService: FlashcardService, private titleService: Title, private dialog: MatDialog) {
 
    }
 
@@ -75,7 +78,24 @@ export class CardsetEditorComponent implements OnInit {
       if (response.data) {
         this.router.navigate(['cards/' + this.flashcardSet!.id]);
       }
-    }, (error) => { });    
+    }, (error) => {
+      let errorCode = error.status;
+      let errorMsg = error.error.message;
+      if (errorMsg == undefined || errorMsg == null || errorMsg == "" || errorMsg.includes('/') || errorMsg.includes('.')) {
+        errorMsg = "-";
+      }
+      if (errorCode == undefined || errorCode == null || errorCode == "") {
+        errorCode = "500";
+      }
+      
+      this.dialog.open(ErrorDialogComponent, {
+        data: {
+          status: errorCode,
+          title: ErrorViewComponent.getErrorTitle(errorCode),
+          msg: errorMsg
+        }
+      });
+    });    
   }
 
   counter(i: number): number[] {

@@ -55,6 +55,10 @@ html, body {
     height: 100%;
 }
 
+.mat-dialog-container {
+    background-color: $dcon;
+}
+
 .mat-menu-panel.action-menu {
     background-color: $dark;
     min-width: 10px;
