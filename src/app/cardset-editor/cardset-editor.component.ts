@@ -15,6 +15,8 @@ import { ErrorViewComponent } from '../error-view/error-view.component';
 })
 export class CardsetEditorComponent implements OnInit {
 
+  private static previewDelay = 500;
+
   @ViewChildren("tSpans") tSpans!: QueryList<ElementRef>;
   @ViewChildren("dSpans") dSpans!: QueryList<ElementRef>;
   @ViewChild("name") flashcardSetNameInput!: ElementRef;
@@ -29,6 +31,7 @@ export class CardsetEditorComponent implements OnInit {
 
   public count: number = 1;
   public focusIndex: number = -1;
+  public previewIndex: number = -1;
   public termFocus: boolean = true;
 
   public flashcardSet?: FlashcardSet;
@@ -120,10 +123,16 @@ export class CardsetEditorComponent implements OnInit {
 
   onFocusOut(index: number): void {
     this.focusIndex = -1;
+    setTimeout(() => {
+      if (this.focusIndex != this.previewIndex) {
+        this.previewIndex = -1
+      }
+    }, CardsetEditorComponent.previewDelay);
     setTimeout(() => this.checkForEmpty(index), 5); // TODO clean up, i think this isn't guaranteed to work 
   }
 
   onFocusIn(index: number, termFocus: boolean): void {
+    this.previewIndex = index;
     this.focusIndex = index;
     this.termFocus = termFocus;
   }

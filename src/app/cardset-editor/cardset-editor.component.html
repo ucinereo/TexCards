@@ -10,10 +10,10 @@
             <div class="item" *ngFor="let in of counter(count); let i = index">
                 <div>
                     <div class="card-input-div">
-                        <span #tSpans class="ftextarea ftextarea-t" role="textbox" contenteditable (input)="update(i, $event, true)" (focus)="onFocusIn(i, true)" (focusout)="onFocusOut(i)" (paste)="onPaste($event)"></span>
+                        <span tabindex="{{2 * i + 1}}" #tSpans class="ftextarea ftextarea-t" role="textbox" contenteditable (input)="update(i, $event, true)" (focus)="onFocusIn(i, true)" (focusout)="onFocusOut(i)" (paste)="onPaste($event)"></span>
                     </div>
                     <div class="card-input-div">
-                        <span #dSpans class="ftextarea ftextarea-d" role="textbox" contenteditable (input)="update(i, $event, false)" (focus)="onFocusIn(i, false)" (focusout)="onFocusOut(i)" (paste)="onPaste($event)"></span>
+                        <span tabindex="{{2 * i+2}}" #dSpans class="ftextarea ftextarea-d" role="textbox" contenteditable (input)="update(i, $event, false)" (focus)="onFocusIn(i, false)" (focusout)="onFocusOut(i)" (paste)="onPaste($event)"></span>
                     </div>
                     <div class="ico-div" (click)="removeItem(i)">
                         <i class="material-icons">delete</i>
@@ -28,7 +28,7 @@
                         <i class="material-icons" [ngClass]="{'i-active' : alignment[i] == 1, 'i-passive' : alignment[i] != 1}">format_align_left</i>
                     </div>
                 </div>
-                <div *ngIf="focusIndex == i" class="preview-div">
+                <div *ngIf="previewIndex == i" class="preview-div">
                     <div class="card-preview-div">
                         <card class="text-span" [paragraph]="terms[i]" [align]="alignment[i]"></card>
                     </div>
