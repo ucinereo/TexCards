@@ -2,16 +2,25 @@
 
 .outer-div {
     height: 100%;
-}
-
-.tab-content {
-    height: 100%;
-}
-
-.sets {
-    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 ::ng-deep .mat-tab-label.mat-tab-label-active {
     opacity: 1;
 }
+
+.add-icon {
+    font-size: 35px;
+    border: 3px solid v.$main;
+    border-radius: 50%;
+}
+
+.button-bar {
+    margin-top: auto;
+}
+
+button {
+    text-align: end;
+    flex: auto;
+  }

@@ -55,6 +55,10 @@ html, body {
     height: 100%;
 }
 
+.creation-dialog {
+   width: 400px;
+}
+
 .mat-dialog-container {
     background-color: $dcon;
 }
@@ -176,4 +180,9 @@ input:focus, *:focus {
         border-radius: 50%;
         padding: 10px;
     }
+
+    .creation-dialog {
+        width: 100%;
+    }
+
 }

@@ -2,6 +2,7 @@ import { NgModule, SecurityContext } from '@angular/core';
 import { BrowserModule, HammerModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MarkdownModule } from 'ngx-markdown';
 import 'prismjs';
@@ -32,6 +33,8 @@ import { CardComponent } from './card/card.component';
 import { CardsetOverviewComponent } from './cardset-overview/cardset-overview.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
+import { CardsetImportComponent } from './cardset-import/cardset-import.component';
+import { CardsetCreationDialogComponent } from './dashboard/cardset-creation-dialog/cardset-creation-dialog.component';
 
 
 @NgModule({
@@ -47,7 +50,9 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
     CardComponent,
     CardsetOverviewComponent,
     DashboardComponent,
-    ErrorDialogComponent
+    ErrorDialogComponent,
+    CardsetImportComponent,
+    CardsetCreationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +65,9 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
     MatDialogModule,
     MarkdownModule.forRoot({
       sanitize: SecurityContext.NONE
-    })
+    }),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: BasicAuthInterceptor, multi: true },

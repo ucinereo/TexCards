@@ -10,12 +10,14 @@ import { AuthGuard } from './guards/auth.guard';
 import { ErrorViewComponent } from './error-view/error-view.component'
 import { CardsetOverviewComponent } from './cardset-overview/cardset-overview.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CardsetImportComponent } from './cardset-import/cardset-import.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'sets', component: CardsetSelectorComponent , canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent , canActivate: [AuthGuard] },
   { path: 'editor/:id', component: CardsetEditorComponent, canActivate: [AuthGuard] },
+  { path: 'import/:id', component: CardsetImportComponent, canActivate: [AuthGuard] },
   { path: 'cards/:id', component: CardViewerComponent , canActivate: [AuthGuard] },
   { path: 'share/:id', component: CardsetShareComponent, canActivate: [AuthGuard] },
   { path: 'view/:id', component: CardsetOverviewComponent, canActivate: [AuthGuard] },

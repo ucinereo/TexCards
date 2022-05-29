@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { FlashcardsSets } from '../model/flashcards-sets';
 import { FlashcardService } from '../services/flashcard.service';
+import { CardsetCreationDialogComponent, CreationType } from './cardset-creation-dialog/cardset-creation-dialog.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -11,10 +13,12 @@ import { FlashcardService } from '../services/flashcard.service';
 })
 export class DashboardComponent implements OnInit {
 
+  private dialogOpen: boolean = false;
+
   public flashcardsSets?: FlashcardsSets;
   public ownFlashcardSets?: FlashcardsSets;
 
-  constructor(private flashcardService: FlashcardService, public router: Router, private titleService: Title) { }
+  constructor(private flashcardService: FlashcardService, public router: Router, private titleService: Title, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.flashcardService.getFlashcardsSets().subscribe(response => {
@@ -30,6 +34,40 @@ export class DashboardComponent implements OnInit {
       });
     }, (error) => { });
     this.titleService.setTitle("Tex-Cards " + "Flashcard sets")
+  }
+
+  @HostListener('document:keydown.i')
+  openImportDialog(): void {
+    this.openDialog(CreationType.Import);
+  }
+
+  @HostListener('document:keydown.a')
+  openCreateDialog(): void {
+    this.openDialog(CreationType.Create);
+  }
+
+  private openDialog(creationType: CreationType) {
+    if (!this.dialogOpen) {
+      this.dialogOpen = true;
+      const ref = this.dialog.open(CardsetCreationDialogComponent, {panelClass: 'creation-dialog', data: {type: creationType}});
+      ref.afterClosed().subscribe(result => {
+        if (result && result.length > 0) {
+          this.createNewFlashcardSet(creationType, result);
+        }
+        this.dialogOpen = false;
+      });
+    }
+  }
+
+  
+  createNewFlashcardSet(creationType: CreationType, flashcardSetName: string): void {
+    this.flashcardService.createNewFlashcardSet(flashcardSetName).subscribe(response => {
+      if (creationType == CreationType.Create) {
+        this.router.navigate(['editor/' + response.data]);
+      } else {
+        this.router.navigate(['import/' + response.data]);
+      }
+    }, (error) => { });
   }
 
 

@@ -1,8 +1,9 @@
-import { Component, ElementRef, Host, HostListener, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Host, HostListener, Inject, Input, OnInit, ViewChild } from '@angular/core';
 import { FlashcardService } from '../services/flashcard.service';
 import { FlashcardsSets } from '../model/flashcards-sets';
 import { Router } from '@angular/router';
-import { Title } from '@angular/platform-browser';
+import { MatDialog, MatDialogRef, MatDialogState, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CardsetCreationDialogComponent } from '../dashboard/cardset-creation-dialog/cardset-creation-dialog.component';
 
 @Component({
   selector: 'app-cardset-selector',
@@ -11,40 +12,12 @@ import { Title } from '@angular/platform-browser';
 })
 export class CardsetSelectorComponent implements OnInit {
 
-  @ViewChild("newName") newFlashcardSetInput!: ElementRef;
-
-  public dialogOpen: boolean = false;
-
   @Input() public flashcardsSets?: FlashcardsSets;
 
-  constructor(private flashcardService: FlashcardService, public router: Router) { }
+  constructor() { }
 
   ngOnInit(): void {
 
   }
-
-  @HostListener('document:keydown.esc', ['$event'])
-  @HostListener('document:keydown.a', ['$event'])
-  toggleNewFlashcardSetDialog(event: any): void {
-    if (!this.dialogOpen && (!event || event.key != 'Escape')) {
-      setTimeout(() => {
-        this.dialogOpen = true;
-        this.newFlashcardSetInput.nativeElement.focus();
-      }, 5);
-    } else if (event.key != 'a' || !event) {
-      this.newFlashcardSetInput.nativeElement.blur();
-      this.dialogOpen = false;
-    }
-  }
-
-  @HostListener('document:keydown.enter')
-  createNewFlashcardSet(): void {
-    if (this.newFlashcardSetInput.nativeElement.value.length > 0) {
-      this.flashcardService.createNewFlashcardSet(this.newFlashcardSetInput.nativeElement.value).subscribe(response => {
-        this.router.navigate(['editor/' + response.data]);
-      }, (error) => { });
-    }
-  }
-
 
 }
