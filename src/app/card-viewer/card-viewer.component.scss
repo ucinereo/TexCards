@@ -1,5 +1,20 @@
 @use '../../styles' as v;
 
+.num {
+    font-size: medium;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.missed {
+    color: orange;
+}
+
+.got {
+    color: green;
+}
+
 .learn-reset-button {
     background-color: v.$dcon;
     font-family: v.$pfont;

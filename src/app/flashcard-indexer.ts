@@ -10,6 +10,7 @@ export class FlashcardIndexer {
     private starOrder: number[] = [];
 
     private learnNext: number[] = [];
+    private correctCounter: number = 0;
 
     length: number = 0;
 
@@ -34,6 +35,7 @@ export class FlashcardIndexer {
         this.starOrder = [];
         this.length = 0;
         this.currentIndex = -1;
+        this.correctCounter = 0;
     }
 
     private buildOrders(): void {
@@ -70,12 +72,14 @@ export class FlashcardIndexer {
         this.viewOrder.sort( () => .5 - Math.random() );
         this.learnOrder.sort( () => .5 - Math.random() );
         this.starOrder.sort( () => .5 - Math.random() );
+        this.correctCounter = 0;
     }
 
     private sortOrders(): void {
         this.viewOrder = Array.from(Array(this.length).keys());
         this.learnOrder.sort((a, b) => this.orgOrder.indexOf(a) - this.orgOrder.indexOf(b));
         this.starOrder.sort((a, b) => this.orgOrder.indexOf(a) - this.orgOrder.indexOf(b));
+        this.correctCounter = 0;
     }
 
     public starUpdate(): void {
@@ -119,6 +123,7 @@ export class FlashcardIndexer {
                 this.currentIndex = (this.currentIndex + this.length -1) % this.length;
             } else if (this.viewMode == ViewMode.Learn) {
                 this.learnOrder.shift();
+                this.correctCounter++;
                 if (this.learnOrder.length == 0) {
                     this.currentIndex = -2;
                 }
@@ -131,6 +136,7 @@ export class FlashcardIndexer {
     public resetLearnOrder() {
         if (this.length > 0) {
             this.learnOrder = Array.from(Array(this.length).keys());
+            this.correctCounter = 0;
             this.learnNext = [];
             if (this.shuffled) {
                 this.shuffle();
@@ -143,6 +149,7 @@ export class FlashcardIndexer {
 
     public learnMissed(): void {
         this.learnOrder = [];
+        this.correctCounter = 0;
         this.learnNext.forEach(element => this.learnOrder.push(element));
         this.learnNext = [];
         this.currentIndex = 0;
@@ -182,6 +189,26 @@ export class FlashcardIndexer {
 
     public getMissedCount(): number {
         return this.learnNext.length;
+    }
+
+    public getProgress(): string {
+        if (this.viewMode == ViewMode.Learn) {
+            return "";
+        } else if (this.viewMode == ViewMode.View) {
+            return this.currentIndex + 1 + "/" + this.orgOrder.length;
+        } else if (this.viewMode == ViewMode.Star) {
+            return this.currentIndex + 1 + "/" + this.starOrder.length;
+        } else {
+            return "";
+        }
+    }
+
+    public getLearnProgress(): number[] {
+        if (this.viewMode == ViewMode.Learn) {
+            return [this.learnNext.length, this.learnOrder.length, this.correctCounter];
+        } else {
+            return [0, 0, 0];
+        }
     }
 
 }
