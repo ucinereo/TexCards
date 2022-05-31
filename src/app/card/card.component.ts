@@ -30,6 +30,23 @@ export class CardComponent implements OnInit {
     while (this.countDisplayMathOccurrrences(paragraph) >= 2) {
       paragraph = paragraph.replace(/\$\$/, '\n```math\n').replace(/\$\$/, '\n```\n');
     }
+
+    let inMath = false;
+    for (let i = 0; i < paragraph.length; i++) {
+      if (paragraph.charAt(i) == "$") {
+        if (inMath) {
+          paragraph = paragraph.substring(0, i) + "\\kern{}$" + paragraph.substring(i + 1);
+          i = i + 7;
+        }
+        inMath = !inMath;
+      } else if (inMath) {
+        if (paragraph.charAt(i) == "<") {
+          paragraph = paragraph.substring(0, i) + "\\lt" + paragraph.substring(i + 1);
+        } else if (paragraph.charAt(i) == ">") {
+          paragraph = paragraph.substring(0, i) + "\\gt" + paragraph.substring(i + 1);
+        }
+      }
+    }
     
     this._paragraph = paragraph;
 
