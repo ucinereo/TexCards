@@ -10,7 +10,8 @@
         <div class="face back">
             <span *ngIf="flashcardsLoaded && flashcardSet != undefined && flashcardIndexer.getIndex() >= 0" class="text-span">
                 <card [paragraph]="flashcardSet.definitions[flashcardIndexer.getIndex()]" [align]="flashcardSet.alignment[flashcardIndexer.getIndex()]" class="k-paragraph"></card>
-                <span class="num">{{ flashcardIndexer.getProgress() }}</span>
+                <span *ngIf="flashcardIndexer.getViewMode() != viewModeEnum.Learn" class="num">{{ flashcardIndexer.getProgress() }}</span>
+                <span *ngIf="flashcardIndexer.getViewMode() == viewModeEnum.Learn" class="num"><span class="missed">{{ flashcardIndexer.getLearnProgress()[0] }}</span>/{{ flashcardIndexer.getLearnProgress()[1] }}/<span class="got">{{ flashcardIndexer.getLearnProgress()[2] }}</span></span>
             </span>
         </div>
         <div *ngIf="flashcardIndexer.getViewMode() == viewModeEnum.Learn && flashcardIndexer.getIndex() == -2" class="face done">
