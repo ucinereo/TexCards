@@ -1,27 +1,35 @@
 # TexCards
+An angular web application to make flashcards with markdown, latex (katex), mermaid support
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.2.
+## Feature overview
+The application allows users to register a new account. Then, create flashcard sets, share them with other users and view the cards in three different modes, view mode: displays all cards; learn mode: lets you decide which cards you know and which don't, and you can repeat the cards you didn't know; star mode: displays all cards the user has marked with a star.
 
-## Development server
+### Latex usage
+Use single dollar notation for inline math, e.g. `$\LaTeX$` renders as $\LaTeX$, and double dollar notation for display mode e.g. ``$$\LaTeX$$`` $$\LaTeX$$
+More information on latex with katex can be found [here](https://katex.org/docs/supported.html)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Mermaid usage
+Use the code environment with mermaid as language the generate graphs e.g.
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
+More information on graphs with mermaid can be found [here](https://mermaid-js.github.io/mermaid/#/)
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Run for development
+To run the application, you need the corresponding [backend](https://github.com/Cryptric/TexCardsBackend)
 
-## Build
+To run the application for development
+- [Install angular](https://angular.io/cli)
+- Set the IP address/port for the backend in `src/environments/environment.ts`
+- Execute `npm install` on the project root
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Then you can run `ng serve` in the project root to start the production environment.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## Build for production 
+To build the production files, first set the IP address/port for your deployed backend under `src/environments/environment.prod.ts`
+then run `ng build` in the project root
