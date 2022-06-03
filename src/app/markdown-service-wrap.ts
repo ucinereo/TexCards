@@ -4,6 +4,7 @@ import { Inject, PLATFORM_ID, SecurityContext, Optional, Injectable } from "@ang
 import { DomSanitizer } from "@angular/platform-browser";
 import katex, { KatexOptions } from "katex";
 import { MarkdownService, SECURITY_CONTEXT, MarkedOptions, errorKatexNotLoaded } from "ngx-markdown";
+import { MarkedRendererWrap } from "./marked-renderer-wrap";
 
 @Injectable({
     providedIn: 'root'
@@ -19,8 +20,8 @@ export class MarkdownServiceWrap extends MarkdownService {
         sanitizer: DomSanitizer,
     ) {
         super(platform, securityContext, http, options, sanitizer);
+        this.renderer = new MarkedRendererWrap();
     }
-
 
     override renderKatex(html: string, options?: KatexOptions): string {
         if (typeof katex === 'undefined' || typeof katex.renderToString === 'undefined') {

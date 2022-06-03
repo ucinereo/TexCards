@@ -14,4 +14,9 @@ export class NgxMarkdownWrapComponent extends MarkdownComponent {
     super(element, markdownService);
   }
 
+  override render(markdown: string, decodeHtml?: boolean): void {
+      let compiled = this.markdownService.renderKatex(markdown, this.katexOptions);
+      super.render(compiled, decodeHtml);
+  }
+
 }
