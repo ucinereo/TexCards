@@ -35,6 +35,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 import { CardsetImportComponent } from './cardset-import/cardset-import.component';
 import { CardsetCreationDialogComponent } from './dashboard/cardset-creation-dialog/cardset-creation-dialog.component';
+import { NgxMarkdownWrapComponent } from './ngx-markdown-wrap/ngx-markdown-wrap.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { CardsetCreationDialogComponent } from './dashboard/cardset-creation-dia
     DashboardComponent,
     ErrorDialogComponent,
     CardsetImportComponent,
-    CardsetCreationDialogComponent
+    CardsetCreationDialogComponent,
+    NgxMarkdownWrapComponent
   ],
   imports: [
     BrowserModule,

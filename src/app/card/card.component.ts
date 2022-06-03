@@ -1,16 +1,15 @@
-import { Component, ChangeDetectionStrategy, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import mermaid from "mermaid";
 import { KatexOptions, MarkdownService } from 'ngx-markdown';
 
-import mermaid from "mermaid";
 
-import katex from "katex";
 
 @Component({
   selector: 'card',
   template: `
     <p>
-      <markdown katex lineNumbers [katexOptions]="options" [data]="_paragraph" [style.text-align]="getTextAlignment()">
-      </markdown>
+      <app-ngx-markdown-wrap katex lineNumbers [katexOptions]="options" [data]="_paragraph" [style.text-align]="getTextAlignment()">
+      </app-ngx-markdown-wrap>
     </p>
   `,
 })
@@ -26,39 +25,12 @@ export class CardComponent implements OnInit {
   @Input() align: number = 2;
 
   @Input() set paragraph(paragraph: string) {
-
-    while (this.countDisplayMathOccurrrences(paragraph) >= 2) {
-      paragraph = paragraph.replace(/\$\$/, '\n```math\n').replace(/\$\$/, '\n```\n');
-    }
-
-    let inMath = false;
-    for (let i = 0; i < paragraph.length; i++) {
-      if (paragraph.charAt(i) == "$") {
-        if (inMath) {
-          paragraph = paragraph.substring(0, i) + "\\kern{}$" + paragraph.substring(i + 1);
-          i = i + 7;
-        }
-        inMath = !inMath;
-      } else if (inMath) {
-        if (paragraph.charAt(i) == "<") {
-          paragraph = paragraph.substring(0, i) + "\\lt" + paragraph.substring(i + 1);
-        } else if (paragraph.charAt(i) == ">") {
-          paragraph = paragraph.substring(0, i) + "\\gt" + paragraph.substring(i + 1);
-        }
-      }
-    }
     
     this._paragraph = paragraph;
 
     setTimeout(() => {
       mermaid.init(document.querySelectorAll(".mermaid"));
       mermaid.initialize({ });
-      MathManager.displayMath.forEach((value: string, key: string) => {
-        let element = document.getElementsByClassName(key)[0] as HTMLElement;
-        if (element != undefined && element != null) {
-          katex.render(value, element, { throwOnError: false, displayMode: true });
-        }
-      });
     }, 5);
   }
 
@@ -68,18 +40,10 @@ export class CardComponent implements OnInit {
     this.markdownService.renderer.code = (code, language) => {
       if (language?.match('^mermaid')) {
         return '<div class="mermaid">' + code + '</div>';
-      } else if (language?.match('^math')) {
-        let id = "tex-" + MathManager.mathID++;
-        MathManager.displayMath.set(id, code);
-        return '<div class="' + id + '"></div>';
       } else {
         return this.renderCode(code, language!);
       }
     }
-  }
-
-  private countDisplayMathOccurrrences(input: string): number {
-    return (input.match(/\$\$/g)||[]).length;
   }
 
   public getTextAlignment(): string {
@@ -109,9 +73,4 @@ export class CardComponent implements OnInit {
     return '<pre><code class="' + this.markdownService.renderer.options.langPrefix + language + '">' + code + '</code></pre>\n';
   }
 
-}
-
-class MathManager {
-  public static mathID: number = 0;
-  public static displayMath: Map<string, string> = new Map<string, string>();
 }
