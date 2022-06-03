@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import mermaid from "mermaid";
+import mermaidAPI from 'mermaid/mermaidAPI';
 import { KatexOptions, MarkdownService } from 'ngx-markdown';
 
 
@@ -24,13 +25,16 @@ export class CardComponent {
 
   @Input() align: number = 2;
 
+  // @ts-nocheck
   @Input() set paragraph(paragraph: string) {
     
     this._paragraph = paragraph;
 
     setTimeout(() => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      mermaid.initialize({theme: 'forest'});
       mermaid.init(document.querySelectorAll(".mermaid"));
-      mermaid.initialize({ });
     }, 5);
   }
 
