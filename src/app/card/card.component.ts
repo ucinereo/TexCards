@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import mermaid from "mermaid";
+import mermaidAPI from 'mermaid/mermaidAPI';
 import { KatexOptions, MarkdownService } from 'ngx-markdown';
 
 
@@ -13,7 +14,7 @@ import { KatexOptions, MarkdownService } from 'ngx-markdown';
     </p>
   `,
 })
-export class CardComponent implements OnInit {
+export class CardComponent {
 
   public options: KatexOptions = {
     displayMode: false,
@@ -24,27 +25,20 @@ export class CardComponent implements OnInit {
 
   @Input() align: number = 2;
 
+  // @ts-nocheck
   @Input() set paragraph(paragraph: string) {
     
     this._paragraph = paragraph;
 
     setTimeout(() => {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      mermaid.initialize({theme: 'forest'});
       mermaid.init(document.querySelectorAll(".mermaid"));
-      mermaid.initialize({ });
     }, 5);
   }
 
   constructor(private markdownService: MarkdownService) { }
-
-  ngOnInit(): void {
-    this.markdownService.renderer.code = (code, language) => {
-      if (language?.match('^mermaid')) {
-        return '<div class="mermaid">' + code + '</div>';
-      } else {
-        return this.renderCode(code, language!);
-      }
-    }
-  }
 
   public getTextAlignment(): string {
     if (this.align == 1) {
@@ -54,23 +48,6 @@ export class CardComponent implements OnInit {
     } else {
       return "right";
     }
-  }
-
-  private renderCode(code: string, language: string) {
-    if (this.markdownService.renderer.options.highlight) {
-      const out = this.markdownService.renderer.options.highlight(code, language);
-      if (out != null && out !== code) {
-        code = out;
-      }
-    }
-
-    code = code.replace(/\n$/, '') + '\n';
-
-    if (!language) {
-      return '<pre><code>' + code + '</code></pre>\n';
-    }
-
-    return '<pre><code class="' + this.markdownService.renderer.options.langPrefix + language + '">' + code + '</code></pre>\n';
   }
 
 }
