@@ -128,7 +128,7 @@ export class FlashcardIndexer {
                     this.currentIndex = -2;
                 }
             } else if (this.viewMode == ViewMode.Star) {
-                this.currentIndex = (this.currentIndex + this.length -1) % this.starOrder.length;
+                this.currentIndex = (this.currentIndex + this.starOrder.length -1) % this.starOrder.length;
             }
         }
     }
