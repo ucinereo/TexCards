@@ -168,6 +168,11 @@ input:focus, *:focus {
     height: 80%;
 }
 
+.card-text img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
 
 @media screen and (max-width: 1200px), (orientation: portrait) {
     .form {
