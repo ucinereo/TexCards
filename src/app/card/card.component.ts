@@ -28,7 +28,7 @@ export class CardComponent {
 
 
   @Input() set paragraph(paragraph: string) {
-    this._paragraph = paragraph;
+    this._paragraph = paragraph.replaceAll('\\{', '\\\\{').replaceAll('\\}', '\\\\}');
   }
 
   constructor() { }
