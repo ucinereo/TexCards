@@ -5,14 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MarkdownModule } from 'ngx-markdown';
-import 'prismjs';
-import 'prismjs/components/prism-java.min.js';
-import 'prismjs/components/prism-python.min.js';
-import 'prismjs/components/prism-c.min.js';
-import 'prismjs/components/prism-cpp.min.js';
-import 'prismjs/components/prism-bash.min.js';
-import 'prismjs/plugins/line-numbers/prism-line-numbers.js';
-import 'prismjs/plugins/line-highlight/prism-line-highlight.js';
 
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -35,7 +27,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 import { CardsetImportComponent } from './cardset-import/cardset-import.component';
 import { CardsetCreationDialogComponent } from './dashboard/cardset-creation-dialog/cardset-creation-dialog.component';
-import { NgxMarkdownWrapComponent } from './ngx-markdown-wrap/ngx-markdown-wrap.component';
 
 
 @NgModule({
@@ -54,7 +45,6 @@ import { NgxMarkdownWrapComponent } from './ngx-markdown-wrap/ngx-markdown-wrap.
     ErrorDialogComponent,
     CardsetImportComponent,
     CardsetCreationDialogComponent,
-    NgxMarkdownWrapComponent
   ],
   imports: [
     BrowserModule,

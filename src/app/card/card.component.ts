@@ -1,7 +1,5 @@
 import { Component, Input } from '@angular/core';
-import mermaid from "mermaid";
-import mermaidAPI from 'mermaid/mermaidAPI';
-import { KatexOptions, MarkdownService } from 'ngx-markdown';
+import { KatexOptions, MarkdownService, MermaidAPI } from 'ngx-markdown';
 
 
 
@@ -9,36 +7,31 @@ import { KatexOptions, MarkdownService } from 'ngx-markdown';
   selector: 'card',
   template: `
     <p>
-      <app-ngx-markdown-wrap katex lineNumbers [katexOptions]="options" [data]="_paragraph" [style.text-align]="getTextAlignment()">
-      </app-ngx-markdown-wrap>
+      <markdown katex mermaid lineNumbers [katexOptions]="options" [mermaidOptions]="mermaidOptions" [data]="_paragraph" [style.text-align]="getTextAlignment()">
+      </markdown>
     </p>
   `,
 })
 export class CardComponent {
 
   public options: KatexOptions = {
-    displayMode: false,
     throwOnError: false,
+  }
+
+  public mermaidOptions: MermaidAPI.Config = {
+    theme: MermaidAPI.Theme.Forest
   }
 
   _paragraph!: string;
 
   @Input() align: number = 2;
 
-  // @ts-nocheck
-  @Input() set paragraph(paragraph: string) {
-    
-    this._paragraph = paragraph;
 
-    setTimeout(() => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-expect-error
-      mermaid.initialize({theme: 'forest'});
-      mermaid.init(document.querySelectorAll(".mermaid"));
-    }, 5);
+  @Input() set paragraph(paragraph: string) {
+    this._paragraph = paragraph;
   }
 
-  constructor(private markdownService: MarkdownService) { }
+  constructor() { }
 
   public getTextAlignment(): string {
     if (this.align == 1) {

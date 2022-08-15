@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlashcardSetImport } from '../model/flashcard-set-import';
@@ -17,12 +17,12 @@ export class CardsetImportComponent implements OnInit {
 
   public inputText: string = '';
 
-  public iForm = new FormGroup({
-    tdSeparator: new FormControl('\\t'),
-    cSeparator: new FormControl('\\n'),
-    align: new FormControl('2'),
-    tdCustom: new FormControl(''),
-    cCustom: new FormControl('')
+  public iForm = new UntypedFormGroup({
+    tdSeparator: new UntypedFormControl('\\t'),
+    cSeparator: new UntypedFormControl('\\n'),
+    align: new UntypedFormControl('2'),
+    tdCustom: new UntypedFormControl(''),
+    cCustom: new UntypedFormControl('')
   });
 
   constructor(private flashcardService: FlashcardService,  private route: ActivatedRoute, private router: Router, private titleService: Title) { }
