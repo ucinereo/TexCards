@@ -21,13 +21,18 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      - name: Install zip
+        uses: montudor/action-zip@v1
       - name: npm install and npm run build
         run: |
           npm i
           npm run build
+      - name: Zip dist files
+        working-directory: dist/tex-cards
+        run: zip -qq tex-cards.zip -d tex-cards
       - name: Push Build to Releases
         uses: ncipollo/release-action@v1
         with:
           tag: "v1.0"
-          artifacts: "dist/tex-cards/*"
+          artifacts: "dist/tex-cards.zip"
           token: ${{ secrets.TOKEN }}
