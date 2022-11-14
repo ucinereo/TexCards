@@ -28,8 +28,7 @@ jobs:
           npm i
           npm run build
       - name: Zip dist files
-        working-directory: dist/tex-cards
-        run: zip -qq tex-cards.zip -d tex-cards
+        run: zip -qq dist/tex-cards.zip -d dist/tex-cards
       - name: Push Build to Releases
         uses: ncipollo/release-action@v1
         with:
