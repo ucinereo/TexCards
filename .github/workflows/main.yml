@@ -35,5 +35,5 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           tag: "v1.0"
-          artifacts: "dist/release.zip"
+          artifacts: "dist/tex-cards/release.zip"
           token: ${{ secrets.TOKEN }}
