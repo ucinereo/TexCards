@@ -1,0 +1,32 @@
+on: 
+  workflow_dispatch:
+name: Build and deploy
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [16.x]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Node ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+      - name: npm install and npm run build
+        run: |
+          npm i
+          npm run build
+      - name: Install SSH key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known_hosts: unnecessary
+      - name: Adding Known Hosts
+        run: ssh-keyscan -H ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+      - name: Deploy with rsync
+        run: rsync -avz --delete -e "ssh -p ${{ secrets.SSH_PORT }}" ./dist/tex-cards ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/gawain/rsync-test/
+
