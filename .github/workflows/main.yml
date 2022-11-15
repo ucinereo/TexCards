@@ -1,4 +1,7 @@
-on: [workflow_dispatch]
+on:
+  push:
+    tags:
+      - '*'
 name: Build Angular
 jobs:
   build:
@@ -28,6 +31,5 @@ jobs:
       - name: Push Build to Releases
         uses: ncipollo/release-action@v1
         with:
-          tag: "v1.0"
           artifacts: "dist/tex-cards/release.zip"
           token: ${{ secrets.TOKEN }}
