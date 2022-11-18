@@ -11,9 +11,10 @@ import { ErrorViewComponent } from './error-view/error-view.component'
 import { CardsetOverviewComponent } from './cardset-overview/cardset-overview.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CardsetImportComponent } from './cardset-import/cardset-import.component';
+import {HomeComponent} from "./home/home.component";
 
 const routes: Routes = [
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', component: HomeComponent },
   { path: 'sets', component: CardsetSelectorComponent , canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent , canActivate: [AuthGuard] },
   { path: 'editor/:id', component: CardsetEditorComponent, canActivate: [AuthGuard] },

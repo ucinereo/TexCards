@@ -23,6 +23,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 import { CardsetImportComponent } from './cardset-import/cardset-import.component';
 import { CardsetCreationDialogComponent } from './dashboard/cardset-creation-dialog/cardset-creation-dialog.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { CardsetCreationDialogComponent } from './dashboard/cardset-creation-dia
     ErrorDialogComponent,
     CardsetImportComponent,
     CardsetCreationDialogComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,

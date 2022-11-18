@@ -1,16 +1,1 @@
-<div class="main-div">
-  <div class="nav-bar">
-    <div id="logo-div">
-      <h1 id="logo" a routerLink="">Tex Cards</h1>
-    </div>
-    <div id="logout-div">
-      <h1 *ngIf="authService.isUserLoggedIn()"><i class="material-icons o-icon" (click)="onLogout()" routerLink="login">logout</i></h1>
-      <h1 *ngIf="!authService.isUserLoggedIn()"><i class="material-icons o-icon" (click)="onLogout()" routerLink="login">login</i></h1>
-    </div>
-  </div>
-  <div class="component-div">
-    <div class="scroll-div">
-      <router-outlet></router-outlet>
-    </div>
-  </div>
-</div>
+<router-outlet></router-outlet>
