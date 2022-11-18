@@ -3,7 +3,7 @@
         <ul>
           <li *ngFor="let set of flashcardsSets?.names let i = index">
             <span routerLink="/cards/{{ flashcardsSets!.ids[i] }}">{{ set }}</span>
-            <button mat-button class="men-button" [matMenuTriggerFor]="menu">
+         <!--   <button mat-button class="men-button" [matMenuTriggerFor]="menu">
               <i class="material-icons">more_vert</i>
             </button>
             <mat-menu #menu="matMenu" xPosition="before" class="action-menu">
@@ -25,7 +25,7 @@
                   <span class="action-text">View</span>
                 </div>
               </button>
-            </mat-menu>
+            </mat-menu> -->
           </li>
         </ul>
     </div>

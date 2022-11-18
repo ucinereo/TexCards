@@ -1,5 +1,4 @@
 import { Component, HostListener, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { FlashcardsSets } from '../model/flashcards-sets';
@@ -18,7 +17,7 @@ export class DashboardComponent implements OnInit {
   public flashcardsSets?: FlashcardsSets;
   public ownFlashcardSets?: FlashcardsSets;
 
-  constructor(private flashcardService: FlashcardService, public router: Router, private titleService: Title, private dialog: MatDialog) { }
+  constructor(private flashcardService: FlashcardService, public router: Router, private titleService: Title) { }
 
   ngOnInit(): void {
     this.flashcardService.getFlashcardsSets().subscribe(response => {
@@ -49,17 +48,17 @@ export class DashboardComponent implements OnInit {
   private openDialog(creationType: CreationType) {
     if (!this.dialogOpen) {
       this.dialogOpen = true;
-      const ref = this.dialog.open(CardsetCreationDialogComponent, {panelClass: 'creation-dialog', data: {type: creationType}});
-      ref.afterClosed().subscribe(result => {
-        if (result && result.length > 0) {
-          this.createNewFlashcardSet(creationType, result);
-        }
-        this.dialogOpen = false;
-      });
+      // const ref = this.dialog.open(CardsetCreationDialogComponent, {panelClass: 'creation-dialog', data: {type: creationType}});
+      //ref.afterClosed().subscribe(result => {
+      //  if (result && result.length > 0) {
+      //    this.createNewFlashcardSet(creationType, result);
+      //  }
+      //  this.dialogOpen = false;
+      //});
     }
   }
 
-  
+
   createNewFlashcardSet(creationType: CreationType, flashcardSetName: string): void {
     this.flashcardService.createNewFlashcardSet(flashcardSetName).subscribe(response => {
       if (creationType == CreationType.Create) {

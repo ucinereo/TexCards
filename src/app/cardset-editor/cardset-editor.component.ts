@@ -1,7 +1,6 @@
 import { Component, ElementRef, HostListener, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MatDialog } from '@angular/material/dialog'
 import { FlashcardSet } from '../model/flashcard-set';
 import { Card, EditType, FlashcardSetEdit, ModCard } from '../model/flashcard-set-edit';
 import { FlashcardService } from '../services/flashcard.service';
@@ -37,7 +36,7 @@ export class CardsetEditorComponent implements OnInit {
   public flashcardSet?: FlashcardSet;
   public flashcardSetID?: number;
 
-  constructor(private route: ActivatedRoute, private router: Router, private flashcardService: FlashcardService, private titleService: Title, private dialog: MatDialog) {
+  constructor(private route: ActivatedRoute, private router: Router, private flashcardService: FlashcardService, private titleService: Title) {
 
    }
 
@@ -54,7 +53,7 @@ export class CardsetEditorComponent implements OnInit {
         this.definitions.push("");
         this.alignment.push(2);
         this.titleService.setTitle("Tex-Cards " + this.flashcardSet!.flashcardSetName);
-        setTimeout(() => this.setupData(), 5);      
+        setTimeout(() => this.setupData(), 5);
       }, (error) => { })
     });
   }
@@ -70,7 +69,7 @@ export class CardsetEditorComponent implements OnInit {
     e.preventDefault();
     const text = e.clipboardData.getData('text/plain');
     document.execCommand("insertText", false, text);
-    
+
   }
 
   @HostListener('document:keydown.control.s')
@@ -90,15 +89,15 @@ export class CardsetEditorComponent implements OnInit {
       if (errorCode == undefined || errorCode == null || errorCode == "") {
         errorCode = "500";
       }
-      
-      this.dialog.open(ErrorDialogComponent, {
-        data: {
-          status: errorCode,
-          title: ErrorViewComponent.getErrorTitle(errorCode),
-          msg: errorMsg
-        }
-      });
-    });    
+
+      // this.dialog.open(ErrorDialogComponent, {
+      //   data: {
+      //     status: errorCode,
+      //     title: ErrorViewComponent.getErrorTitle(errorCode),
+      //     msg: errorMsg
+      //   }
+      // });
+    });
   }
 
   counter(i: number): number[] {
@@ -128,7 +127,7 @@ export class CardsetEditorComponent implements OnInit {
         this.previewIndex = -1
       }
     }, CardsetEditorComponent.previewDelay);
-    setTimeout(() => this.checkForEmpty(index), 5); // TODO clean up, i think this isn't guaranteed to work 
+    setTimeout(() => this.checkForEmpty(index), 5); // TODO clean up, i think this isn't guaranteed to work
   }
 
   onFocusIn(index: number, termFocus: boolean): void {

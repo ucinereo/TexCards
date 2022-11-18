@@ -6,10 +6,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { MarkdownModule } from 'ngx-markdown';
 
-import { MatMenuModule } from '@angular/material/menu';
-import { MatTabsModule } from '@angular/material/tabs';
-import { MatDialogModule } from '@angular/material/dialog';
-
 import { AppComponent } from './app.component';
 import { CardViewerComponent } from './card-viewer/card-viewer.component';
 import { CardsetSelectorComponent } from './cardset-selector/cardset-selector.component';
@@ -52,9 +48,6 @@ import { CardsetCreationDialogComponent } from './dashboard/cardset-creation-dia
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatMenuModule,
-    MatTabsModule,
-    MatDialogModule,
     MarkdownModule.forRoot({
       sanitize: SecurityContext.NONE
     }),

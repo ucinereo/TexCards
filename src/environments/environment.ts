@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiHost: "http://192.168.178.79:8080/"
+  apiHost: "https://tex-cards.cryptric.ch:8080/"
 };
 
 /*

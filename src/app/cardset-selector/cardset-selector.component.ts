@@ -1,9 +1,5 @@
-import { Component, ElementRef, Host, HostListener, Inject, Input, OnInit, ViewChild } from '@angular/core';
-import { FlashcardService } from '../services/flashcard.service';
+import { Component, Input, OnInit } from '@angular/core';
 import { FlashcardsSets } from '../model/flashcards-sets';
-import { Router } from '@angular/router';
-import { MatDialog, MatDialogRef, MatDialogState, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { CardsetCreationDialogComponent } from '../dashboard/cardset-creation-dialog/cardset-creation-dialog.component';
 
 @Component({
   selector: 'app-cardset-selector',
