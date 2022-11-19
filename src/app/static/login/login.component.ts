@@ -10,8 +10,8 @@ import { AuthenticationService } from '../../services/auth/authentication.servic
 })
 export class LoginComponent implements OnInit {
 
-  @ViewChild("username") usernameInput?: ElementRef;
-  @ViewChild("password") passwordInput?: ElementRef;
+  username: string = "";
+  password: string = "";
 
   public wrongCredentials: boolean = false;
 
@@ -23,9 +23,9 @@ export class LoginComponent implements OnInit {
 
   @HostListener('document:keydown.enter')
   onSubmit(): void {
-    this.authService.authenticate(this.usernameInput?.nativeElement.value, this.passwordInput?.nativeElement.value).subscribe(response => {
-      this.router.navigate(['']);
-    }, (error) => { this.wrongCredentials = true });
+    this.authService.authenticate(this.username, this.password).subscribe(response => {
+      this.router.navigate(['dashboard']);
+    }, (error) => { this.wrongCredentials = true; });
   }
 
 

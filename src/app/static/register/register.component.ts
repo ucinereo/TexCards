@@ -9,9 +9,9 @@ import { AuthenticationService } from '../../services/auth/authentication.servic
 })
 export class RegisterComponent implements OnInit {
 
-  @ViewChild("iUsername") iUsername!: ElementRef;
-  @ViewChild("iEmail") iEmail!: ElementRef;
-  @ViewChild("iPassword") iPassword!: ElementRef;
+  username: string = "";
+  email: string = "";
+  password: string = "";
 
   public errorMsg: string = "Error";
   public registrationError: boolean = false;
@@ -24,17 +24,15 @@ export class RegisterComponent implements OnInit {
 
   @HostListener('document:keydown.enter')
   onRegister(): void {
-    let username = this.iUsername.nativeElement.value;
-    let email = this.iEmail.nativeElement.value;
-    let password = this.iPassword.nativeElement.value;
-    if (username.length > 0 && email.length > 0 && password.length > 0) {
-      this.authService.register(username, email, password).subscribe(data => {
+    console.log(this.username + " " + this.email + " " + this.password);
+     if (this.username.length > 0 && this.email.length > 0 && this.password.length > 0) {
+       this.authService.register(this.username, this.email, this.password).subscribe(data => {
 
-      }, (error) => {
-        this.errorMsg = error.error.message;
-        this.registrationError = true;
-      });
-    }
+       }, (error) => {
+         this.errorMsg = error.error.message;
+         this.registrationError = true;
+       });
+     }
   }
 
 }

@@ -11,10 +11,10 @@ export class BasicAuthInterceptor implements HttpInterceptor {
   constructor(private authService: AuthenticationService, private router: Router) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    if (sessionStorage.getItem('username') && sessionStorage.getItem('token')) {
+    if (localStorage.getItem('username') && localStorage.getItem('token')) {
       request = request.clone({
         setHeaders: {
-          Authorization: sessionStorage.getItem('token')!
+          Authorization: localStorage.getItem('token')!
         }
       })
     }
@@ -23,13 +23,13 @@ export class BasicAuthInterceptor implements HttpInterceptor {
         if (this.router.url.match('.*editor.*') && err.status != 401) {
           return throwError(err);
         }
-        
+
         let errorCode = err.status;
         let errorMsg = err.error.message;
-        if (errorMsg == undefined || errorMsg == null || errorMsg == "" || errorMsg.includes('/') || errorMsg.includes('.')) {
+        if (errorMsg == undefined || errorMsg == "" || errorMsg.includes('/') || errorMsg.includes('.')) {
           errorMsg = "-";
         }
-        if (errorCode == undefined || errorCode == null || errorCode == "") {
+        if (errorCode == undefined || errorCode == "") {
           errorCode = "500";
         }
         if (err.status == 401) {
