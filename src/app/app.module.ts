@@ -26,6 +26,7 @@ import { CardsetCreationDialogComponent } from './app/cardset-creation-dialog/ca
 import { HomeComponent } from './static/home/home.component';
 import { CardFlipperComponent } from './app/card-flipper/card-flipper.component';
 import { CardCarouselComponent } from './app/card-carousel/card-carousel.component';
+import { FlashcardsetSummaryComponent } from './app/flashcardset-summary/flashcardset-summary.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { CardCarouselComponent } from './app/card-carousel/card-carousel.compone
     HomeComponent,
     CardFlipperComponent,
     CardCarouselComponent,
+    FlashcardsetSummaryComponent,
   ],
   imports: [
     BrowserModule,
