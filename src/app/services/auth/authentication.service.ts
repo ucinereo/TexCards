@@ -13,9 +13,9 @@ export class AuthenticationService {
 
   public authenticate(username: string, password: string) {
     return this.httpClient.post<any>(FlashcardService.REST_API_SERVER + "auth/login", {"username": username, "password": password}).pipe(map(userData => {
-      sessionStorage.setItem("username", username);
+      localStorage.setItem("username", username);
       let tokenStr = "Bearer " + userData.token;
-      sessionStorage.setItem("token", tokenStr);
+      localStorage.setItem("token", tokenStr);
       return userData;
     }));
   }
@@ -23,9 +23,9 @@ export class AuthenticationService {
   public register(username: string, email: string, password: string) {
     return this.httpClient.post<any>(FlashcardService.REST_API_SERVER + "auth/register", {"username": username, "email": email, "password": password}).pipe(map(userData => {
       if (!userData.error) {
-        sessionStorage.setItem("username", username);
+        localStorage.setItem("username", username);
         let tokenStr = "Bearer " + userData.token;
-        sessionStorage.setItem("token", tokenStr);
+        localStorage.setItem("token", tokenStr);
         this.router.navigate(['sets']);
         return userData;
       }
@@ -33,13 +33,13 @@ export class AuthenticationService {
   }
 
   isUserLoggedIn(): boolean {
-    let user = sessionStorage.getItem("username");
+    let user = localStorage.getItem("username");
     return !(user == null);
   }
 
   logOut(): void {
-    sessionStorage.removeItem("username");
-    sessionStorage.removeItem("token");
+    localStorage.removeItem("username");
+    localStorage.removeItem("token");
   }
 
 }
