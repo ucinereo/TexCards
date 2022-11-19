@@ -44,15 +44,15 @@ export class CardsetEditorComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.flashcardSetID = params['id'];
       this.flashcardService.getFlashcardSet(this.flashcardSetID!).subscribe(response => {
-        this.flashcardSet = response.data;
-        this.count = this.flashcardSet!.terms.length + 1;
-        this.terms = [... this.flashcardSet!.terms];
-        this.definitions = [... this.flashcardSet!.definitions];
-        this.alignment = [... this.flashcardSet!.alignment];
-        this.terms.push("");
-        this.definitions.push("");
-        this.alignment.push(2);
-        this.titleService.setTitle("Tex-Cards " + this.flashcardSet!.flashcardSetName);
+        // this.flashcardSet = response.data;
+        // this.count = this.flashcardSet!.terms.length + 1;
+        // this.terms = [... this.flashcardSet!.terms];
+        // this.definitions = [... this.flashcardSet!.definitions];
+        // this.alignment = [... this.flashcardSet!.alignment];
+        // this.terms.push("");
+        // this.definitions.push("");
+        // this.alignment.push(2);
+        // this.titleService.setTitle("Tex-Cards " + this.flashcardSet!.flashcardSetName);
         setTimeout(() => this.setupData(), 5);
       }, (error) => { })
     });
@@ -180,9 +180,9 @@ export class CardsetEditorComponent implements OnInit {
           org++;
         }
       }
-      if (org < this.flashcardSet!.terms.length) {
-        ind.push(org);
-      }
+      //if (org < this.flashcardSet!.terms.length) {
+      //  ind.push(org);
+      //}
     });
     return ind;
   }
@@ -191,22 +191,22 @@ export class CardsetEditorComponent implements OnInit {
     let deleteInd = this.calculateDeleteIndecies();
 
     let flashcardSetEdit = new FlashcardSetEdit(this.flashcardSet!.id, this.flashcardSetNameInput.nativeElement.value);
-    let cardCounter = 0; // counts how many cards of the displayed list have been processed
-    for (let i = 0; i < this.flashcardSet!.terms.length; i++) {
-      if (deleteInd.includes(i)) { // delete
-        let card = new Card(this.flashcardSet!.terms[i], this.flashcardSet!.definitions[i], this.flashcardSet!.alignment[i]);
-        flashcardSetEdit.editMap.push(new ModCard(card, card,  EditType.Delete));
-      } else { // modify
-        let oldCard = new Card(this.flashcardSet!.terms[i], this.flashcardSet!.definitions[i], this.flashcardSet!.alignment[i]);
-        let newCard = new Card(this.terms[cardCounter], this.definitions[cardCounter], this.alignment[cardCounter]);
-        cardCounter++;
-        flashcardSetEdit.editMap.push(new ModCard(oldCard, newCard, EditType.Modify));
-      }
-    }
-    for (let i = cardCounter; i < this.terms.length -1; i++) { // add
-      let card = new Card(this.terms[i], this.definitions[i], this.alignment[i]);
-      flashcardSetEdit.editMap.push(new ModCard(new Card("", "", 0), card, EditType.Add));
-    }
+    //let cardCounter = 0; // counts how many cards of the displayed list have been processed
+    //for (let i = 0; i < this.flashcardSet!.terms.length; i++) {
+    //  if (deleteInd.includes(i)) { // delete
+    //    let card = new Card(this.flashcardSet!.terms[i], this.flashcardSet!.definitions[i], this.flashcardSet!.alignment[i]);
+    //    flashcardSetEdit.editMap.push(new ModCard(card, card,  EditType.Delete));
+    //  } else { // modify
+    //    let oldCard = new Card(this.flashcardSet!.terms[i], this.flashcardSet!.definitions[i], this.flashcardSet!.alignment[i]);
+    //    let newCard = new Card(this.terms[cardCounter], this.definitions[cardCounter], this.alignment[cardCounter]);
+    //    cardCounter++;
+    //    flashcardSetEdit.editMap.push(new ModCard(oldCard, newCard, EditType.Modify));
+    //  }
+    //}
+    //for (let i = cardCounter; i < this.terms.length -1; i++) { // add
+    //  let card = new Card(this.terms[i], this.definitions[i], this.alignment[i]);
+    //  flashcardSetEdit.editMap.push(new ModCard(new Card("", "", 0), card, EditType.Add));
+    //}
 
     return flashcardSetEdit;
 

@@ -43,12 +43,12 @@ export class FlashcardIndexer {
         this.viewOrder = Array.from(Array(this.length).keys());
         this.learnOrder = Array.from(Array(this.length).keys());
         this.starOrder = [];
-        this.flashcardSet.stars.forEach(element => this.starOrder.push(element));
+       // this.flashcardSet.stars.forEach(element => this.starOrder.push(element));
     }
 
     public setFlashcardSet(flashcardSet: FlashcardSet) {
         this.flashcardSet = flashcardSet;
-        this.length = flashcardSet.terms.length;
+        //this.length = flashcardSet.terms.length;
         if (this.length > 0) {
             this.buildOrders();
             this.currentIndex = 0;
@@ -84,7 +84,7 @@ export class FlashcardIndexer {
 
     public starUpdate(): void {
         this.starOrder = [];
-        this.flashcardSet.stars.forEach(element => this.starOrder.push(element));
+        //this.flashcardSet.stars.forEach(element => this.starOrder.push(element));
         if (this.viewMode == ViewMode.Star) {
             this.currentIndex = this.currentIndex % this.starOrder.length;
         }

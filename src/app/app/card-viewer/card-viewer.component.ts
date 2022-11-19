@@ -56,7 +56,7 @@ export class CardViewerComponent implements OnInit {
         this.flashcardSet = response.data;
         this.flashcardsLoaded = true;
         this.flashcardIndexer.setFlashcardSet(this.flashcardSet!);
-        this.titleService.setTitle("Tex-Cards " + this.flashcardSet!.flashcardSetName);
+        //this.titleService.setTitle("Tex-Cards " + this.flashcardSet!.flashcardSetName);
       })
     }, (error) => { });
   }
@@ -82,17 +82,17 @@ export class CardViewerComponent implements OnInit {
 
   @HostListener('document:keydown.h')
   toggleStar(): void {
-    let index = this.flashcardIndexer.getIndex();
-    if (this.flashcardSet!.stars.includes(index)) {
-      this.flashcardService.removeFlashcardStar(this.flashcardSet!.id, this.flashcardSet!.terms[this.flashcardIndexer.getIndex()], this.flashcardSet!.definitions[this.flashcardIndexer.getIndex()]).subscribe(response => {
-        }, (error) => { });
-      this.flashcardSet!.stars.splice(this.flashcardSet!.stars.indexOf(index), 1);
-    } else {
-      this.flashcardService.addFlashcardStar(this.flashcardSet!.id, this.flashcardSet!.terms[this.flashcardIndexer.getIndex()], this.flashcardSet!.definitions[this.flashcardIndexer.getIndex()]).subscribe(data => {
-        }, (error) => { });
-      this.flashcardSet!.stars.push(index);
-    }
-    this.flashcardIndexer.starUpdate();
+    //let index = this.flashcardIndexer.getIndex();
+    //if (this.flashcardSet!.stars.includes(index)) {
+    //  this.flashcardService.removeFlashcardStar(this.flashcardSet!.id, this.flashcardSet!.terms[this.flashcardIndexer.getIndex()], this.flashcardSet!.definitions[this.flashcardIndexer.getIndex()]).subscribe(response => {
+    //    }, (error) => { });
+    //  this.flashcardSet!.stars.splice(this.flashcardSet!.stars.indexOf(index), 1);
+    //} else {
+    //  this.flashcardService.addFlashcardStar(this.flashcardSet!.id, this.flashcardSet!.terms[this.flashcardIndexer.getIndex()], this.flashcardSet!.definitions[this.flashcardIndexer.getIndex()]).subscribe(data => {
+    //    }, (error) => { });
+    //  this.flashcardSet!.stars.push(index);
+    //}
+    //this.flashcardIndexer.starUpdate();
   }
 
   onNext() {
