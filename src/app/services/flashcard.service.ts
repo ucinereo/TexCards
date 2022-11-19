@@ -19,8 +19,8 @@ export class FlashcardService {
 
   }
 
-  public getFlashcardsSets() {
-    return this.httpClient.get<any>(FlashcardService.REST_API_SERVER + "flashcard-sets");
+  public getFlashcardSets() {
+    return this.httpClient.get<any>(FlashcardService.REST_API_SERVER + "flashcard/get_flashcard_sets");
   }
 
   public getFlashcardSet(id: number) {
