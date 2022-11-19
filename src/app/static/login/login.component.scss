@@ -1,0 +1,26 @@
+@use '../../styles' as v;
+
+h3 {
+  font-family: v.$pfont;
+  font-weight: 300;
+}
+
+.invalid {
+  color: red;
+}
+
+.register {
+  color: v.$main;
+  cursor: pointer;
+}
+
+button {
+    color: v.$main;
+    background-color: v.$dark;
+    border: none;
+    font-size: x-large;
+    padding: 10px;
+    border-radius: 30px;
+    margin-top: 10px;
+    cursor: pointer;
+}

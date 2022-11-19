@@ -1,0 +1,164 @@
+@use '../../styles' as v;
+
+.num {
+    font-size: medium;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.missed {
+    color: orange;
+}
+
+.got {
+    color: green;
+}
+
+.learn-reset-button {
+    background-color: v.$dcon;
+    font-family: v.$pfont;
+    font-size: xx-large;
+    color: v.$main;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.face {
+    display: grid;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    backface-visibility: hidden;
+    overflow-y: auto;
+    overflow-x: auto;
+    touch-action: pan-y !important; // fixes swipe gestures not working with overfow auto
+    place-items: center;
+}
+
+.back,
+.front {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    backface-visibility: hidden;
+}
+
+.back {
+    transform: rotateY(180deg);
+}
+
+.front {
+    transform: rotateY(0deg);
+}
+
+.card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box; 
+}
+
+.card-text {
+    height: 85%;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: v.$dark;
+    border-radius: 15px;
+    perspective: 600px;
+    -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
+    display: flex;
+    cursor: pointer;
+    position: relative;
+    transform-style: preserve-3d;
+    color: v.$txt;
+}
+
+.text-span {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+    font-family: v.$pfont;
+    font-size: xx-large;
+    //position: relative;
+    padding: 20px;
+    box-sizing: border-box; 
+}
+
+.card-nav {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.div-nav-icon {
+    width: 25%;
+    float: left;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: normal;
+}
+
+.nav-icon-nb {
+    color: v.$main;
+    font-size: xx-large;
+    padding: 10px;
+    text-align: center;
+}
+
+.nav-icon-a {
+    color: v.$main;
+    font-size: xx-large;
+    border-radius: 50%;
+    border: 3px solid v.$main;
+    padding: 10px;
+    text-align: center;
+}
+
+.nav-icon-p {
+    color: v.$mcon1;
+    border-radius: 50%;
+    border: 3px solid v.$mcon1;
+    padding: 10px;
+    text-align: center;
+}
+
+.star-icon {
+    font-size: xx-large;
+    text-align: center;
+}
+
+.star-icon-a {
+    color: yellow;
+}
+
+.star-icon-p {
+    color: v.$dark;
+}
+
+@media screen and (max-width: 1200px), (orientation: portrait) {
+    .text-span {
+        font-size: 3.5vw;
+    }
+
+    .learn-reset-button {
+        font-size: 3.5vw;
+    }
+}
