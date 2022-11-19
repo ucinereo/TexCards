@@ -1,5 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-@import '~bootstrap/scss/bootstrap';
 
 @import '~katex/dist/katex.css';
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
@@ -7,7 +6,6 @@
 
 @import 'prismjs/plugins/line-numbers/prism-line-numbers.css';
 @import 'prismjs/plugins/line-highlight/prism-line-highlight.css';
-
 
 /*** VARIABLES ***/
 /* Colors */
@@ -32,20 +30,6 @@ html, body {
     background-color: $dark;
 }
 
-h1 {
-    font-family: $pfont;
-    font-weight: 300;
-    color: $main;
-    margin: 0;
-}
-
-h2 {
-    font-family: $pfont;
-    font-weight: 300;
-    color: $main;
-    margin: 0;
-}
-
 i {
     cursor: pointer;
     color: $main;
@@ -55,54 +39,6 @@ html, body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
     height: 100%;
-}
-
-.creation-dialog {
-   width: 400px;
-}
-
-.mat-dialog-container {
-    background-color: $dcon;
-}
-
-.mat-menu-panel.action-menu {
-    background-color: $dark;
-    min-width: 10px;
-}
-
-.mat-tab-label {
-    color: $txt;
-    font-family: $pfont;
-    font-weight: 300;;
-    font-size: large;
-}
-
-.mat-tab-group.mat-primary .mat-ink-bar {
-    background-color: $main;
-}
-
-.mat-tab-body-wrapper {
-    flex-grow: 1;
-}
-
-.action-button {
-  text-align: start;
-}
-
-.action-text {
-  margin-left: 10px;
-  vertical-align: super;
-}
-
-button {
-    background-color: transparent;
-    border: none;
-}
-
-.form {
-    display: grid;
-    width: 200px;
-    text-align: center;
 }
 
 input:focus, *:focus {

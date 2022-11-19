@@ -32,7 +32,9 @@
 						"styles": [
 							"src/styles.scss",
 							"node_modules/katex/dist/katex.min.css",
-							"src/prism-solarized-dark-atom.css"
+							"src/prism-solarized-dark-atom.css",
+              "src/assets/bootstrap/css/bootstrap.min.css",
+              "src/assets/css/Navbar-Right-Links-Dark-icons.css"
 						],
 						"scripts": [
 							"node_modules/katex/dist/katex.min.js",
@@ -46,7 +48,8 @@
               "node_modules/prismjs/plugins/line-highlight/prism-line-highlight.js",
               "node_modules/marked/marked.min.js",
               "node_modules/katex/dist/contrib/auto-render.min.js",
-              "node_modules/mermaid/dist/mermaid.min.js"
+              "node_modules/mermaid/dist/mermaid.min.js",
+              "src/assets/bootstrap/js/bootstrap.min.js"
 						]
 					},
 					"configurations": {
