@@ -1,0 +1,19 @@
+.tex-carousel {
+    position: relative;
+    height: 500px;
+    width: 500px;
+}
+
+.tex-carousel-item {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+}
+
+.card-current {
+    transform: translateX(0);
+}
+
+.card-prev {
+    transform: translateX(-520px);
+}

@@ -1,1 +1,11 @@
-<p>card-carousel works!</p>
+<div class="container tex-carousel">
+    <div class="tex-carousel-item card-current" [@current]="position" (@current.done)="resetCurrent()">
+        <app-card-flipper [term]="current_term" [definition]="current_def"></app-card-flipper>
+    </div>
+    <div class="tex-carousel-item card-prev" [@previous]="position">
+        <app-card-flipper [term]="previous_term" [definition]="previous_def"></app-card-flipper>
+    </div>
+    <div class="tex-carousel-item card-next" [@next]="position">
+        <app-card-flipper [term]="next_term" [definition]="next_def"></app-card-flipper>
+    </div>
+</div>

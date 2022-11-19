@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges, SimpleChanges, HostBinding } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
@@ -8,7 +8,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   animations: [
     trigger('flipped', [
       state('true', style({
-        transform: 'rotateY(179deg)'
+        transform: 'rotateY(180deg)'
       })),
       state('false', style({
         transform: 'rotateY(0)'
@@ -20,6 +20,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 })
 export class CardFlipperComponent implements OnInit {
 
+  // TODO: Remove ugly demo data :)
   @Input() term: string = `
   fksdlfjsdlfkjsdflkdsjfsdkl fjsdfl;kjd asf;kljad sf;kljdas f;lkadjs f;lkasdjf ;ladksjf ;ladksjf ;adklsjf. \n
   \`\`\`
@@ -34,6 +35,10 @@ export class CardFlipperComponent implements OnInit {
   `;
   @Input() definition: string = "some definition";
 
+  // provide method to flip the card without animation
+  @HostBinding('@.disabled')
+  public animationsDisabled = false;
+  
   public flipped: boolean = false;
 
   constructor() { }
@@ -42,8 +47,18 @@ export class CardFlipperComponent implements OnInit {
   }
 
   flip(): void {
-    console.log("lol");
-    
     this.flipped = !this.flipped;
+  }
+
+  // this gets called if the content gets changed from the card-carousel-component
+  ngOnChanges(changes: SimpleChanges): void {
+
+    // temporary disable the animation
+    this.animationsDisabled = true;
+    if (this.flipped) {
+      this.flip();
+    }
+    // enable the animation again
+    this.animationsDisabled = false;
   }
 }
