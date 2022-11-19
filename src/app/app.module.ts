@@ -7,23 +7,23 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MarkdownModule } from 'ngx-markdown';
 
 import { AppComponent } from './app.component';
-import { CardViewerComponent } from './card-viewer/card-viewer.component';
-import { CardsetSelectorComponent } from './cardset-selector/cardset-selector.component';
+import { CardViewerComponent } from './app/card-viewer/card-viewer.component';
+import { CardsetSelectorComponent } from './app/cardset-selector/cardset-selector.component';
 import { AppRoutingModule } from './app-routing.module';
-import { CardsetEditorComponent } from './cardset-editor/cardset-editor.component';
-import { LoginComponent } from './login/login.component';
+import { CardsetEditorComponent } from './app/cardset-editor/cardset-editor.component';
+import { LoginComponent } from './static/login/login.component';
 import { BasicAuthInterceptor } from './services/auth/basic-auth.interceptor';
 import { AuthGuard } from './guards/auth.guard';
-import { CardsetShareComponent } from './cardset-share/cardset-share.component';
-import { RegisterComponent } from './register/register.component';
+import { CardsetShareComponent } from './app/cardset-share/cardset-share.component';
+import { RegisterComponent } from './static/register/register.component';
 import { ErrorViewComponent } from './error-view/error-view.component';
 import { CardComponent } from './card/card.component';
-import { CardsetOverviewComponent } from './cardset-overview/cardset-overview.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { CardsetOverviewComponent } from './app/cardset-overview/cardset-overview.component';
+import { DashboardComponent } from './app/dashboard/dashboard.component';
 import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 import { CardsetImportComponent } from './cardset-import/cardset-import.component';
-import { CardsetCreationDialogComponent } from './dashboard/cardset-creation-dialog/cardset-creation-dialog.component';
-import { HomeComponent } from './home/home.component';
+import { CardsetCreationDialogComponent } from './app/cardset-creation-dialog/cardset-creation-dialog.component';
+import { HomeComponent } from './static/home/home.component';
 
 
 @NgModule({

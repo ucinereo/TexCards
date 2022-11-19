@@ -1,6 +1,6 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { AuthenticationService } from '../services/auth/authentication.service';
+import { AuthenticationService } from '../../services/auth/authentication.service';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +12,7 @@ export class RegisterComponent implements OnInit {
   @ViewChild("iUsername") iUsername!: ElementRef;
   @ViewChild("iEmail") iEmail!: ElementRef;
   @ViewChild("iPassword") iPassword!: ElementRef;
-  
+
   public errorMsg: string = "Error";
   public registrationError: boolean = false;
 

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { FlashcardSet } from '../model/flashcard-set';
-import { FlashcardService } from '../services/flashcard.service';
+import { FlashcardSet } from '../../model/flashcard-set';
+import { FlashcardService } from '../../services/flashcard.service';
 
 @Component({
   selector: 'app-cardset-overview',

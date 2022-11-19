@@ -1,11 +1,11 @@
 import { Component, ElementRef, HostListener, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FlashcardSet } from '../model/flashcard-set';
-import { Card, EditType, FlashcardSetEdit, ModCard } from '../model/flashcard-set-edit';
-import { FlashcardService } from '../services/flashcard.service';
-import { ErrorDialogComponent } from '../error-dialog/error-dialog.component';
-import { ErrorViewComponent } from '../error-view/error-view.component';
+import { FlashcardSet } from '../../model/flashcard-set';
+import { Card, EditType, FlashcardSetEdit, ModCard } from '../../model/flashcard-set-edit';
+import { FlashcardService } from '../../services/flashcard.service';
+import { ErrorDialogComponent } from '../../error-dialog/error-dialog.component';
+import { ErrorViewComponent } from '../../error-view/error-view.component';
 
 @Component({
   selector: 'app-cardset-editor',

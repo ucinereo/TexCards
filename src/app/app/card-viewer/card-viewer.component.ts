@@ -1,11 +1,11 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { FlashcardService } from '../services/flashcard.service';
-import { FlashcardSet } from '../model/flashcard-set';
+import { FlashcardService } from '../../services/flashcard.service';
+import { FlashcardSet } from '../../model/flashcard-set';
 import { trigger, state, style, transition, animate, keyframes } from '@angular/animations';
-import { FlashcardIndexer, ViewMode } from '../flashcard-indexer';
+import { FlashcardIndexer, ViewMode } from '../../flashcard-indexer';
 import { Title } from '@angular/platform-browser';
-import * as kf from '../keyframes';
+import * as kf from '../../keyframes';
 
 @Component({
   selector: 'app-card-viewer',
@@ -42,7 +42,7 @@ export class CardViewerComponent implements OnInit {
   public flashcardSetID?: number;
 
   public flashcardsLoaded: boolean = false;
-  
+
   public flashcardIndexer: FlashcardIndexer;
 
   constructor(private route: ActivatedRoute, private router: Router, private flashcardService: FlashcardService, private titleService: Title) {

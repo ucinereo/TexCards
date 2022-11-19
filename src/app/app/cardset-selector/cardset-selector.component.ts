@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FlashcardsSets } from '../model/flashcards-sets';
+import { FlashcardsSets } from '../../model/flashcards-sets';
 
 @Component({
   selector: 'app-cardset-selector',

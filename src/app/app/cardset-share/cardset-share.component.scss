@@ -1,4 +1,4 @@
-@use '../../styles' as v;
+@use '../../../styles' as v;
 
 .titel-bar {
     margin-left: 15px;
@@ -90,7 +90,7 @@ label {
     .r-box-div {
         grid-column: 2;
     }
-    
+
     .w-box-div {
         grid-column: 2;
         grid-row: 2;

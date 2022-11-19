@@ -1,17 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CardsetSelectorComponent } from './cardset-selector/cardset-selector.component';
-import { CardViewerComponent } from './card-viewer/card-viewer.component';
-import { CardsetEditorComponent } from './cardset-editor/cardset-editor.component';
-import { CardsetShareComponent } from './cardset-share/cardset-share.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { CardsetSelectorComponent } from './app/cardset-selector/cardset-selector.component';
+import { CardViewerComponent } from './app/card-viewer/card-viewer.component';
+import { CardsetEditorComponent } from './app/cardset-editor/cardset-editor.component';
+import { CardsetShareComponent } from './app/cardset-share/cardset-share.component';
+import { LoginComponent } from './static/login/login.component';
+import { RegisterComponent } from './static/register/register.component';
 import { AuthGuard } from './guards/auth.guard';
 import { ErrorViewComponent } from './error-view/error-view.component'
-import { CardsetOverviewComponent } from './cardset-overview/cardset-overview.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { CardsetOverviewComponent } from './app/cardset-overview/cardset-overview.component';
+import { DashboardComponent } from './app/dashboard/dashboard.component';
 import { CardsetImportComponent } from './cardset-import/cardset-import.component';
-import {HomeComponent} from "./home/home.component";
+import {HomeComponent} from "./static/home/home.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },

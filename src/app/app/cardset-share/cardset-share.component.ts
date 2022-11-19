@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
-import { FlashcardService } from '../services/flashcard.service';
-import { UserPermission } from '../model/user-permission';
+import { FlashcardService } from '../../services/flashcard.service';
+import { UserPermission } from '../../model/user-permission';
 
 @Component({
   selector: 'app-cardset-share',
@@ -25,7 +25,7 @@ export class CardsetShareComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.flashcardSetID = params['id'];
       this.flashcardService.getFlahcardSetPermissions(this.flashcardSetID).subscribe(response => {
-        this.userPermissions = response.data;    
+        this.userPermissions = response.data;
       }, (error) => { });
       this.flashcardService.getFlashcardSetName(this.flashcardSetID).subscribe(response => {
         this.flashcardSetName = response.data.flashcardSetName;
