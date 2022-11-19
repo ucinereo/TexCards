@@ -1,0 +1,10 @@
+<div class="container card-wrapper">
+    <div (click)="flip()" [@flipped]="flipped ? 'true' : 'false'" class="tex-card" >
+        <div class="p-2 card-flip card-front bg-dark align-middle fs-2 row align-items-center overflow-auto">
+            <card [paragraph]="term"></card>
+        </div>
+        <div class="card-flip card-back bg-dark align-middle fs-2 row align-items-center overflow-auto">
+            <card [paragraph]="definition"></card>
+        </div>
+    </div>
+</div>

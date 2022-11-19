@@ -24,6 +24,8 @@ import { ErrorDialogComponent } from './error-dialog/error-dialog.component';
 import { CardsetImportComponent } from './cardset-import/cardset-import.component';
 import { CardsetCreationDialogComponent } from './app/cardset-creation-dialog/cardset-creation-dialog.component';
 import { HomeComponent } from './static/home/home.component';
+import { CardFlipperComponent } from './app/card-flipper/card-flipper.component';
+import { CardCarouselComponent } from './app/card-carousel/card-carousel.component';
 
 
 @NgModule({
@@ -43,6 +45,8 @@ import { HomeComponent } from './static/home/home.component';
     CardsetImportComponent,
     CardsetCreationDialogComponent,
     HomeComponent,
+    CardFlipperComponent,
+    CardCarouselComponent,
   ],
   imports: [
     BrowserModule,
