@@ -102,7 +102,7 @@ export class CardCarouselComponent implements OnInit {
       new Flashcard(6, "term6", "definition6", 0, false, 1)
     ];
     this.cards = new FlashcardSet(1, "set name", "desc.", "the almighty ucinereo",
-                                  ["tag1"], true, true, 0, flashcards);
+                                  ["tag1"], true, true, 0, 6, flashcards);
     this.numOfCards = 6;
 
     this.updateCards();

@@ -10,9 +10,10 @@ export class FlashcardSet {
     writePermission: boolean;
     owner: boolean;
     lastUsed: number;
+  numberOfFlashcards: number;
     flashcards: Flashcard[];
 
-    constructor(id: number, name: string, description: string, author: string, tags: string[], writePermission: boolean, owner: boolean, lastUsed: number, flashcards: Flashcard[] ) {
+    constructor(id: number, name: string, description: string, author: string, tags: string[], writePermission: boolean, owner: boolean, lastUsed: number, numberOfFlashcards: number, flashcards: Flashcard[] ) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -21,6 +22,7 @@ export class FlashcardSet {
         this.writePermission = writePermission;
         this.owner = owner;
         this.lastUsed = lastUsed;
+        this.numberOfFlashcards = numberOfFlashcards;
         this.flashcards = flashcards;
     }
 

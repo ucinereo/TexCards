@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {FlashcardSet} from "../../model/flashcard-set";
 
 @Component({
   selector: 'app-flashcardset-summary',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./flashcardset-summary.component.scss']
 })
 export class FlashcardsetSummaryComponent implements OnInit {
+
+  @Input() flashcardSet!: FlashcardSet;
 
   constructor() { }
 

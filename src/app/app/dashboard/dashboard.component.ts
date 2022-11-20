@@ -13,7 +13,9 @@ import {FlashcardSet} from "../../model/flashcard-set";
 })
 export class DashboardComponent implements OnInit {
 
-  public flashcardSets?: FlashcardSet[];
+  public flashcardSets: FlashcardSet[] = [];
+
+  public recentlyStudied: FlashcardSet[][] = [];
 
   constructor(private flashcardService: FlashcardService, public router: Router, private titleService: Title) { }
 
@@ -21,8 +23,18 @@ export class DashboardComponent implements OnInit {
     this.flashcardService.getFlashcardSets().subscribe(response => {
 
       this.flashcardSets = response.data;
+      this.recentlyStudied = this.reshapeToColStructure(this.flashcardSets.sort((n1, n2) => n1.lastUsed - n2.lastUsed).slice(0, 4));
 
     }, (error) => { });
     this.titleService.setTitle("Tex-Cards " + "Flashcard sets")
+  }
+
+  private reshapeToColStructure(flashcardSets: FlashcardSet[]) {
+    const innerSize = 2;
+    let reshaped: FlashcardSet[][] = [];
+    for (let i = 0; (i + innerSize) < flashcardSets.length + 2; i += innerSize) {
+      reshaped.push(flashcardSets.slice(i, i + innerSize));
+    }
+    return reshaped;
   }
 }
