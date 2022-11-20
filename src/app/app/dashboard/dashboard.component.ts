@@ -16,6 +16,7 @@ export class DashboardComponent implements OnInit {
   public flashcardSets: FlashcardSet[] = [];
 
   public recentlyStudied: FlashcardSet[][] = [];
+  public filteredFlashcardSets: FlashcardSet[][] = [];
 
   constructor(private flashcardService: FlashcardService, public router: Router, private titleService: Title) { }
 
@@ -24,6 +25,7 @@ export class DashboardComponent implements OnInit {
 
       this.flashcardSets = response.data;
       this.recentlyStudied = this.reshapeToColStructure(this.flashcardSets.sort((n1, n2) => n1.lastUsed - n2.lastUsed).slice(0, 4));
+      this.filteredFlashcardSets = this.reshapeToColStructure(this.flashcardSets);
 
     }, (error) => { });
     this.titleService.setTitle("Tex-Cards " + "Flashcard sets")
