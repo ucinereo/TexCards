@@ -13,6 +13,8 @@ import {FlashcardSet} from "../../model/flashcard-set";
 })
 export class DashboardComponent implements OnInit {
 
+  public searchTerm: string = "";
+
   public flashcardSets: FlashcardSet[] = [];
 
   public recentlyStudied: FlashcardSet[][] = [];
@@ -38,5 +40,11 @@ export class DashboardComponent implements OnInit {
       reshaped.push(flashcardSets.slice(i, i + innerSize));
     }
     return reshaped;
+  }
+
+  public applyFilter() {
+    this.filteredFlashcardSets = this.reshapeToColStructure(this.flashcardSets.filter((set: FlashcardSet) => {
+      return set.name.toLowerCase().includes(this.searchTerm) || set.description.toLowerCase().includes(this.searchTerm) || set.author.toLowerCase().includes(this.searchTerm) || set.tags.filter((tag) => tag.toLowerCase().includes(this.searchTerm)).length > 0;
+    }))
   }
 }

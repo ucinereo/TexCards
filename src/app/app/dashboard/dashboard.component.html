@@ -13,7 +13,9 @@
         <div class="col-auto col-xl-8 col-xxl-3 align-self-center me-auto" style="padding-bottom: 0px;min-width: 245px;max-width: 65%;width: 65%;border-style: none;border-bottom-width: 1px;">
             <h1 class="text-primary" style="color: var(--bs-dark);margin-bottom: 10px;border-bottom-width: 1px;font-size: 35px;">My Flashcards</h1>
         </div>
-        <div class="col-auto col-xl-3 col-xxl-3 align-self-center ms-auto" style="border-bottom-width: 1px;position: static;display: inline-grid;width: 34%;padding-left: 0px;padding-right: 0px;margin-bottom: 5px;"><input class="form-control-lg d-xxl-flex justify-content-xxl-end" type="search" style="border-radius: 10px;width: 100%;display: grid;border: 1px solid var(--bs-gray-500) ;" placeholder="search..."></div>
+        <div class="col-auto col-xl-3 col-xxl-3 align-self-center ms-auto" style="border-bottom-width: 1px;position: static;display: inline-grid;width: 34%;padding-left: 0px;padding-right: 0px;margin-bottom: 5px;">
+          <input class="form-control-lg d-xxl-flex justify-content-xxl-end" type="search" style="border-radius: 10px;width: 100%;display: grid;border: 1px solid var(--bs-gray-500) ;" placeholder="search..." [(ngModel)]="searchTerm" (ngModelChange)="applyFilter()">
+        </div>
     </div>
     <div *ngFor="let sets of filteredFlashcardSets" class="row" style="margin-bottom: 20px;display: flex;">
         <div *ngFor="let set of sets" class="col-md-6" style="margin-top: 20px;">
