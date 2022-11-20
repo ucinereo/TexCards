@@ -1,4 +1,4 @@
-import { Component, Input, HostListener, OnInit } from '@angular/core';
+import { Component, Input, HostListener, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Flashcard } from 'src/app/model/flashcard';
 import { FlashcardSet } from 'src/app/model/flashcard-set';
 import { trigger, state, style, transition, animate } from '@angular/animations';
@@ -27,11 +27,11 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
         opacity: '1'
       })),
       state('right', style({
-        transform: 'translateX(520px)',
+        transform: 'translateX(100%)',
         opacity: '0'
       })),
       state('left', style({
-        transform: 'translateX(-520px)',
+        transform: 'translateX(-100%)',
         opacity: '0'
       })),
       transition('idle => right', animate('400ms ease-out')),
@@ -41,11 +41,11 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     ]),
     trigger('previous', [ // Animations for the card on the left
       state('idle', style({
-        transform: 'translate(-520px)',
+        transform: 'translate(-100%)',
         opacity: '0'
       })),
       state('left', style({
-        transform: 'translate(-520px)',
+        transform: 'translate(-100%)',
         opacity: '0'
       })),
       state('right', style({
@@ -57,11 +57,11 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     ]),
     trigger('next', [ // Animations for the card on the right
       state('idle', style({
-        transform: 'translate(520px)',
+        transform: 'translate(100%)',
         opacity: '0'
       })),
       state('right', style({
-        transform: 'translate(520px)',
+        transform: 'translate(100%)',
         opacity: '0'
       })),
       state('left', style({
@@ -91,7 +91,7 @@ export class CardCarouselComponent implements OnInit {
   private current: number = 0;
   private numOfCards!: number;
 
-  constructor() {
+  constructor(private _ref: ChangeDetectorRef) {
     // TODO: Remove template card sets
     let flashcards: Flashcard[] = [
       new Flashcard(1, "term1", "definition1", 0, false, 1),
@@ -113,19 +113,21 @@ export class CardCarouselComponent implements OnInit {
   // TODO: Create event
   @HostListener('document:keydown.arrowRight')
   public rotateRight():void {
-    console.log('transition1');
+    if (this.position != 'idle') { return; }
     this.current--;
     if (this.current < 0) { this.current += this.numOfCards; }
     this.position = 'right';
+    this._ref.detectChanges();
   }
 
   // TODO: Create event
   @HostListener('document:keydown.arrowleft')
   public rotateLeft():void {
-    console.log('transition2');
+    if (this.position != 'idle') { return; }
     this.current++;
     if (this.current >= this.numOfCards) { this.current -= this.numOfCards; }
     this.position = 'left';
+    this._ref.detectChanges();
   }
 
   private updateCards(): void {
@@ -151,7 +153,7 @@ export class CardCarouselComponent implements OnInit {
 
   // Update the contents of the cards
   public resetCurrent(): void {
-    if (this.position == 'idle') return;
+    if (this.position == 'idle') { return; }
     this.updateCards();
     this.position = 'idle';
   }
