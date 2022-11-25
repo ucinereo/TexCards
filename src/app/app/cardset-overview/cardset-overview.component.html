@@ -2,18 +2,18 @@
     <div style="border-bottom-style: none;border-radius: 5px;background: var(--bs-dark);padding: 20px;">
         <div class="row" style="padding: 20px;">
             <div class="col m-auto">
-                <h1 class="text-primary">set-name-veryverylong</h1>
-                <p class="text-sm-start">Facilisi morbi tempus iaculis urna id. Ut morbi tincidunt augue interdum velit. Lacinia quis vel eros donec ac odio. Dolor sit amet consectetur adipiscing elit.</p>
-                <div class="text-start" style="padding-top: 0px;margin-top: 0px;padding-bottom: 10px;"><span class="badge bg-primary" style="margin-right: 10px;border-radius: 3px;">AnD</span><span class="badge bg-primary fw-bold" style="margin-right: 10px;border-radius: 3px;">2nd semester</span><span class="badge bg-primary fw-bold" style="border-radius: 3px;background: var(--bs-badge-color);">graphtheory</span></div>
+                <h1 class="text-primary">{{ flashcardSet.name }}</h1>
+                <p class="text-sm-start">{{ flashcardSet.description }}</p>
+                <div class="text-start" style="padding-top: 0px;margin-top: 0px;padding-bottom: 10px;"><span *ngFor="let tag of flashcardSet.tags" class="badge bg-primary tag">{{ tag }}</span></div>
             </div>
             <div class="col mx-auto">
                 <div class="row">
                     <div class="col">
-                        <h1 class="text-primary" style="text-align: right;">Max Mustermann</h1>
+                        <h1 class="text-primary" style="text-align: right;">{{ flashcardSet.author }}</h1>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col text-end"><span style="color: var(--bs-gray-500);font-style: italic;font-size: 20px;">@musterMax</span></div>
+                    <div class="col text-end"><span style="color: var(--bs-gray-500);font-style: italic;font-size: 20px;">@{{ flashcardSet.author }}</span></div>
                 </div>
                 <div class="row">
                     <div class="col text-end" style="padding-top: 20px;">
@@ -46,12 +46,12 @@
                 </div>
             </div>
         </div>
-        <div class="row" style="padding: 20px;width: 100%;margin-left: -5px;">
+        <div *ngFor="let card of flashcardSet.flashcards" class="row" style="padding: 20px;width: 100%;margin-left: -5px;">
             <div class="col">
-                <div style="background: var(--bs-pink);width: 100%;height: 100px;"></div>
+                <card [paragraph]="card.term" [align]="card.alignment"></card>
             </div>
             <div class="col">
-                <div style="background: var(--bs-pink);width: 100%;height: 100px;"></div>
+                <card [paragraph]="card.definition" [align]="card.alignment"></card>
             </div>
         </div>
     </div>

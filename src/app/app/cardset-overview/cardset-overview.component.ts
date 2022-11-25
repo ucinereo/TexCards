@@ -17,13 +17,13 @@ export class CardsetOverviewComponent implements OnInit {
   constructor(private flashcardService: FlashcardService, private route: ActivatedRoute, private titleService: Title) { }
 
   ngOnInit(): void {
-  //  this.route.params.subscribe(params => {
-  //    this.flashcardSetID = params['id'];
-  //    this.flashcardService.getFlashcardSet(this.flashcardSetID).subscribe(response => {
-  //      this.flashcardSet = response.data;
-  //      //this.titleService.setTitle("Tex-Cards " + this.flashcardSet!.flashcardSetName);
-  //    }, error => {});
-  //  });
+    this.route.params.subscribe(params => {
+      this.flashcardSetID = params['id'];
+      this.flashcardService.getFlashcardSet(this.flashcardSetID).subscribe(response => {
+        this.flashcardSet = response.data;
+        //this.titleService.setTitle("Tex-Cards " + this.flashcardSet!.flashcardSetName);
+      }, error => {});
+    });
   }
 
 }

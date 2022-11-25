@@ -24,8 +24,8 @@ export class FlashcardService {
   }
 
   public getFlashcardSet(id: number) {
-    const params = new HttpParams().set("id", id);
-    return this.httpClient.get<any>(FlashcardService.REST_API_SERVER + "flashcard-set", {params});
+    const params = new HttpParams().set("flashcardSetId", id);
+    return this.httpClient.get<any>(FlashcardService.REST_API_SERVER + "flashcard/get_flashcard_set", {params});
   }
 
   public getFlashcardSetName(id: number) {
