@@ -2,3 +2,12 @@
   margin-right: 10px;
   border-radius: 3px;
 }
+
+// The card carousel should be placed in the middle
+.app-card-carousel-wrapper {
+  overflow: hidden;
+  position: relative;
+  width: 100vw;
+  margin-left: -50vw;
+  left: 50%;
+}
