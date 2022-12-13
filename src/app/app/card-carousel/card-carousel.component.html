@@ -1,12 +1,12 @@
-<div class="row tex-carousel-wrapper p-4">
+<div class="tex-carousel-wrapper">
     <div class="d-flex mx-auto tex-carousel">
-        <div class="tex-carousel-item card-current" [@current]="position" (@current.done)="resetCurrent()">
+        <div class="tex-carousel-item card-current p-4" [@current]="position" (@current.done)="resetCurrent()">
             <app-card-flipper [term]="current_term" [definition]="current_def"></app-card-flipper>
         </div>
-        <div class="tex-carousel-item card-prev" [@previous]="position">
+        <div class="tex-carousel-item card-prev p-4" [@previous]="position">
             <app-card-flipper [term]="previous_term" [definition]="previous_def"></app-card-flipper>
         </div>
-        <div class="tex-carousel-item card-next" [@next]="position">
+        <div class="tex-carousel-item card-next p-4" [@next]="position">
             <app-card-flipper [term]="next_term" [definition]="next_def"></app-card-flipper>
         </div>
     </div>

@@ -1,6 +1,6 @@
 <div class="card-wrapper">
     <div (click)="flip()" [@flipped]="flipped ? 'true' : 'false'" class="tex-card" >
-        <div class="d-flex p-2 card-flip card-front bg-dark align-middle fs-2 justify-content-center overflow-auto">
+        <div class="d-flex card-flip card-front bg-dark align-middle fs-2 justify-content-center overflow-auto">
             <card [paragraph]="term" class="overflow-auto tex-center"></card>
         </div>
         <div class="d-flex card-flip card-back bg-dark align-middle fs-2 justify-content-center overflow-auto">
