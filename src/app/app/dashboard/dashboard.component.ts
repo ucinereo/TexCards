@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
     this.flashcardService.getFlashcardSets().subscribe(response => {
 
       this.flashcardSets = response.data;
-      this.recentlyStudied = this.reshapeToColStructure(this.flashcardSets.sort((n1, n2) => n1.lastUsed - n2.lastUsed).slice(0, 4));
+      this.recentlyStudied = this.reshapeToColStructure(this.flashcardSets.sort((n1, n2) => n2.lastUsed - n1.lastUsed).slice(0, 4));
       this.filteredFlashcardSets = this.reshapeToColStructure(this.flashcardSets);
 
     }, (error) => { });
