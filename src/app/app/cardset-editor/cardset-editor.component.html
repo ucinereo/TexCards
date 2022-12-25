@@ -1,50 +1,94 @@
-<div class="card">
-    <div class="edit-div">
-        <div class="header-div">
-            <input #name type="text" placeholder="Flashcard set name" value="{{ undefined }}" class="txt-input">
-            <div class="delete-div" *ngIf="flashcardSet != undefined && flashcardSet != null && flashcardSet.owner" (click)="deleteFlashcardSet()">
-                <i class="material-icons delete-icon">delete</i>
-            </div>
-        </div>
-        <div class="list" id="edit-list">
-            <div class="item" *ngFor="let in of counter(count); let i = index">
-                <div>
-                    <div class="card-input-div">
-                        <span tabindex="{{2 * i + 1}}" #tSpans class="ftextarea ftextarea-t" role="textbox" contenteditable (input)="update(i, $event, true)" (focus)="onFocusIn(i, true)" (focusout)="onFocusOut(i)" (paste)="onPaste($event)"></span>
-                    </div>
-                    <div class="card-input-div">
-                        <span tabindex="{{2 * i+2}}" #dSpans class="ftextarea ftextarea-d" role="textbox" contenteditable (input)="update(i, $event, false)" (focus)="onFocusIn(i, false)" (focusout)="onFocusOut(i)" (paste)="onPaste($event)"></span>
-                    </div>
-                    <div class="ico-div" (click)="removeItem(i)">
-                        <i class="material-icons">delete</i>
-                    </div>
-                    <div class="ico-div" (click)="setAlignment(i, 3)">
-                        <i class="material-icons" [ngClass]="{'i-active' : alignment[i] == 3, 'i-passive' : alignment[i] != 3}">format_align_right</i>
-                    </div>
-                    <div class="ico-div" (click)="setAlignment(i, 2)">
-                        <i class="material-icons" [ngClass]="{'i-active' : alignment[i] == 2, 'i-passive' : alignment[i] != 2}">format_align_center</i>
-                    </div>
-                    <div class="ico-div" (click)="setAlignment(i, 1)">
-                        <i class="material-icons" [ngClass]="{'i-active' : alignment[i] == 1, 'i-passive' : alignment[i] != 1}">format_align_left</i>
-                    </div>
-                </div>
-                <div *ngIf="previewIndex == i" class="preview-div">
-                    <div class="card-preview-div">
-                        <card class="text-span" [paragraph]="terms[i]" [align]="alignment[i]"></card>
-                    </div>
-                    <div class="card-preview-div">
-                        <card class="text-span" [paragraph]="definitions[i]" [align]="alignment[i]"></card>
-                    </div>
-                </div>
-            </div>
-        </div>
+<div class="container sticky-top" style="height: 100%;">
+  <div class="row">
+    <div class="col col-md-8">
+      <h1 class="text-primary">Edit Flashcardset</h1>
+      <div class="input-group"><input class="form-control" type="text" placeholder="Flashcardset Name" [(ngModel)]="flashcardSetName"/></div>
     </div>
-    <div class="card-nav">
-        <div class="div-nav-icon" (click)="submit()">
-            <i class="material-icons nav-icon">done</i>
-        </div>
-        <div class="div-nav-icon">
-            <i class="material-icons nav-icon" routerLink="/cards/{{ flashcardSetID! }}">close</i>
-        </div>
+    <div class="w-100 d-md-none d-lg-none d-xl-none d-xxl-none"></div>
+    <div class="col col-md-4 d-flex align-items-end justify-content-end">
+      <h5 class="fst-italic text-secondary mt-1">@ {{ flashcardSet?.author }}</h5>
     </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col">
+      <div class="input-group input-group-sm"><input class="form-control" type="text" placeholder="Description" [(ngModel)]="flashcardSetDescription"/></div>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col">
+      <div class="dropdown"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">Dropdown </button>
+        <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
+      </div>
+      <div class="mt-2"><span class="align-items-center bg-primary badge d-inline-flex" style="border-radius: 3px;">Imamoglu<i class="material-icons fs-6" style="cursor: pointer;">close</i></span></div>
+    </div>
+  </div>
+  <div class="row" style="height: 100%;">
+    <div class="col-md-8 overflow-auto" style="height: 100%;max-height: 100%;">
+      <div class="row" style="margin-top: 20px;max-height: 10%;height: 10%;min-height: 10%;">
+        <div class="col-md-6 col-xl-6" style="max-width: 48%;"><span style="width: 100%;padding-bottom: 0px;display: block;height: 100%;text-align: left;border-bottom: 2px solid var(--bs-blue);" contenteditable="true"></span></div>
+        <div class="col-md-6 col-xxl-5" style="min-width: 52%;max-width: 52%;">
+          <div class="row" style="height: 100%;min-height: 100%;max-height: 100%;margin-right: -10px;">
+            <div class="col-md-6 col-xl-9" style="max-width: 90%;min-width: 90%;"><span style="width: 100%;padding-bottom: 0px;display: block;height: 100%;text-align: left;border-bottom: 2px solid var(--bs-blue);" contenteditable="true"></span></div>
+            <div class="col-auto col-xl-1" style="max-width: 10%;min-width: 10%;padding-right: 0px;padding-left: 1px;">
+              <div class="btn-group-vertical btn-group-sm" role="group"><button class="btn btn-primary" type="button" style="background: rgba(0,0,0,0);border-style: none;padding: 0;"><i class="material-icons" style="margin: 0;color: var(--bs-btn-disabled-color);">format_align_right</i></button><button class="btn btn-primary" type="button" style="background: #00000000;border-style: none;padding: 0;"><i class="material-icons" style="margin: 0;color: var(--bs-btn-disabled-color);">format_align_center</i></button><button class="btn btn-primary" type="button" style="background: rgba(255,255,255,0);border-style: none;padding: 0;"><i class="material-icons" style="margin: 0;color: var(--bs-btn-disabled-color);">format_align_left</i></button><button class="btn btn-primary" type="button" style="background: rgba(255,255,255,0);border-style: none;padding: 0;"><i class="material-icons" style="margin: 0;color: var(--bs-white);">delete</i></button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 20px;max-height: 10%;height: 10%;min-height: 10%;">
+        <div class="col-md-6 col-xl-6" style="max-width: 48%;"><span style="width: 100%;padding-bottom: 0px;display: block;height: 100%;text-align: left;border-bottom: 2px solid var(--bs-blue);" contenteditable="true"></span></div>
+        <div class="col-md-6 col-xxl-5" style="min-width: 52%;max-width: 52%;">
+          <div class="row" style="height: 100%;min-height: 100%;max-height: 100%;margin-right: -10px;">
+            <div class="col-md-6 col-xl-9" style="max-width: 90%;min-width: 90%;"><span style="width: 100%;padding-bottom: 0px;display: block;height: 100%;text-align: left;border-bottom: 2px solid var(--bs-blue);" contenteditable="true"></span></div>
+            <div class="col-auto col-xl-1" style="max-width: 10%;min-width: 10%;padding-right: 0px;padding-left: 1px;">
+              <div class="btn-group-vertical btn-group-sm" role="group"><button class="btn btn-primary" type="button" style="background: rgba(0,0,0,0);border-style: none;padding: 0;"><i class="material-icons" style="margin: 0;color: var(--bs-btn-disabled-color);">format_align_right</i></button><button class="btn btn-primary" type="button" style="background: #00000000;border-style: none;padding: 0;"><i class="material-icons" style="margin: 0;color: var(--bs-btn-disabled-color);">format_align_center</i></button><button class="btn btn-primary" type="button" style="background: rgba(255,255,255,0);border-style: none;padding: 0;"><i class="material-icons" style="margin: 0;color: var(--bs-btn-disabled-color);">format_align_left</i></button><button class="btn btn-primary" type="button" style="background: rgba(255,255,255,0);border-style: none;padding: 0;"><i class="material-icons" style="margin: 0;color: var(--bs-white);">delete</i></button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 20px;max-height: 10%;height: 10%;min-height: 10%;">
+        <div class="col-md-6 col-xl-6" style="max-width: 48%;"><span style="width: 100%;padding-bottom: 0px;display: block;height: 100%;text-align: left;border-bottom: 2px solid var(--bs-blue);" contenteditable="true"></span></div>
+        <div class="col-md-6 col-xxl-5" style="min-width: 52%;max-width: 52%;">
+          <div class="row" style="height: 100%;min-height: 100%;max-height: 100%;margin-right: -10px;">
+            <div class="col-md-6 col-xl-9" style="max-width: 90%;min-width: 90%;"><span style="width: 100%;padding-bottom: 0px;display: block;height: 100%;text-align: left;border-bottom: 2px solid var(--bs-blue);" contenteditable="true"></span></div>
+            <div class="col-auto col-xl-1" style="max-width: 10%;min-width: 10%;padding-right: 0px;padding-left: 1px;">
+              <div class="btn-group-vertical btn-group-sm" role="group"><button class="btn btn-primary" type="button" style="background: rgba(0,0,0,0);border-style: none;padding: 0;"><i class="material-icons" style="margin: 0;color: var(--bs-btn-disabled-color);">format_align_right</i></button><button class="btn btn-primary" type="button" style="background: #00000000;border-style: none;padding: 0;"><i class="material-icons" style="margin: 0;color: var(--bs-btn-disabled-color);">format_align_center</i></button><button class="btn btn-primary" type="button" style="background: rgba(255,255,255,0);border-style: none;padding: 0;"><i class="material-icons" style="margin: 0;color: var(--bs-btn-disabled-color);">format_align_left</i></button><button class="btn btn-primary" type="button" style="background: rgba(255,255,255,0);border-style: none;padding: 0;"><i class="material-icons" style="margin: 0;color: var(--bs-white);">delete</i></button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 20px;max-height: 10%;height: 10%;min-height: 10%;">
+        <div class="col-md-6 col-xl-6" style="max-width: 48%;"><span style="width: 100%;padding-bottom: 0px;display: block;height: 100%;text-align: left;border-bottom: 2px solid var(--bs-blue);" contenteditable="true"></span></div>
+        <div class="col-md-6 col-xxl-5" style="min-width: 52%;max-width: 52%;">
+          <div class="row" style="height: 100%;min-height: 100%;max-height: 100%;margin-right: -10px;">
+            <div class="col-md-6 col-xl-9" style="max-width: 90%;min-width: 90%;"><span style="width: 100%;padding-bottom: 0px;display: block;height: 100%;text-align: left;border-bottom: 2px solid var(--bs-blue);" contenteditable="true"></span></div>
+            <div class="col-auto col-xl-1" style="max-width: 10%;min-width: 10%;padding-right: 0px;padding-left: 1px;">
+              <div class="btn-group-vertical btn-group-sm" role="group"><button class="btn btn-primary" type="button" style="background: rgba(0,0,0,0);border-style: none;padding: 0;"><i class="material-icons" style="margin: 0;color: var(--bs-btn-disabled-color);">format_align_right</i></button><button class="btn btn-primary" type="button" style="background: #00000000;border-style: none;padding: 0;"><i class="material-icons" style="margin: 0;color: var(--bs-btn-disabled-color);">format_align_center</i></button><button class="btn btn-primary" type="button" style="background: rgba(255,255,255,0);border-style: none;padding: 0;"><i class="material-icons" style="margin: 0;color: var(--bs-btn-disabled-color);">format_align_left</i></button><button class="btn btn-primary" type="button" style="background: rgba(255,255,255,0);border-style: none;padding: 0;"><i class="material-icons" style="margin: 0;color: var(--bs-white);">delete</i></button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 20px;max-height: 10%;height: 10%;min-height: 10%;">
+        <div class="col-md-6 col-xl-6" style="max-width: 48%;"><span style="width: 100%;padding-bottom: 0px;display: block;height: 100%;text-align: left;border-bottom: 2px solid var(--bs-blue);" contenteditable="true"></span></div>
+        <div class="col-md-6 col-xxl-5" style="min-width: 52%;max-width: 52%;">
+          <div class="row" style="height: 100%;min-height: 100%;max-height: 100%;margin-right: -10px;">
+            <div class="col-md-6 col-xl-9" style="max-width: 90%;min-width: 90%;"><span style="width: 100%;padding-bottom: 0px;display: block;height: 100%;text-align: left;border-bottom: 2px solid var(--bs-blue);" contenteditable="true"></span></div>
+            <div class="col-auto col-xl-1" style="max-width: 10%;min-width: 10%;padding-right: 0px;padding-left: 1px;">
+              <div class="btn-group-vertical btn-group-sm" role="group"><button class="btn btn-primary" type="button" style="background: rgba(0,0,0,0);border-style: none;padding: 0;"><i class="material-icons" style="margin: 0;color: var(--bs-btn-disabled-color);">format_align_right</i></button><button class="btn btn-primary" type="button" style="background: #00000000;border-style: none;padding: 0;"><i class="material-icons" style="margin: 0;color: var(--bs-btn-disabled-color);">format_align_center</i></button><button class="btn btn-primary" type="button" style="background: rgba(255,255,255,0);border-style: none;padding: 0;"><i class="material-icons" style="margin: 0;color: var(--bs-btn-disabled-color);">format_align_left</i></button><button class="btn btn-primary" type="button" style="background: rgba(255,255,255,0);border-style: none;padding: 0;"><i class="material-icons" style="margin: 0;color: var(--bs-white);">delete</i></button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="d-block d-print-none d-sm-block d-md-none d-lg-none d-xl-none d-xxl-none text-end mt-3 fw-bold">
+        <div class="btn-group" role="group"><button class="btn btn-primary d-flex align-items-center text-primary bg-transparent border-0" type="button"><i class="material-icons" style="font-size: 28px;">close</i></button><button class="btn btn-primary d-flex align-items-center text-primary bg-transparent border-0" type="button"><i class="material-icons" style="font-size: 28px;">check</i></button></div>
+      </div>
+    </div>
+    <div class="col-md-4 col-xxl-4 d-none d-print-block d-sm-none d-md-block d-lg-block d-xl-block d-xxl-block align-self-start" style="position: sticky;top: 0px;bottom: 0px;height: 100%;margin-top: -30px;padding-top: 50px;">
+      <div style="width: 100%;background: var(--bs-purple);max-height: 50%;min-height: 200px;"></div>
+      <div style="width: 100%;background: var(--bs-purple);margin-top: 30px;max-height: 50%;min-height: 200px;"></div>
+      <div class="text-end mt-3 fw-bold">
+        <div class="btn-group" role="group"><button class="btn btn-primary d-flex align-items-center text-primary bg-transparent border-0" type="button"><i class="material-icons" style="font-size: 28px;">close</i></button><button class="btn btn-primary d-flex align-items-center text-primary bg-transparent border-0" type="button"><i class="material-icons" style="font-size: 28px;">check</i></button></div>
+      </div>
+    </div>
+  </div>
 </div>
