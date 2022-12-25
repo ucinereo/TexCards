@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { FlashcardSet } from '../../model/flashcard-set';
 import { FlashcardService } from '../../services/flashcard.service';
+import {CardCarouselComponent} from "../card-carousel/card-carousel.component";
 
 @Component({
   selector: 'app-cardset-overview',
@@ -10,6 +11,8 @@ import { FlashcardService } from '../../services/flashcard.service';
   styleUrls: ['./cardset-overview.component.scss']
 })
 export class CardsetOverviewComponent implements OnInit {
+
+  @ViewChild(CardCarouselComponent) carousel?: CardCarouselComponent;
 
   public flashcardSet: FlashcardSet | undefined;
   public flashcardSetID!: number;

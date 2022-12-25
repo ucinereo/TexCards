@@ -34,6 +34,10 @@
     </div>
     <div class="app-card-carousel-wrapper my-4">
         <app-card-carousel [cards]="flashcardSet?.flashcards!"></app-card-carousel>
+        <div class="d-flex justify-content-evenly text-primary">
+          <i class="material-icons fs-1 pointer" (click)="carousel?.rotateLeft()">chevron_left</i>
+          <i class="material-icons fs-1 pointer" (click)="carousel?.rotateRight()">chevron_right</i>
+        </div>
     </div>
     <div style="border-bottom-style: none;border-radius: 5px;background: var(--bs-dark);padding: 20px;">
         <div style="margin-left: 30px;margin-right: 30px;">
