@@ -1,9 +1,7 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { FlashcardsSets } from '../../model/flashcards-sets';
 import { FlashcardService } from '../../services/flashcard.service';
-import { CardsetCreationDialogComponent, CreationType } from '../cardset-creation-dialog/cardset-creation-dialog.component';
 import {FlashcardSet} from "../../model/flashcard-set";
 
 @Component({
