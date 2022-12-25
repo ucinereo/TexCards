@@ -2,18 +2,18 @@
     <div style="border-bottom-style: none;border-radius: 5px;background: var(--bs-dark);padding: 20px;">
         <div class="row" style="padding: 20px;">
             <div class="col m-auto">
-                <h1 class="text-primary">{{ flashcardSet.name }}</h1>
-                <p class="text-sm-start">{{ flashcardSet.description }}</p>
-                <div class="text-start" style="padding-top: 0px;margin-top: 0px;padding-bottom: 10px;"><span *ngFor="let tag of flashcardSet.tags" class="badge bg-primary tag">{{ tag }}</span></div>
+                <h1 class="text-primary">{{ flashcardSet?.name }}</h1>
+                <p class="text-sm-start">{{ flashcardSet?.description }}</p>
+                <div class="text-start" style="padding-top: 0px;margin-top: 0px;padding-bottom: 10px;"><span *ngFor="let tag of flashcardSet?.tags" class="badge bg-primary tag">{{ tag }}</span></div>
             </div>
             <div class="col mx-auto">
                 <div class="row">
                     <div class="col">
-                        <h1 class="text-primary" style="text-align: right;">{{ flashcardSet.author }}</h1>
+                        <h1 class="text-primary" style="text-align: right;">{{ flashcardSet?.author }}</h1>
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col text-end"><span style="color: var(--bs-gray-500);font-style: italic;font-size: 20px;">@{{ flashcardSet.author }}</span></div>
+                    <div class="col text-end"><span style="color: var(--bs-gray-500);font-style: italic;font-size: 20px;">@{{ flashcardSet?.author }}</span></div>
                 </div>
                 <div class="row">
                     <div class="col text-end" style="padding-top: 20px;">
@@ -33,7 +33,7 @@
         </div>
     </div>
     <div class="app-card-carousel-wrapper my-4">
-        <app-card-carousel></app-card-carousel>
+        <app-card-carousel [cards]="flashcardSet?.flashcards!"></app-card-carousel>
     </div>
     <div style="border-bottom-style: none;border-radius: 5px;background: var(--bs-dark);padding: 20px;">
         <div style="margin-left: 30px;margin-right: 30px;">
@@ -46,7 +46,7 @@
                 </div>
             </div>
         </div>
-        <div *ngFor="let card of flashcardSet.flashcards" class="row" style="padding: 20px;width: 100%;margin-left: -5px;">
+        <div *ngFor="let card of flashcardSet?.flashcards" class="row" style="padding: 20px;width: 100%;margin-left: -5px;">
             <div class="col">
                 <card [paragraph]="card.term" [align]="card.alignment"></card>
             </div>

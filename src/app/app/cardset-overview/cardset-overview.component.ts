@@ -11,7 +11,7 @@ import { FlashcardService } from '../../services/flashcard.service';
 })
 export class CardsetOverviewComponent implements OnInit {
 
-  public flashcardSet!: FlashcardSet;
+  public flashcardSet: FlashcardSet | undefined;
   public flashcardSetID!: number;
 
   constructor(private flashcardService: FlashcardService, private route: ActivatedRoute, private titleService: Title) { }

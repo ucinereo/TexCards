@@ -75,7 +75,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 })
 export class CardCarouselComponent implements OnInit {
 
-  @Input() cards: FlashcardSet;
+  public _cards!: Flashcard[];
 
   public position: string = 'idle';
 
@@ -92,20 +92,15 @@ export class CardCarouselComponent implements OnInit {
   private numOfCards!: number;
 
   constructor(private _ref: ChangeDetectorRef) {
-    // TODO: Remove template card sets
-    let flashcards: Flashcard[] = [
-      new Flashcard(1, "term1", "definition1", 0, false, 1),
-      new Flashcard(2, "term2", "definition2", 0, false, 1),
-      new Flashcard(3, "term3", "definition3", 0, false, 1),
-      new Flashcard(4, "term4", "definition4", 0, false, 1),
-      new Flashcard(5, "term5", "definition5", 0, false, 1),
-      new Flashcard(6, "term6", "definition6", 0, false, 1)
-    ];
-    this.cards = new FlashcardSet(1, "set name", "desc.", "the almighty ucinereo",
-                                  ["tag1"], true, true, 0, 6, flashcards);
-    this.numOfCards = 6;
 
-    this.updateCards();
+  }
+
+  @Input() set cards(value: Flashcard[]) {
+    if (value) {
+      this._cards = value;
+      this.numOfCards = value?.length;
+      this.updateCards();
+    }
   }
 
   ngOnInit(): void {  }
@@ -142,13 +137,13 @@ export class CardCarouselComponent implements OnInit {
   private getDef(i: number): string {
     if (i < 0) { i += this.numOfCards; }
     else if (i >= this.numOfCards) { i -= this.numOfCards; }
-    return this.cards.flashcards[i % this.numOfCards].definition;
+    return this._cards?.[i % this.numOfCards].definition;
   }
 
   private getTerm(i: number): string {
     if (i < 0) { i += this.numOfCards; }
     else if (i >= this.numOfCards) { i -= this.numOfCards; }
-    return this.cards.flashcards[i % this.numOfCards].term;
+    return this._cards?.[i % this.numOfCards].term;
   }
 
   // Update the contents of the cards
