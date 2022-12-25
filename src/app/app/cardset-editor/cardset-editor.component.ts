@@ -55,7 +55,17 @@ export class CardsetEditorComponent implements OnInit {
     // check if it is the last card, if so add a new one
     if (index == this.flashcardList.length -1) {
       this.flashcardList.push(EditFlashcard.createEmpty());
+    } else if (this.flashcardList[index].editType != EditType.New) {
+      // set the card as modified
+      this.flashcardList[index].editType = EditType.Modified;
     }
+  }
+
+  public onRemove(index: number) {
+    if (index != this.flashcardList.length -1 && this.flashcardList[index].editType != EditType.New) {
+      this.removedList.push((this.flashcardList.splice(index, 1)[0]));
+    }
+    console.log(this.removedList);
   }
 
 
@@ -63,16 +73,19 @@ export class CardsetEditorComponent implements OnInit {
 
 }
 enum EditType {
+  Unchanged,
   Modified,
   New
 }
 
 class EditFlashcard extends Flashcard {
 
-  editType: EditType = EditType.New;
+  editType: EditType = EditType.Unchanged;
 
   static createEmpty() {
-    return new EditFlashcard(new Flashcard(-1, "", "", 0, false, 0));
+    const card = new EditFlashcard(new Flashcard(-1, "", "", 0, false, 0));
+    card.editType = EditType.New;
+    return card;
   }
 
   constructor(flashcard: Flashcard) {
