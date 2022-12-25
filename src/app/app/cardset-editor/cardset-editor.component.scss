@@ -1,0 +1,13 @@
+span:focus {
+  outline: none;
+}
+
+.term[contenteditable]:empty::before {
+  content: "Term";
+  color: rgba(var(--bs-secondary-rgb));
+}
+
+.definition[contenteditable]:empty::before {
+  content: "Definition";
+  color: rgba(var(--bs-secondary-rgb));
+}

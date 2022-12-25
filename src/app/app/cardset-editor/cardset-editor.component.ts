@@ -1,11 +1,9 @@
-import { Component, ElementRef, HostListener, OnInit, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlashcardSet } from '../../model/flashcard-set';
-import { Card, EditType, FlashcardSetEdit, ModCard } from '../../model/flashcard-set-edit';
 import { FlashcardService } from '../../services/flashcard.service';
-import { ErrorDialogComponent } from '../../error-dialog/error-dialog.component';
-import { ErrorViewComponent } from '../../error-view/error-view.component';
+import {Flashcard} from "../../model/flashcard";
 
 @Component({
   selector: 'app-cardset-editor',
@@ -22,6 +20,9 @@ export class CardsetEditorComponent implements OnInit {
   public flashcardSetName: string = "";
   public flashcardSetDescription: string = "";
 
+  public flashcardList: EditFlashcard[] = [];
+
+  public removedList: Flashcard[] = [];
 
   constructor(private route: ActivatedRoute, private router: Router, private flashcardService: FlashcardService, private titleService: Title) {
 
@@ -34,6 +35,9 @@ export class CardsetEditorComponent implements OnInit {
         this.flashcardSet = response.data;
         this.flashcardSetName = this.flashcardSet?.name!;
         this.flashcardSetDescription = this.flashcardSet?.description!;
+
+        this.flashcardSet?.flashcards.forEach(item => this.flashcardList.push(new EditFlashcard(item)));
+        this.flashcardList.push(EditFlashcard.createEmpty());
       })
     });
   }
@@ -44,9 +48,35 @@ export class CardsetEditorComponent implements OnInit {
     e.preventDefault();
     const text = e.clipboardData.getData('text/plain');
     document.execCommand("insertText", false, text);
-
   }
 
 
+  public onChange(index: number) {
+    // check if it is the last card, if so add a new one
+    if (index == this.flashcardList.length -1) {
+      this.flashcardList.push(EditFlashcard.createEmpty());
+    }
+  }
+
+
+
+
+}
+enum EditType {
+  Modified,
+  New
+}
+
+class EditFlashcard extends Flashcard {
+
+  editType: EditType = EditType.New;
+
+  static createEmpty() {
+    return new EditFlashcard(new Flashcard(-1, "", "", 0, false, 0));
+  }
+
+  constructor(flashcard: Flashcard) {
+    super(flashcard.id, flashcard.term, flashcard.definition, flashcard.alignment, flashcard.star, flashcard.learnState);
+  }
 
 }

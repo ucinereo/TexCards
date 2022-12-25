@@ -4,7 +4,6 @@ import { FlashcardSet } from '../model/flashcard-set';
 import { FlashcardStar } from '../model/flashcard-star';
 import { UserPermission } from '../model/user-permission';
 import { environment } from 'src/environments/environment';
-import { FlashcardSetEdit } from '../model/flashcard-set-edit';
 import { FlashcardSetImport } from '../model/flashcard-set-import';
 
 
@@ -33,7 +32,7 @@ export class FlashcardService {
     return this.httpClient.get<any>(FlashcardService.REST_API_SERVER + "flashcard-set-name", {params});
   }
 
-  public editFlashcardSet(flashcardSetEdit: FlashcardSetEdit) {
+  public editFlashcardSet(flashcardSetEdit: FlashcardSet) {
     return this.httpClient.put<any>(FlashcardService.REST_API_SERVER + "flashcard-set-edit", flashcardSetEdit);
   }
 
