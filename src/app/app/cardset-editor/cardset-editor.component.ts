@@ -104,7 +104,7 @@ class EditFlashcard extends Flashcard {
   editType: EditType = EditType.Unchanged;
 
   static createEmpty() {
-    const card = new EditFlashcard(new Flashcard(-1, "", "", 0, false, 0));
+    const card = new EditFlashcard(new Flashcard(-1, "", "", 1, false, 0));
     card.editType = EditType.New;
     return card;
   }
