@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, OnInit, QueryList, ViewChildren} from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FlashcardSet } from '../../model/flashcard-set';
@@ -12,7 +12,8 @@ import {Flashcard} from "../../model/flashcard";
 })
 export class CardsetEditorComponent implements OnInit {
 
-  private static previewDelay = 500;
+  @ViewChildren("tSpans") tSpans!: QueryList<ElementRef>;
+  @ViewChildren("dSpans") dSpans!: QueryList<ElementRef>;
 
   public flashcardSet?: FlashcardSet;
   public flashcardSetID?: number;
@@ -23,6 +24,8 @@ export class CardsetEditorComponent implements OnInit {
   public flashcardList: EditFlashcard[] = [];
 
   public removedList: Flashcard[] = [];
+
+  public focusIndex: number = -1;
 
   constructor(private route: ActivatedRoute, private router: Router, private flashcardService: FlashcardService, private titleService: Title) {
 
@@ -38,7 +41,15 @@ export class CardsetEditorComponent implements OnInit {
 
         this.flashcardSet?.flashcards.forEach(item => this.flashcardList.push(new EditFlashcard(item)));
         this.flashcardList.push(EditFlashcard.createEmpty());
+        setTimeout(() => this.setData(), 0);
       })
+    });
+  }
+
+  private setData(): void {
+    this.flashcardList.forEach((card: EditFlashcard, index: number) => {
+      this.tSpans.get(index)!.nativeElement.innerText = card.term;
+      this.dSpans.get(index)!.nativeElement.innerText = card.definition;
     });
   }
 
@@ -51,7 +62,12 @@ export class CardsetEditorComponent implements OnInit {
   }
 
 
-  public onChange(index: number) {
+  public onChange(index: number, event: Event) {
+    if ((event.target as HTMLElement).className == "term") {
+      this.flashcardList[index].term = (event.target as HTMLElement).innerText;
+    } else {
+      this.flashcardList[index].definition = (event.target as HTMLElement).innerText;
+    }
     // check if it is the last card, if so add a new one
     if (index == this.flashcardList.length -1) {
       this.flashcardList.push(EditFlashcard.createEmpty());
@@ -65,11 +81,12 @@ export class CardsetEditorComponent implements OnInit {
     if (index != this.flashcardList.length -1 && this.flashcardList[index].editType != EditType.New) {
       this.removedList.push((this.flashcardList.splice(index, 1)[0]));
     }
-    console.log(this.removedList);
+    this.flashcardList.splice(index, 1);
   }
 
-
-
+  public onFocusIn(index: number) {
+    this.focusIndex = index;
+  }
 
 }
 enum EditType {
