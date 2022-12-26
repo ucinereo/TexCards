@@ -53,6 +53,10 @@ export class CardsetEditorComponent implements OnInit {
     });
   }
 
+  public setAlignment(index: number, alignment: number) {
+    this.flashcardList[index].alignment = alignment;
+  }
+
 
 
   onPaste(e: any): void {
