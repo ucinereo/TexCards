@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FlashcardSet } from '../../model/flashcard-set';
 import { FlashcardService } from '../../services/flashcard.service';
 import {Flashcard} from "../../model/flashcard";
+import {NgSelectComponent} from "@ng-select/ng-select";
 
 @Component({
   selector: 'app-cardset-editor',
@@ -27,6 +28,9 @@ export class CardsetEditorComponent implements OnInit {
 
   public focusIndex: number = -1;
 
+  selectedTags: any = [];
+  tags: any[] = [];
+
   constructor(private route: ActivatedRoute, private router: Router, private flashcardService: FlashcardService, private titleService: Title) {
 
    }
@@ -42,7 +46,16 @@ export class CardsetEditorComponent implements OnInit {
         this.flashcardSet?.flashcards.forEach(item => this.flashcardList.push(new EditFlashcard(item)));
         this.flashcardList.push(EditFlashcard.createEmpty());
         setTimeout(() => this.setData(), 0);
+
+        this.flashcardSet?.tags.forEach((tag: string, index: number) => {
+          this.selectedTags = [...this.selectedTags, {name: tag}];
+        });
       })
+    });
+    this.flashcardService.getTagList().subscribe(response => {
+      response.data.forEach((tag: any, index: number) => {
+        this.tags = [...this.tags, {id: index, name: tag}];
+      });
     });
   }
 

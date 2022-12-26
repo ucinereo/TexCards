@@ -16,10 +16,8 @@
   </div>
   <div class="row mt-3">
     <div class="col">
-      <div class="dropdown"><button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">Dropdown </button>
-        <div class="dropdown-menu"><a class="dropdown-item" href="#">First Item</a><a class="dropdown-item" href="#">Second Item</a><a class="dropdown-item" href="#">Third Item</a></div>
-      </div>
-      <div class="mt-2"><span class="align-items-center bg-primary badge d-inline-flex" style="border-radius: 3px;">Imamoglu<i class="material-icons fs-6" style="cursor: pointer;">close</i></span></div>
+      <ng-select [items]="tags" [(ngModel)]="selectedTags" [hideSelected]="true" [addTag]="true" [multiple]="true" bindLabel="name" placeholder="Tags" [addTagText]="'Add tag'" [notFoundText]="'No tag found'">
+      </ng-select>
     </div>
   </div>
   <div class="row" style="height: 100%;">

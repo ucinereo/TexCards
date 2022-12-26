@@ -32,9 +32,10 @@
 						"styles": [
 							"src/styles.scss",
 							"node_modules/katex/dist/katex.min.css",
+              "node_modules/@ng-select/ng-select/themes/default.theme.css",
 							"src/prism-solarized-dark-atom.css",
-              				"src/assets/bootstrap/css/bootstrap.min.css",
-              				"src/assets/css/Navbar-Right-Links-Dark-icons.css",
+              "src/assets/bootstrap/css/bootstrap.min.css",
+              "src/assets/css/Navbar-Right-Links-Dark-icons.css",
 							"src/assets/css/Login-Form-Basic-icons.css"
 						],
 						"scripts": [

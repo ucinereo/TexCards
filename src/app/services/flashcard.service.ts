@@ -32,6 +32,10 @@ export class FlashcardService {
     return this.httpClient.get<any>(FlashcardService.REST_API_SERVER + "flashcard-set-name", {params});
   }
 
+  public getTagList() {
+    return this.httpClient.get<any>(FlashcardService.REST_API_SERVER + "tag/get_tags");
+  }
+
   public editFlashcardSet(flashcardSetEdit: FlashcardSet) {
     return this.httpClient.put<any>(FlashcardService.REST_API_SERVER + "flashcard-set-edit", flashcardSetEdit);
   }
