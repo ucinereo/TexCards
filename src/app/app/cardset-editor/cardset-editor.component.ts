@@ -5,6 +5,7 @@ import { FlashcardSet } from '../../model/flashcard-set';
 import { FlashcardService } from '../../services/flashcard.service';
 import {Flashcard} from "../../model/flashcard";
 import {NgSelectComponent} from "@ng-select/ng-select";
+import {EditFlashcardSetRequest} from "../../model/edit-flashcard-set-request";
 
 @Component({
   selector: 'app-cardset-editor',
@@ -48,13 +49,13 @@ export class CardsetEditorComponent implements OnInit {
         setTimeout(() => this.setData(), 0);
 
         this.flashcardSet?.tags.forEach((tag: string, index: number) => {
-          this.selectedTags = [...this.selectedTags, {name: tag}];
+          this.selectedTags = [...this.selectedTags, tag];
         });
       })
     });
     this.flashcardService.getTagList().subscribe(response => {
       response.data.forEach((tag: any, index: number) => {
-        this.tags = [...this.tags, {id: index, name: tag}];
+        this.tags = [...this.tags, tag];
       });
     });
   }
@@ -69,8 +70,6 @@ export class CardsetEditorComponent implements OnInit {
   public setAlignment(index: number, alignment: number) {
     this.flashcardList[index].alignment = alignment;
   }
-
-
 
   onPaste(e: any): void {
     e.preventDefault();
@@ -97,12 +96,30 @@ export class CardsetEditorComponent implements OnInit {
   public onRemove(index: number) {
     if (index != this.flashcardList.length -1 && this.flashcardList[index].editType != EditType.New) {
       this.removedList.push((this.flashcardList.splice(index, 1)[0]));
+    } else if (index != this.flashcardList.length -1 && this.flashcardList[index].editType == EditType.New) {
+      this.flashcardList.splice(index, 1);
     }
-    this.flashcardList.splice(index, 1);
   }
 
   public onFocusIn(index: number) {
     this.focusIndex = index;
+  }
+
+  public checkPreviewBounds(): boolean {
+    return 0 <= this.focusIndex && this.focusIndex < this.flashcardList.length;
+  }
+
+  public onSubmit() {
+    let newTags = this.setMinus(this.selectedTags, this.flashcardSet!.tags);
+    let removedTags = this.setMinus(this.flashcardSet!.tags, this.selectedTags);
+    let newCards = this.flashcardList.filter(card => card.editType == EditType.New).slice(0, -1);
+    let modifiedCards = this.flashcardList.filter(card => card.editType == EditType.Modified);
+    let editRequest = new EditFlashcardSetRequest(this.flashcardSet!.id, this.flashcardSetName, this.flashcardSetDescription, newTags, removedTags, modifiedCards, newCards, this.removedList);
+
+  }
+
+  private setMinus(minuend: any[], subtrahend: any[]) {
+    return minuend.filter((element) => !subtrahend.includes(element));
   }
 
 }
