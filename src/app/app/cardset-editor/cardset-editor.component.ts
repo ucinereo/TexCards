@@ -116,6 +116,9 @@ export class CardsetEditorComponent implements OnInit {
     let modifiedCards = this.flashcardList.filter(card => card.editType == EditType.Modified);
     let editRequest = new EditFlashcardSetRequest(this.flashcardSet!.id, this.flashcardSetName, this.flashcardSetDescription, newTags, removedTags, modifiedCards, newCards, this.removedList);
 
+    this.flashcardService.editFlashcardSet(editRequest).subscribe((response =>
+      this.router.navigate(['view/' + this.flashcardSet!.id])
+    ));
   }
 
   private setMinus(minuend: any[], subtrahend: any[]) {

@@ -5,6 +5,7 @@ import { FlashcardStar } from '../model/flashcard-star';
 import { UserPermission } from '../model/user-permission';
 import { environment } from 'src/environments/environment';
 import { FlashcardSetImport } from '../model/flashcard-set-import';
+import {EditFlashcardSetRequest} from "../model/edit-flashcard-set-request";
 
 
 @Injectable({
@@ -36,8 +37,8 @@ export class FlashcardService {
     return this.httpClient.get<any>(FlashcardService.REST_API_SERVER + "tag/get_tags");
   }
 
-  public editFlashcardSet(flashcardSetEdit: FlashcardSet) {
-    return this.httpClient.put<any>(FlashcardService.REST_API_SERVER + "flashcard-set-edit", flashcardSetEdit);
+  public editFlashcardSet(request: EditFlashcardSetRequest) {
+    return this.httpClient.put<any>(FlashcardService.REST_API_SERVER + "flashcard/edit_flashcard_set", request);
   }
 
   public importFlashcardSet(flashcardSetImport: FlashcardSetImport) {
