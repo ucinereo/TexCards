@@ -1,0 +1,28 @@
+<div class="d-flex align-items-center">
+  <div class="container">
+    <div class="app-card-carousel-wrapper my-4">
+      <app-card-carousel #carousel [cards]="cardSplit"></app-card-carousel>
+    </div>
+    <div class="bg-dark" style="border-radius: 3px;">
+      <div class="justify-content-around d-flex">
+        <button class="btn btn-primary d-flex align-items-center bg-transparent border-0 text-primary" type="button">
+          <i class="material-icons">chevron_left</i>
+        </button>
+        <button class="btn btn-primary d-flex align-items-center bg-transparent border-0 text-primary" type="button">
+          <i class="material-icons">shuffle</i>
+        </button>
+        <button (click)="toggleStar()" class="btn btn-primary d-flex align-items-center bg-transparent border-0 text-primary" type="button">
+          <i [style.color]="hasStar()? 'yellow' : 'var(--bs-body-bg)'" class="material-icons">star</i>
+        </button>
+        <button (click)="toggleMode()" class="btn btn-primary d-flex align-items-center bg-transparent border-0 text-primary" type="button">
+          <i [hidden]="cardDealer.getViewMode() != viewModeEnum.View" class="material-icons">visibility</i>
+          <i [hidden]="cardDealer.getViewMode() != viewModeEnum.Learn" class="material-icons">multiple_stop</i>
+          <i [hidden]="cardDealer.getViewMode() != viewModeEnum.Star" class="material-icons">star</i>
+        </button>
+        <button class="btn btn-primary d-flex align-items-center bg-transparent border-0 text-primary" type="button">
+          <i class="material-icons">chevron_right</i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

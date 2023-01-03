@@ -6,6 +6,8 @@ import { UserPermission } from '../model/user-permission';
 import { environment } from 'src/environments/environment';
 import { FlashcardSetImport } from '../model/flashcard-set-import';
 import {EditFlashcardSetRequest} from "../model/edit-flashcard-set-request";
+import {AddStarRequest} from "../model/add-star-request";
+import {RemoveStarRequest} from "../model/remove-star-request";
 
 
 @Injectable({
@@ -53,12 +55,12 @@ export class FlashcardService {
     return this.httpClient.put<any>(FlashcardService.REST_API_SERVER + "flashcard-set-delete", flashcardSet.id);
   }
 
-  public addFlashcardStar(flashcardSetID: number, flashcardTerm: string, flashcardDefinition: string) {
-    return this.httpClient.put<any>(FlashcardService.REST_API_SERVER + "flashcard-add-star", new FlashcardStar(flashcardSetID, flashcardTerm, flashcardDefinition));
+  public addFlashcardStar(request: AddStarRequest) {
+    return this.httpClient.put<any>(FlashcardService.REST_API_SERVER + "flashcard/add_star", request);
   }
 
-  public removeFlashcardStar(flashcardSetID: number, flashcardTerm: string, flashcardDefinition: string) {
-    return this.httpClient.put<any>(FlashcardService.REST_API_SERVER + "flashcard-remove-star", new FlashcardStar(flashcardSetID, flashcardTerm, flashcardDefinition));
+  public removeFlashcardStar(request: RemoveStarRequest) {
+    return this.httpClient.put<any>(FlashcardService.REST_API_SERVER + "flashcard/remove_star", request);
   }
 
   public getFlahcardSetPermissions(flashcardSetID: number) {

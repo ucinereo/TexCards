@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, HostListener, OnInit, ViewChild} from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { FlashcardSet } from '../../model/flashcard-set';
@@ -28,5 +28,22 @@ export class CardsetOverviewComponent implements OnInit {
       }, error => {});
     });
   }
+
+  @HostListener('document:keydown.arrowleft')
+  private rotateLeft(): void {
+    this.carousel?.rotateLeft();
+  }
+
+  @HostListener('document:keydown.arrowRight')
+  private rotateRight(): void {
+    this.carousel?.rotateRight();
+  }
+
+  @HostListener('document:keydown.space', ['$event'])
+  private flip(event: KeyboardEvent): void {
+    event.preventDefault();
+    this.carousel?.flip();
+  }
+
 
 }

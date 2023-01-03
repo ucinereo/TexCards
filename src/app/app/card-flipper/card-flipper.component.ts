@@ -25,8 +25,8 @@ export class CardFlipperComponent implements OnInit {
   fksdlfjsdlfkjsdflkdsjfsdkl fjsdfl;kjd asf;kljad sf;kljdas f;lkadjs f;lkasdjf ;ladksjf ;ladksjf ;adklsjf. \n
   \`\`\`
   dsfsdfdf dsfjkal fl;aksdjf asdl;kfj dasl;kfj d;aslkfj d;aslkfj asd;lkfj d;alksfj al;dksfj ;asdlkfj d;aslfkj ad;slfkj
-  \`\`\` cpp 
-  test \n test \n test \n test \n test \n test \n test \n test \ntest \n test \n test \n 
+  \`\`\` cpp
+  test \n test \n test \n test \n test \n test \n test \n test \ntest \n test \n test \n
   \`\`\`
   dfsdf dkljfsdlfk; jdsfl;kjd sal;fkjd a;flksdjf dl;askfj a;sdlkfj adl;skjf ;asdlkjf asd;lkjf ;aklsjf d;lkaj sfd;lkjad sf;lkjasd ;flkjads f;lkasdjf ad
 
@@ -38,7 +38,7 @@ export class CardFlipperComponent implements OnInit {
   // provide method to flip the card without animation
   @HostBinding('@.disabled')
   public animationsDisabled = false;
-  
+
   public flipped: boolean = false;
 
   constructor() { }

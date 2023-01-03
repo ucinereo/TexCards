@@ -1,7 +1,8 @@
-import { Component, Input, HostListener, OnInit, ChangeDetectorRef } from '@angular/core';
+import {Component, Input, HostListener, OnInit, ChangeDetectorRef, ViewChild, ElementRef} from '@angular/core';
 import { Flashcard } from 'src/app/model/flashcard';
 import { FlashcardSet } from 'src/app/model/flashcard-set';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import {CardFlipperComponent} from "../card-flipper/card-flipper.component";
 
 /*
   The component consists of 3 'app-card-flipper' items (previous/current/next)
@@ -75,7 +76,9 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 })
 export class CardCarouselComponent implements OnInit {
 
-  public _cards!: Flashcard[];
+  @ViewChild("currentCard") currentCard?: CardFlipperComponent;
+
+  public _cards?: Flashcard[];
 
   public position: string = 'idle';
 
@@ -95,37 +98,69 @@ export class CardCarouselComponent implements OnInit {
 
   }
 
-  @Input() set cards(value: Flashcard[]) {
+  @Input() set cards(value: Flashcard[] | undefined) {
     if (value) {
-      this._cards = value;
-      this.numOfCards = value?.length;
-      this.updateCards();
+      if (value.length == 0) {
+        this._cards = undefined;
+        this.numOfCards = 0;
+        this.current = 0;
+        this.resetTermsDefs()
+      } else {
+        this._cards = value;
+        this.numOfCards = value.length;
+        if (this.current >= this.numOfCards) {
+          this.current = this.current % this.numOfCards;
+        }
+        this.updateCards();
+      }
     }
   }
 
   ngOnInit(): void {  }
 
-  // TODO: Create event
-  @HostListener('document:keydown.arrowRight')
+  private resetTermsDefs(): void {
+    this.current_term = 'term current';
+    this.current_def = 'definition current';
+    this.previous_term = 'term previous';
+    this.previous_def = 'definition previous';
+    this.next_term = 'term next';
+    this.next_def = 'definition next';
+  }
+
+  public resetIndex(): void {
+    this.current = 0;
+    this.updateCards();
+  }
+
+  public getCurrentCard() {
+    if (0 <= this.current && this.current < this.numOfCards) {
+      return this._cards![this.current];
+    } else {
+      return null;
+    }
+  }
+
   public rotateRight():void {
-    if (this.position != 'idle') { return; }
+    if (this.position != 'idle' || this.numOfCards == 0) { return; }
     this.current--;
     if (this.current < 0) { this.current += this.numOfCards; }
     this.position = 'right';
     this._ref.detectChanges();
   }
 
-  // TODO: Create event
-  @HostListener('document:keydown.arrowleft')
   public rotateLeft():void {
-    if (this.position != 'idle') { return; }
+    if (this.position != 'idle' || this.numOfCards == 0) { return; }
     this.current++;
     if (this.current >= this.numOfCards) { this.current -= this.numOfCards; }
     this.position = 'left';
     this._ref.detectChanges();
   }
 
-  private updateCards(): void {
+  public flip(): void {
+    this.currentCard?.flip();
+  }
+
+  public updateCards(): void {
     this.current_term = this.getTerm(this.current);
     this.current_def = this.getDef(this.current);
     this.previous_term = this.getTerm(this.current - 1 );
@@ -137,13 +172,13 @@ export class CardCarouselComponent implements OnInit {
   private getDef(i: number): string {
     if (i < 0) { i += this.numOfCards; }
     else if (i >= this.numOfCards) { i -= this.numOfCards; }
-    return this._cards?.[i % this.numOfCards].definition;
+    return this._cards![i % this.numOfCards].definition;
   }
 
   private getTerm(i: number): string {
     if (i < 0) { i += this.numOfCards; }
     else if (i >= this.numOfCards) { i -= this.numOfCards; }
-    return this._cards?.[i % this.numOfCards].term;
+    return this._cards![i % this.numOfCards].term;
   }
 
   // Update the contents of the cards
