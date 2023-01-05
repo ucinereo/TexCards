@@ -1,6 +1,5 @@
-import {Component, Input, HostListener, OnInit, ChangeDetectorRef, ViewChild, ElementRef} from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectorRef, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Flashcard } from 'src/app/model/flashcard';
-import { FlashcardSet } from 'src/app/model/flashcard-set';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import {CardFlipperComponent} from "../card-flipper/card-flipper.component";
 
@@ -78,6 +77,9 @@ export class CardCarouselComponent implements OnInit {
 
   @ViewChild("currentCard") currentCard?: CardFlipperComponent;
 
+  @Input("learnMode") learnMode: boolean = false;
+  @Output("allDone") allDone: EventEmitter<any> = new EventEmitter<any>();
+
   public _cards?: Flashcard[];
 
   public position: string = 'idle';
@@ -142,16 +144,30 @@ export class CardCarouselComponent implements OnInit {
 
   public rotateRight():void {
     if (this.position != 'idle' || this.numOfCards == 0) { return; }
-    this.current--;
-    if (this.current < 0) { this.current += this.numOfCards; }
+    if (!this.learnMode) {
+      this.current--;
+      if (this.current < 0) { this.current += this.numOfCards; }
+    } else {
+      this.current++;
+      if (this.current >= this.numOfCards) {
+        this.allDone.emit();
+      }
+    }
     this.position = 'right';
     this._ref.detectChanges();
   }
 
   public rotateLeft():void {
     if (this.position != 'idle' || this.numOfCards == 0) { return; }
-    this.current++;
-    if (this.current >= this.numOfCards) { this.current -= this.numOfCards; }
+    if (!this.learnMode) {
+      this.current++;
+      if (this.current >= this.numOfCards) { this.current -= this.numOfCards; }
+    } else {
+      this.current++;
+      if (this.current >= this.numOfCards) {
+        this.allDone.emit();
+      }
+    }
     this.position = 'left';
     this._ref.detectChanges();
   }
@@ -161,12 +177,21 @@ export class CardCarouselComponent implements OnInit {
   }
 
   public updateCards(): void {
-    this.current_term = this.getTerm(this.current);
-    this.current_def = this.getDef(this.current);
-    this.previous_term = this.getTerm(this.current - 1 );
-    this.previous_def = this.getDef(this.current - 1);
-    this.next_term = this.getTerm(this.current + 1 );
-    this.next_def = this.getDef(this.current + 1);
+    if (!this.learnMode) {
+      this.current_term = this.getTerm(this.current);
+      this.current_def = this.getDef(this.current);
+      this.previous_term = this.getTerm(this.current - 1 );
+      this.previous_def = this.getDef(this.current - 1);
+      this.next_term = this.getTerm(this.current + 1 );
+      this.next_def = this.getDef(this.current + 1);
+    } else {
+      this.current_term = this.getTerm(this.current);
+      this.current_def = this.getDef(this.current);
+      this.previous_term = this.getTerm(this.current + 1 );
+      this.previous_def = this.getDef(this.current + 1);
+      this.next_term = this.getTerm(this.current + 1 );
+      this.next_def = this.getDef(this.current + 1);
+    }
   }
 
   private getDef(i: number): string {

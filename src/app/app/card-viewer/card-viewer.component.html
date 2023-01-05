@@ -1,7 +1,7 @@
 <div class="d-flex align-items-center">
-  <div class="container">
+  <div [hidden]="showAllDone" class="container">
     <div class="app-card-carousel-wrapper my-4">
-      <app-card-carousel #carousel [cards]="cardSplit"></app-card-carousel>
+      <app-card-carousel #carousel [cards]="cardSplit" [learnMode]="cardDealer.getViewMode() == viewModeEnum.Learn" (allDone)="allDone()"></app-card-carousel>
     </div>
     <div class="bg-dark" style="border-radius: 3px;">
       <div class="justify-content-around d-flex">
@@ -22,6 +22,24 @@
         <button class="btn btn-primary d-flex align-items-center bg-transparent border-0 text-primary" type="button">
           <i class="material-icons">chevron_right</i>
         </button>
+      </div>
+    </div>
+  </div>
+  <div [hidden]="!showAllDone" class="container">
+    <div class="row">
+      <div class="col text-center">
+        <h1>you have studied all cards</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div [hidden]="cardDealer.getMissedCardCount() == 0" class="col">
+        <button (click)="learnMissedAgain()" class="btn btn-primary">Learn the missed cards again</button>
+      </div>
+      <div class="col">
+        <button (click)="learnAllAgain();" class="btn btn-primary">Learn all cards again</button>
+      </div>
+      <div class="col">
+        <button (click)="returnToCards()" class="btn btn-primary">Return to the cards</button>
       </div>
     </div>
   </div>

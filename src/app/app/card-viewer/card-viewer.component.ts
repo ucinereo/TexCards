@@ -23,6 +23,8 @@ export class CardViewerComponent implements OnInit {
   public flashcardSet?: FlashcardSet;
   public flashcardSetID?: number;
 
+  public showAllDone: boolean = false;
+
   public cardDealer: CardDealer;
 
   public cardSplit: Flashcard[] = [];
@@ -88,12 +90,28 @@ export class CardViewerComponent implements OnInit {
     this.reloadCardSplit();
   }
 
-  learnAllAgain(): void {
-    // TODO
+  public allDone(): void {
+    this.showAllDone = true;
   }
 
-  learnMissedAgain(): void {
-    // TODO
+  public learnAllAgain(): void {
+    this.cardDealer.setViewMode(ViewMode.Learn);
+    this.carousel?.resetIndex();
+    this.showAllDone = false;
+  }
+
+  public learnMissedAgain(): void {
+    this.cardDealer.loadMissedCards();
+    this.reloadCardSplit();
+    this.carousel?.resetIndex();
+    this.showAllDone = false;
+  }
+
+  public returnToCards(): void {
+    this.cardDealer.setViewMode(ViewMode.View);
+    this.reloadCardSplit();
+    this.carousel?.resetIndex();
+    this.showAllDone = false;
   }
 
   private reloadCardSplit(): void {
@@ -103,8 +121,7 @@ export class CardViewerComponent implements OnInit {
   @HostListener('document:keydown.arrowright')
   keyNext(): void {
     if (this.cardDealer.getViewMode() == ViewMode.Learn) {
-      this.cardDealer.nextLearnCard();
-      this.reloadCardSplit();
+      this.carousel?.rotateRight();
     } else {
       this.carousel?.rotateLeft();
     }
@@ -113,8 +130,8 @@ export class CardViewerComponent implements OnInit {
   @HostListener('document:keydown.arrowleft')
   keyPrev(): void {
     if (this.cardDealer.getViewMode() == ViewMode.Learn) {
-      this.cardDealer.moveToMissed();
-      this.reloadCardSplit();
+      this.cardDealer.moveToMissed(this.carousel?.getCurrentCard()!);
+      this.carousel?.rotateLeft();
     } else {
       this.carousel?.rotateRight();
     }

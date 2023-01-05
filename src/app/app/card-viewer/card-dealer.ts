@@ -47,17 +47,23 @@ export class CardDealer {
     this.setCardSplit();
   }
 
-  public moveToMissed(): void {
-    this.learnNextCards.push(this.currentCards.shift()!);
+  public moveToMissed(card: Flashcard): void {
+    this.learnNextCards.push(card);
   }
 
-  public nextLearnCard(): void {
-    this.currentCards.shift();
+  public loadMissedCards(): void {
+    this.currentCards = [...this.learnNextCards];
+    this.learnNextCards = [];
+  }
+
+  public getMissedCardCount(): number {
+    return this.learnNextCards.length;
   }
 
   public setViewMode(mode: ViewMode): void {
     this.currentViewMode = mode;
     this.setCardSplit();
+    this.learnNextCards = [];
   }
 
   public toggleShuffle() {
