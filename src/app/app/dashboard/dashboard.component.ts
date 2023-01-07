@@ -11,12 +11,9 @@ import {FlashcardSet} from "../../model/flashcard-set";
 })
 export class DashboardComponent implements OnInit {
 
-  public searchTerm: string = "";
-
   public flashcardSets: FlashcardSet[] = [];
 
   public recentlyStudied: FlashcardSet[][] = [];
-  public filteredFlashcardSets: FlashcardSet[][] = [];
 
   constructor(private flashcardService: FlashcardService, public router: Router, private titleService: Title) { }
 
@@ -25,8 +22,6 @@ export class DashboardComponent implements OnInit {
 
       this.flashcardSets = response.data;
       this.recentlyStudied = this.reshapeToColStructure(this.flashcardSets.sort((n1, n2) => n2.lastUsed - n1.lastUsed).slice(0, 4));
-      this.filteredFlashcardSets = this.reshapeToColStructure(this.flashcardSets);
-
     }, (error) => { });
     this.titleService.setTitle("Tex-Cards " + "Flashcard sets")
   }
@@ -38,11 +33,5 @@ export class DashboardComponent implements OnInit {
       reshaped.push(flashcardSets.slice(i, i + innerSize));
     }
     return reshaped;
-  }
-
-  public applyFilter() {
-    this.filteredFlashcardSets = this.reshapeToColStructure(this.flashcardSets.filter((set: FlashcardSet) => {
-      return set.name.toLowerCase().includes(this.searchTerm) || set.description.toLowerCase().includes(this.searchTerm) || set.author.toLowerCase().includes(this.searchTerm) || set.tags.filter((tag) => tag.toLowerCase().includes(this.searchTerm)).length > 0;
-    }))
   }
 }

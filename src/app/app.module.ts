@@ -28,6 +28,7 @@ import { CardFlipperComponent } from './app/card-flipper/card-flipper.component'
 import { CardCarouselComponent } from './app/card-carousel/card-carousel.component';
 import { FlashcardsetSummaryComponent } from './app/flashcardset-summary/flashcardset-summary.component';
 import {NgSelectModule} from "@ng-select/ng-select";
+import { FlashcardsetSummaryListComponent } from './app/flashcardset-summary-list/flashcardset-summary-list.component';
 
 
 @NgModule({
@@ -50,6 +51,7 @@ import {NgSelectModule} from "@ng-select/ng-select";
     CardFlipperComponent,
     CardCarouselComponent,
     FlashcardsetSummaryComponent,
+    FlashcardsetSummaryListComponent,
   ],
     imports: [
         BrowserModule,
