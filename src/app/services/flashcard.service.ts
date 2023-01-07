@@ -8,6 +8,10 @@ import { FlashcardSetImport } from '../model/flashcard-set-import';
 import {EditFlashcardSetRequest} from "../model/edit-flashcard-set-request";
 import {AddStarRequest} from "../model/add-star-request";
 import {RemoveStarRequest} from "../model/remove-star-request";
+import {GrantWritePermissionRequest} from "../model/grant-write-permission-request";
+import {RemoveWritePermissionRequest} from "../model/remove-write-permission-request";
+import {RemoveReadPermissionRequest} from "../model/remove-read-permission-request";
+import {GrantReadPermissionRequest} from "../model/grant-read-permission-request";
 
 
 @Injectable({
@@ -63,21 +67,25 @@ export class FlashcardService {
     return this.httpClient.put<any>(FlashcardService.REST_API_SERVER + "flashcard/remove_star", request);
   }
 
-  public getFlahcardSetPermissions(flashcardSetID: number) {
-    const params = new HttpParams().set("id", flashcardSetID);
-    return this.httpClient.get<any>(FlashcardService.REST_API_SERVER + "flashcard-set-permissions", {params});
+  public getFlashcardSetPermissions(flashcardSetID: number) {
+    const params = new HttpParams().set("flashcardSetId", flashcardSetID);
+    return this.httpClient.get<any>(FlashcardService.REST_API_SERVER + "permission/get_user_permissions", {params});
   }
 
-  public editFlashcardSetUserPermission(userPermission: UserPermission) {
-    return this.httpClient.put<any>(FlashcardService.REST_API_SERVER + "flashcard-set-change-permission", userPermission);
+  public grantWritePermission(request: GrantWritePermissionRequest) {
+    return this.httpClient.put<any>(FlashcardService.REST_API_SERVER + "permission/grant_write_permission", request);
   }
 
-  public removeFlashcardSetUserPermission(userPermission: UserPermission) {
-    return this.httpClient.put<any>(FlashcardService.REST_API_SERVER + "flashcard-set-remove-permission", userPermission);
+  public grantReadPermission(request: GrantReadPermissionRequest) {
+    return this.httpClient.put<any>(FlashcardService.REST_API_SERVER + "permission/grant_read_permission", request);
   }
 
-  public addFlashcardSetUserPermission(userPermission: UserPermission) {
-    return this.httpClient.put<any>(FlashcardService.REST_API_SERVER + "flashcard-set-add-permission", userPermission);
+  public removeWritePermission(request: RemoveWritePermissionRequest) {
+    return this.httpClient.put<any>(FlashcardService.REST_API_SERVER + "permission/remove_write_permission", request);
+  }
+
+  public removeReadPermission(request: RemoveReadPermissionRequest) {
+    return this.httpClient.put<any>(FlashcardService.REST_API_SERVER + "permission/remove_read_permission", request);
   }
 
 }

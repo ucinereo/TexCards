@@ -1,38 +1,36 @@
-<div>
-    <div class="titel-bar">
-        <h2>{{ flashcardSetName }}</h2>
+<div class="container mt-5">
+  <h1>Flashcardset Access Permissions</h1>
+  <p>Use the form below to manage user access permissions:</p>
+  <form class="mb-5">
+    <div class="form-group mb-2">
+      <label class="form-label fs-6">Enter a user:</label>
+      <input [(ngModel)]="userName" class="form-control" type="text" name="userName" />
     </div>
-    <div class="permission-box">
-        <div class="permission-list-box">
-            <div *ngFor="let user of userPermissions" class="user-permission-box">
-                <p class="username">{{ user.username }}</p>
-                <div class="r-box-div">
-                    <input class="r-box" type="checkbox" role="switch" name="read" [checked]="user.readPermission" (change)="changeUserReadPermissionPermission(user.username, $event)">
-                    <label class="r-label" for="read">Read permission</label>
-                </div>
-                <div class="w-box-div">
-                    <input class="w-box" type="checkbox" role="switch" name="write" [checked]="user.writePermission" (change)="changeUserWritePermissionPermission(user.username, $event)">
-                    <label class="w-label" for="write">Write permission</label>
-                </div>
-                <div class="rm-div">
-                    <i (click)="removeUserPermission(user.username)" class="material-icons">delete</i>
-                </div>
-            </div>
-        </div>
-        <div class="new-permission-box">
-            <input #iUsername type="text" class="new-username uname-input" placeholder="Username">
-            <div class="r-box-div">
-                <input #iRead type="checkbox" role="switch" name="read">
-                <label for="read">Read permission</label>
-            </div>
-            <div class="w-box-div">
-                <input #iWrite type="checkbox" role="switch" name="write">
-                <label for="write">Write permission</label>
-            </div>
-            <div class="add-div">
-                <i (click)="addUserPermission()" class="material-icons">add</i>
-            </div>
-        </div>
+    <div class="form-group mb-3">
+      <label class="form-label fs-6">Select a permission:</label>
+      <select [(ngModel)]="permissionType" name="permissionType" class="form-select">
+      <option value="read" selected>Read Permission</option>
+      <option value="write">Write Permission</option>
+    </select>
     </div>
-
+    <button (click)="addUserPermission()" class="btn btn-primary" type="button">Submit</button>
+  </form>
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>User</th>
+        <th>Permission</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let permission of userPermissionList?.permissions; let i = index">
+        <td>{{ permission.username }}</td>
+        <td>{{ permission.writePermission? "Write" : "Read" }}</td>
+        <td><button (click)="revokePermission(i)" class="btn btn-primary btn-danger" type="button">Revoke</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

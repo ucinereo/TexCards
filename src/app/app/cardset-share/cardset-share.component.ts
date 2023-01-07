@@ -3,6 +3,11 @@ import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { FlashcardService } from '../../services/flashcard.service';
 import { UserPermission } from '../../model/user-permission';
+import {FlashcardSetPermissionList} from "../../model/flashcard-set-permission-list";
+import {GrantWritePermissionRequest} from "../../model/grant-write-permission-request";
+import {GrantReadPermissionRequest} from "../../model/grant-read-permission-request";
+import {RemoveWritePermissionRequest} from "../../model/remove-write-permission-request";
+import {RemoveReadPermissionRequest} from "../../model/remove-read-permission-request";
 
 @Component({
   selector: 'app-cardset-share',
@@ -11,11 +16,10 @@ import { UserPermission } from '../../model/user-permission';
 })
 export class CardsetShareComponent implements OnInit {
 
-  @ViewChild("iUsername") iUsername!: ElementRef;
-  @ViewChild("iRead") iRead!: ElementRef;
-  @ViewChild("iWrite") iWrite!: ElementRef;
+  public userName: string = "";
+  public permissionType: string = "read";
 
-  public userPermissions!: UserPermission[];
+  public userPermissionList?: FlashcardSetPermissionList;
   private flashcardSetID!: number;
   public flashcardSetName: string = "Flashcard set name";
 
@@ -24,49 +28,49 @@ export class CardsetShareComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.flashcardSetID = params['id'];
-      this.flashcardService.getFlahcardSetPermissions(this.flashcardSetID).subscribe(response => {
-        this.userPermissions = response.data;
-      }, (error) => { });
-      this.flashcardService.getFlashcardSetName(this.flashcardSetID).subscribe(response => {
-        this.flashcardSetName = response.data.flashcardSetName;
-        this.titleService.setTitle("Tex-Cards " + this.flashcardSetName);
-      }, (error) => { });
+      this.flashcardService.getFlashcardSetPermissions(this.flashcardSetID).subscribe(response => {
+        this.userPermissionList = response.data;
+        this.titleService.setTitle("Tex-Cards " + this.userPermissionList?.name);
+      });
     });
   }
 
-  changeUserReadPermissionPermission(username: string, e: any): void {
-    this.userPermissions.find(element => element.username == username)!.readPermission = e.target.checked;
-    this.flashcardService.editFlashcardSetUserPermission(this.userPermissions.find(element => element.username == username)!).subscribe(response => { }, (error) => { });
-  }
-
-  changeUserWritePermissionPermission(username: string, e: any): void {
-    this.userPermissions.find(element => element.username == username)!.writePermission = e.target.checked;
-    this.flashcardService.editFlashcardSetUserPermission(this.userPermissions.find(element => element.username == username)!).subscribe(response => { }, (error) => { });
-  }
-
-  removeUserPermission(username: string): void {
-    this.flashcardService.removeFlashcardSetUserPermission(this.userPermissions.find(element => element.username == username)!).subscribe(response => {
-      if (response.data) {
-        this.userPermissions!.forEach((element, index) => {
-          if (element.username == username) {
-            this.userPermissions.splice(index, 1);
-          }
-        });
-      }
-    }, (error) => { });
+  revokePermission(index: number): void {
+    if (this.userPermissionList?.permissions[index].writePermission) {
+      // remove write permission
+      const request = new RemoveWritePermissionRequest(this.userPermissionList?.permissions[index].username!, this.flashcardSetID);
+      this.flashcardService.removeWritePermission(request).subscribe();
+      this.userPermissionList.permissions[index].writePermission = false;
+    } else {
+      // remove read permission
+      const request = new RemoveReadPermissionRequest(this.userPermissionList?.permissions[index].username!, this.flashcardSetID);
+      this.flashcardService.removeReadPermission(request).subscribe();
+      this.userPermissionList?.permissions.splice(index, 1);
+    }
   }
 
   addUserPermission(): void {
-    let username = this.iUsername.nativeElement.value;
-    let read = this.iRead.nativeElement.checked;
-    let write = this.iWrite.nativeElement.checked;
-    let userPermission = new UserPermission(username, this.flashcardSetID, read, write);
-    this.flashcardService.addFlashcardSetUserPermission(userPermission).subscribe(response => {
-      if (response.data) {
-        this.userPermissions.push(userPermission);
+    const permissionEntry = this.userPermissionList?.permissions.find(p => p.username == this.userName);
+    if (permissionEntry) {
+      if (!permissionEntry.writePermission && this.permissionType == "write") { // otherwise write permission already granted
+        const request = new GrantWritePermissionRequest(this.userName, this.flashcardSetID);
+        this.flashcardService.grantWritePermission(request).subscribe();
+        permissionEntry.writePermission = true;
       }
-    }, (error) => { });
-    this.iUsername.nativeElement.value = "";
+    } else {
+      if (this.permissionType == "read") {
+        const request = new GrantReadPermissionRequest(this.userName, this.flashcardSetID);
+        this.flashcardService.grantReadPermission(request).subscribe();
+        const newEntry = new UserPermission(this.userName, this.flashcardSetID, true, false);
+        this.userPermissionList?.permissions.push(newEntry);
+      } else {
+        const request = new GrantWritePermissionRequest(this.userName, this.flashcardSetID);
+        this.flashcardService.grantWritePermission(request).subscribe();
+        const newEntry = new UserPermission(this.userName, this.flashcardSetID, true, true);
+        this.userPermissionList?.permissions.push(newEntry);
+      }
+    }
+    this.userName = "";
   }
 
 }
