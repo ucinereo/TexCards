@@ -1,0 +1,39 @@
+@property --p {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+
+.pie {
+  --p:20;
+  --b:10px;
+  --w:200px;
+
+  width: var(--w);
+  aspect-ratio: 1;
+  position: relative;
+  display: inline-grid;
+  margin: 5px;
+  place-content: center;
+  font-size: 25px;
+}
+
+.pie:before,
+.pie:after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+}
+
+.pie:before {
+  inset: 0;
+  background: radial-gradient(farthest-side,var(--bs-primary) 98%,#0000) top/var(--b) var(--b) no-repeat, conic-gradient(var(--bs-primary) calc(var(--p)*1%),#0000 0);
+  -webkit-mask:radial-gradient(farthest-side,#0000 calc(99% - var(--b)),#000 calc(100% - var(--b)));
+  mask:radial-gradient(farthest-side,#0000 calc(99% - var(--b)),#000 calc(100% - var(--b)));
+}
+
+.pie:after {
+  inset:calc(50% - var(--b)/2);
+  background:var(--bs-primary);
+  transform:rotate(calc(var(--p)*3.6deg)) translateY(calc(50% - var(--w)/2));
+}

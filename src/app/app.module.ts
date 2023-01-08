@@ -30,6 +30,7 @@ import { FlashcardsetSummaryComponent } from './app/flashcardset-summary/flashca
 import {NgSelectModule} from "@ng-select/ng-select";
 import { FlashcardsetSummaryListComponent } from './app/flashcardset-summary-list/flashcardset-summary-list.component';
 import { ProfileComponent } from './app/profile/profile.component';
+import { PieChartComponent } from './app/pie-chart/pie-chart.component';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { ProfileComponent } from './app/profile/profile.component';
     FlashcardsetSummaryComponent,
     FlashcardsetSummaryListComponent,
     ProfileComponent,
+    PieChartComponent,
   ],
     imports: [
         BrowserModule,
