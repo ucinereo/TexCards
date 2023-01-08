@@ -2,6 +2,7 @@ import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/auth/authentication.service';
+import {FlashcardService} from "../../services/flashcard.service";
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent implements OnInit {
 
   public wrongCredentials: boolean = false;
 
-  constructor(private authService: AuthenticationService, private router: Router, private titleService: Title) { }
+  constructor(private authService: AuthenticationService, private flashcardService: FlashcardService, private router: Router, private titleService: Title) { }
 
   ngOnInit(): void {
     this.titleService.setTitle("Tex-Cards Login");
@@ -24,6 +25,11 @@ export class LoginComponent implements OnInit {
   @HostListener('document:keydown.enter')
   onSubmit(): void {
     this.authService.authenticate(this.username, this.password).subscribe(response => {
+      this.flashcardService.getUserSettings().subscribe(response => {
+        for (let e in response.data) {
+          localStorage.setItem(e, response.data[e]);
+        }
+      });
       this.router.navigate(['dashboard']);
     }, (error) => { this.wrongCredentials = true; });
   }
