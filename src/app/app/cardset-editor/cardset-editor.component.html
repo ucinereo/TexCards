@@ -1,84 +1,86 @@
-<div class="container sticky-top" style="height: 100%;">
-  <div class="row">
-    <div class="col col-md-8">
-      <h1 class="text-primary">Edit Flashcardset</h1>
-      <div class="input-group"><input class="form-control" type="text" placeholder="Flashcardset Name" [(ngModel)]="flashcardSetName"/></div>
+<div>
+  <div class="container sticky-top" style="height: 100%;">
+    <div class="row">
+      <div class="col col-md-8">
+        <h1 class="text-primary">Edit Flashcardset</h1>
+        <div class="input-group"><input class="form-control" type="text" placeholder="Flashcardset Name" [(ngModel)]="flashcardSetName"/></div>
+      </div>
+      <div class="w-100 d-md-none d-lg-none d-xl-none d-xxl-none"></div>
+      <div class="col col-md-4 d-flex align-items-end justify-content-end">
+        <h5 class="fst-italic text-secondary mt-1">@ {{ flashcardSet?.author }}</h5>
+      </div>
     </div>
-    <div class="w-100 d-md-none d-lg-none d-xl-none d-xxl-none"></div>
-    <div class="col col-md-4 d-flex align-items-end justify-content-end">
-      <h5 class="fst-italic text-secondary mt-1">@ {{ flashcardSet?.author }}</h5>
+    <div class="row mt-3">
+      <div class="col">
+        <div class="input-group input-group-sm"><input class="form-control" type="text" placeholder="Description" [(ngModel)]="flashcardSetDescription"/></div>
+      </div>
     </div>
-  </div>
-  <div class="row mt-3">
-    <div class="col">
-      <div class="input-group input-group-sm"><input class="form-control" type="text" placeholder="Description" [(ngModel)]="flashcardSetDescription"/></div>
+    <div class="row mt-3">
+      <div class="col">
+        <ng-select [items]="tags" [(ngModel)]="selectedTags" [hideSelected]="true" [addTag]="true" [multiple]="true" bindLabel="name" placeholder="Tags" [addTagText]="'Add tag'" [notFoundText]="'No tag found'">
+        </ng-select>
+      </div>
     </div>
-  </div>
-  <div class="row mt-3">
-    <div class="col">
-      <ng-select [items]="tags" [(ngModel)]="selectedTags" [hideSelected]="true" [addTag]="true" [multiple]="true" bindLabel="name" placeholder="Tags" [addTagText]="'Add tag'" [notFoundText]="'No tag found'">
-      </ng-select>
-    </div>
-  </div>
-  <div class="row" style="height: 100%;">
-    <div class="col-md-8 overflow-auto" style="height: 100%;max-height: 100%;">
-      <div *ngFor="let card of flashcardList; let i = index" class="row" style="margin-top: 20px;max-height: 10%;height: 10%;min-height: 10%;">
-        <div class="col-md-6 col-xl-6" style="max-width: 48%;">
-          <span #tSpans (input)="onChange(i, $event)" (focusin)="onFocusIn(i)"
-                class="term" style="width: 100%;padding-bottom: 0px;display: block;height: 100%;text-align: left;border-bottom: 2px solid var(--bs-blue);" contenteditable="true">
-          </span>
-        </div>
-        <div class="col-md-6 col-xxl-5" style="min-width: 52%;max-width: 52%;">
-          <div class="row" style="height: 100%;min-height: 100%;max-height: 100%;margin-right: -10px;">
-            <div class="col-md-6 col-xl-9" style="max-width: 90%;min-width: 90%;">
-              <span #dSpans (input)="onChange(i, $event)" (focusin)="onFocusIn(i)"
-                    class="definition" style="width: 100%;padding-bottom: 0px;display: block;height: 100%;text-align: left;border-bottom: 2px solid var(--bs-blue);" contenteditable="true" role="textbox">
-              </span>
-            </div>
-            <div class="col-auto col-xl-1" style="max-width: 10%;min-width: 10%;padding-right: 0px;padding-left: 1px;">
-              <div class="btn-group-vertical btn-group-sm" role="group">
-                <button (click)="setAlignment(i, 1)" class="btn btn-primary" type="button" style="background: rgba(255,255,255,0);border-style: none;padding: 0;">
-                  <i [style.color]="flashcardList[i].alignment == 1? 'var(--bs-primary)' : 'var(--bs-btn-disabled-color)'" class="material-icons" style="margin: 0;">format_align_left</i>
-                </button>
-                <button (click)="setAlignment(i, 2)" class="btn btn-primary" type="button" style="background: #00000000;border-style: none;padding: 0;">
-                  <i [style.color]="flashcardList[i].alignment == 2? 'var(--bs-primary)' : 'var(--bs-btn-disabled-color)'" class="material-icons" style="margin: 0;">format_align_center</i>
-                </button>
-                <button (click)="setAlignment(i, 3)" class="btn btn-primary" type="button" style="background: rgba(0,0,0,0);border-style: none;padding: 0;">
-                  <i [style.color]="flashcardList[i].alignment == 3? 'var(--bs-primary)' : 'var(--bs-btn-disabled-color)'" class="material-icons" style="margin: 0;">format_align_right</i>
-                </button>
-                <button class="btn btn-primary" (click)="onRemove(i)" type="button" style="background: rgba(255,255,255,0);border-style: none;padding: 0;"><i class="material-icons" style="margin: 0;color: var(--bs-white);">delete</i>
-                </button>
+    <div class="row" style="height: 100%;">
+      <div class="col-md-8 overflow-auto" style="height: 100%;max-height: 100%;">
+        <div *ngFor="let card of flashcardList; let i = index" class="row" style="margin-top: 20px;max-height: 10%;height: 10%;min-height: 10%;">
+          <div class="col-md-6 col-xl-6" style="max-width: 48%;">
+            <span #tSpans (input)="onChange(i, $event)" (focusin)="onFocusIn(i)"
+                  class="term" style="width: 100%;padding-bottom: 0px;display: block;height: 100%;text-align: left;border-bottom: 2px solid var(--bs-blue);" contenteditable="true">
+            </span>
+          </div>
+          <div class="col-md-6 col-xxl-5" style="min-width: 52%;max-width: 52%;">
+            <div class="row" style="height: 100%;min-height: 100%;max-height: 100%;margin-right: -10px;">
+              <div class="col-md-6 col-xl-9" style="max-width: 90%;min-width: 90%;">
+                <span #dSpans (input)="onChange(i, $event)" (focusin)="onFocusIn(i)"
+                      class="definition" style="width: 100%;padding-bottom: 0px;display: block;height: 100%;text-align: left;border-bottom: 2px solid var(--bs-blue);" contenteditable="true" role="textbox">
+                </span>
+              </div>
+              <div class="col-auto col-xl-1" style="max-width: 10%;min-width: 10%;padding-right: 0px;padding-left: 1px;">
+                <div class="btn-group-vertical btn-group-sm" role="group">
+                  <button (click)="setAlignment(i, 1)" class="btn btn-primary" type="button" style="background: rgba(255,255,255,0);border-style: none;padding: 0;">
+                    <i [style.color]="flashcardList[i].alignment == 1? 'var(--bs-primary)' : 'var(--bs-btn-disabled-color)'" class="material-icons" style="margin: 0;">format_align_left</i>
+                  </button>
+                  <button (click)="setAlignment(i, 2)" class="btn btn-primary" type="button" style="background: #00000000;border-style: none;padding: 0;">
+                    <i [style.color]="flashcardList[i].alignment == 2? 'var(--bs-primary)' : 'var(--bs-btn-disabled-color)'" class="material-icons" style="margin: 0;">format_align_center</i>
+                  </button>
+                  <button (click)="setAlignment(i, 3)" class="btn btn-primary" type="button" style="background: rgba(0,0,0,0);border-style: none;padding: 0;">
+                    <i [style.color]="flashcardList[i].alignment == 3? 'var(--bs-primary)' : 'var(--bs-btn-disabled-color)'" class="material-icons" style="margin: 0;">format_align_right</i>
+                  </button>
+                  <button class="btn btn-primary" (click)="onRemove(i)" type="button" style="background: rgba(255,255,255,0);border-style: none;padding: 0;"><i class="material-icons" style="margin: 0;color: var(--bs-white);">delete</i>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="d-block d-print-none d-sm-block d-md-none d-lg-none d-xl-none d-xxl-none text-end mt-3 fw-bold">
-        <div class="btn-group" role="group">
-          <button routerLink="/view/{{ flashcardSet?.id }}" class="btn btn-primary d-flex align-items-center text-primary bg-transparent border-0" type="button">
-            <i class="material-icons" style="font-size: 28px;">close</i>
-          </button>
-          <button (click)="onSubmit()" class="btn btn-primary d-flex align-items-center text-primary bg-transparent border-0" type="button">
-            <i class="material-icons" style="font-size: 28px;">check</i>
-          </button>
+        <div class="d-block d-print-none d-sm-block d-md-none d-lg-none d-xl-none d-xxl-none text-end mt-3 fw-bold">
+          <div class="btn-group" role="group">
+            <button routerLink="/view/{{ flashcardSet?.id }}" class="btn btn-primary d-flex align-items-center text-primary bg-transparent border-0" type="button">
+              <i class="material-icons" style="font-size: 28px;">close</i>
+            </button>
+            <button (click)="onSubmit()" class="btn btn-primary d-flex align-items-center text-primary bg-transparent border-0" type="button">
+              <i class="material-icons" style="font-size: 28px;">check</i>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-4 col-xxl-4 d-none d-print-block d-sm-none d-md-block d-lg-block d-xl-block d-xxl-block align-self-start" style="position: sticky;top: 0px;bottom: 0px;height: 100%;margin-top: -30px;padding-top: 50px;">
-      <div class="d-flex align-items-center justify-content-center" style="width: 100%;background: var(--bs-dark);max-height: 50%;min-height: 200px; border-radius: 3px;">
-        <card [paragraph]="checkPreviewBounds() ? flashcardList[focusIndex].term : 'Term Preview'" [align]="checkPreviewBounds() ? flashcardList[focusIndex].alignment : 0"></card>
-      </div>
-      <div class="d-flex align-items-center justify-content-center" style="width: 100%;background: var(--bs-dark);margin-top: 30px;max-height: 50%;min-height: 200px; border-radius: 3px;">
-        <card [paragraph]="checkPreviewBounds() ? flashcardList[focusIndex].definition : 'Definition Preview'" [align]="checkPreviewBounds() ? flashcardList[focusIndex].alignment : 0"></card>
-      </div>
-      <div class="text-end mt-3 fw-bold">
-        <div class="btn-group" role="group">
-          <button routerLink="/view/{{ flashcardSet?.id }}" class="btn btn-primary d-flex align-items-center text-primary bg-transparent border-0" type="button">
-            <i class="material-icons" style="font-size: 28px;">close</i>
-          </button>
-          <button (click)="onSubmit()" class="btn btn-primary d-flex align-items-center text-primary bg-transparent border-0" type="button">
-            <i class="material-icons" style="font-size: 28px;">check</i>
-          </button></div>
+      <div class="col-md-4 col-xxl-4 d-none d-print-block d-sm-none d-md-block d-lg-block d-xl-block d-xxl-block align-self-start" style="position: sticky;top: 0px;bottom: 0px;height: 100%;margin-top: -30px;padding-top: 50px;">
+        <div class="d-flex align-items-center justify-content-center" style="width: 100%;background: var(--bs-dark);max-height: 50%;min-height: 200px; border-radius: 3px;">
+          <card [paragraph]="checkPreviewBounds() ? flashcardList[focusIndex].term : 'Term Preview'" [align]="checkPreviewBounds() ? flashcardList[focusIndex].alignment : 0"></card>
+        </div>
+        <div class="d-flex align-items-center justify-content-center" style="width: 100%;background: var(--bs-dark);margin-top: 30px;max-height: 50%;min-height: 200px; border-radius: 3px;">
+          <card [paragraph]="checkPreviewBounds() ? flashcardList[focusIndex].definition : 'Definition Preview'" [align]="checkPreviewBounds() ? flashcardList[focusIndex].alignment : 0"></card>
+        </div>
+        <div class="text-end mt-3 fw-bold">
+          <div class="btn-group" role="group">
+            <button routerLink="/view/{{ flashcardSet?.id }}" class="btn btn-primary d-flex align-items-center text-primary bg-transparent border-0" type="button">
+              <i class="material-icons" style="font-size: 28px;">close</i>
+            </button>
+            <button (click)="onSubmit()" class="btn btn-primary d-flex align-items-center text-primary bg-transparent border-0" type="button">
+              <i class="material-icons" style="font-size: 28px;">check</i>
+            </button></div>
+        </div>
       </div>
     </div>
   </div>
