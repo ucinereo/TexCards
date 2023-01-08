@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { FlashcardSet } from '../model/flashcard-set';
-import { FlashcardStar } from '../model/flashcard-star';
-import { UserPermission } from '../model/user-permission';
 import { environment } from 'src/environments/environment';
 import { FlashcardSetImport } from '../model/flashcard-set-import';
 import {EditFlashcardSetRequest} from "../model/edit-flashcard-set-request";
@@ -86,6 +84,10 @@ export class FlashcardService {
 
   public removeReadPermission(request: RemoveReadPermissionRequest) {
     return this.httpClient.put<any>(FlashcardService.REST_API_SERVER + "permission/remove_read_permission", request);
+  }
+
+  public getUserSettings() {
+    return this.httpClient.get<any>(FlashcardService.REST_API_SERVER + "user/get_user_settings");
   }
 
 }

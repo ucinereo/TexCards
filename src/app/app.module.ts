@@ -29,6 +29,7 @@ import { CardCarouselComponent } from './app/card-carousel/card-carousel.compone
 import { FlashcardsetSummaryComponent } from './app/flashcardset-summary/flashcardset-summary.component';
 import {NgSelectModule} from "@ng-select/ng-select";
 import { FlashcardsetSummaryListComponent } from './app/flashcardset-summary-list/flashcardset-summary-list.component';
+import { ProfileComponent } from './app/profile/profile.component';
 
 
 @NgModule({
@@ -52,6 +53,7 @@ import { FlashcardsetSummaryListComponent } from './app/flashcardset-summary-lis
     CardCarouselComponent,
     FlashcardsetSummaryComponent,
     FlashcardsetSummaryListComponent,
+    ProfileComponent,
   ],
     imports: [
         BrowserModule,

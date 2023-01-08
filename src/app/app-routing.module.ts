@@ -12,11 +12,13 @@ import { CardsetOverviewComponent } from './app/cardset-overview/cardset-overvie
 import { DashboardComponent } from './app/dashboard/dashboard.component';
 import { CardsetImportComponent } from './cardset-import/cardset-import.component';
 import {HomeComponent} from "./static/home/home.component";
+import {ProfileComponent} from "./app/profile/profile.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'sets', component: CardsetSelectorComponent , canActivate: [AuthGuard] },
   { path: 'dashboard', component: DashboardComponent , canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'editor/:id', component: CardsetEditorComponent, canActivate: [AuthGuard] },
   { path: 'import/:id', component: CardsetImportComponent, canActivate: [AuthGuard] },
   { path: 'cards/:id', component: CardViewerComponent , canActivate: [AuthGuard] },
