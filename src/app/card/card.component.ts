@@ -6,16 +6,17 @@ import { KatexOptions, MarkdownService, MermaidAPI } from 'ngx-markdown';
 @Component({
   selector: 'card',
   template: `
-    <p>
+    <div>
       <markdown katex mermaid lineNumbers [katexOptions]="options" [mermaidOptions]="mermaidOptions" [data]="_paragraph" [style.text-align]="getTextAlignment()">
       </markdown>
-    </p>
+    </div>
   `,
 })
 export class CardComponent {
 
-  public options: KatexOptions = {
+  public options: any = {
     throwOnError: false,
+    output: 'html'
   }
 
   public mermaidOptions: MermaidAPI.Config = {
