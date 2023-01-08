@@ -71,6 +71,10 @@ export class CardDealer {
     this.setCardSplit();
   }
 
+  public isShuffle(): boolean {
+    return this.shuffle;
+  }
+
   public getCurrentCards(): Flashcard[] {
     return this.currentCards;
   }

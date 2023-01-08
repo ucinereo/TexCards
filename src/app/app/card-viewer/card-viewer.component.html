@@ -9,8 +9,8 @@
           <i [hidden]="cardDealer.getViewMode() == viewModeEnum.Learn" class="material-icons">chevron_left</i>
           <i [hidden]="cardDealer.getViewMode() != viewModeEnum.Learn" class="material-icons">thumb_down</i>
         </button>
-        <button class="btn btn-primary d-flex align-items-center bg-transparent border-0 text-primary" type="button">
-          <i class="material-icons">shuffle</i>
+        <button (click)="toggleShuffle()" class="btn btn-primary d-flex align-items-center bg-transparent border-0 text-primary" type="button">
+          <i [style.color]="cardDealer.isShuffle()? 'var(--bs-primary)' : 'var(--bs-body-bg)'" class="material-icons">shuffle</i>
         </button>
         <button (click)="toggleStar()" class="btn btn-primary d-flex align-items-center bg-transparent border-0 text-primary" type="button">
           <i [style.color]="hasStar()? 'yellow' : 'var(--bs-body-bg)'" class="material-icons">star</i>
