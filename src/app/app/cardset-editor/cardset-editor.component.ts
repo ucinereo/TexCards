@@ -6,6 +6,7 @@ import { FlashcardService } from '../../services/flashcard.service';
 import {Flashcard} from "../../model/flashcard";
 import {NgSelectComponent} from "@ng-select/ng-select";
 import {EditFlashcardSetRequest} from "../../model/edit-flashcard-set-request";
+import {CreateFlashcardSetRequest} from "../../model/create-flashcard-set-request";
 
 @Component({
   selector: 'app-cardset-editor',
@@ -39,19 +40,26 @@ export class CardsetEditorComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.flashcardSetID = params['id'];
-      this.flashcardService.getFlashcardSet(this.flashcardSetID!).subscribe(response => {
-        this.flashcardSet = response.data;
-        this.flashcardSetName = this.flashcardSet?.name!;
-        this.flashcardSetDescription = this.flashcardSet?.description!;
-
-        this.flashcardSet?.flashcards.forEach(item => this.flashcardList.push(new EditFlashcard(item)));
+      if (this.flashcardSetID == -1) {
+        this.flashcardSet = new FlashcardSet(-1, "", "", localStorage.getItem("username")!, [], true, true, 0, 0, []);
         this.flashcardList.push(EditFlashcard.createEmpty());
         setTimeout(() => this.setData(), 0);
+      } else {
+        this.flashcardService.getFlashcardSet(this.flashcardSetID!).subscribe(response => {
+          this.flashcardSet = response.data;
+          this.flashcardSetName = this.flashcardSet?.name!;
+          this.flashcardSetDescription = this.flashcardSet?.description!;
 
-        this.flashcardSet?.tags.forEach((tag: string, index: number) => {
-          this.selectedTags = [...this.selectedTags, tag];
+          this.flashcardSet?.flashcards.forEach(item => this.flashcardList.push(new EditFlashcard(item)));
+          this.flashcardList.push(EditFlashcard.createEmpty());
+          setTimeout(() => this.setData(), 0);
+
+          this.flashcardSet?.tags.forEach((tag: string, index: number) => {
+            this.selectedTags = [...this.selectedTags, tag];
+          });
         });
-      })
+      }
+
     });
     this.flashcardService.getTagList().subscribe(response => {
       response.data.forEach((tag: any, index: number) => {
@@ -110,15 +118,25 @@ export class CardsetEditorComponent implements OnInit {
   }
 
   public onSubmit() {
-    let newTags = this.setMinus(this.selectedTags, this.flashcardSet!.tags);
-    let removedTags = this.setMinus(this.flashcardSet!.tags, this.selectedTags);
-    let newCards = this.flashcardList.filter(card => card.editType == EditType.New).slice(0, -1);
-    let modifiedCards = this.flashcardList.filter(card => card.editType == EditType.Modified);
-    let editRequest = new EditFlashcardSetRequest(this.flashcardSet!.id, this.flashcardSetName, this.flashcardSetDescription, newTags, removedTags, modifiedCards, newCards, this.removedList);
+    if (this.flashcardSetID == -1) {
+      let tags = this.selectedTags;
+      let cards = this.flashcardList.slice(0, -1);
+      let createNewFlashcardSetRequest = new CreateFlashcardSetRequest(this.flashcardSetName, this.flashcardSetDescription, tags, cards);
 
-    this.flashcardService.editFlashcardSet(editRequest).subscribe((response =>
-      this.router.navigate(['view/' + this.flashcardSet!.id])
-    ));
+      this.flashcardService.createNewFlashcardSet(createNewFlashcardSetRequest).subscribe((response) => {
+        this.router.navigate(['view/' + response.data]);
+      });
+    } else {
+      let newTags = this.setMinus(this.selectedTags, this.flashcardSet!.tags);
+      let removedTags = this.setMinus(this.flashcardSet!.tags, this.selectedTags);
+      let newCards = this.flashcardList.filter(card => card.editType == EditType.New).slice(0, -1);
+      let modifiedCards = this.flashcardList.filter(card => card.editType == EditType.Modified);
+      let editRequest = new EditFlashcardSetRequest(this.flashcardSet!.id, this.flashcardSetName, this.flashcardSetDescription, newTags, removedTags, modifiedCards, newCards, this.removedList);
+
+      this.flashcardService.editFlashcardSet(editRequest).subscribe((response =>
+        this.router.navigate(['view/' + this.flashcardSet!.id])
+      ));
+    }
   }
 
   private setMinus(minuend: any[], subtrahend: any[]) {

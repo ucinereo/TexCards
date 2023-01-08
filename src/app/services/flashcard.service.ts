@@ -10,6 +10,7 @@ import {GrantWritePermissionRequest} from "../model/grant-write-permission-reque
 import {RemoveWritePermissionRequest} from "../model/remove-write-permission-request";
 import {RemoveReadPermissionRequest} from "../model/remove-read-permission-request";
 import {GrantReadPermissionRequest} from "../model/grant-read-permission-request";
+import {CreateFlashcardSetRequest} from "../model/create-flashcard-set-request";
 
 
 @Injectable({
@@ -49,8 +50,8 @@ export class FlashcardService {
     return this.httpClient.put<any>(FlashcardService.REST_API_SERVER + "flashcard-set-import", flashcardSetImport);
   }
 
-  public createNewFlashcardSet(flashcardSetName: string) {
-    return this.httpClient.post<any>(FlashcardService.REST_API_SERVER + "flashcard-set-create", flashcardSetName);
+  public createNewFlashcardSet(request: CreateFlashcardSetRequest) {
+    return this.httpClient.post<any>(FlashcardService.REST_API_SERVER + "flashcard/create_flashcard_set", request);
   }
 
   public deleteFlashcardSet(flashcardSet: FlashcardSet) {
