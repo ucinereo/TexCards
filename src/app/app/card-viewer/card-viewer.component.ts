@@ -119,7 +119,7 @@ export class CardViewerComponent implements OnInit {
   }
 
   @HostListener('document:keydown.arrowright')
-  keyNext(): void {
+  next(): void {
     if (this.cardDealer.getViewMode() == ViewMode.Learn) {
       this.carousel?.rotateRight();
     } else {
@@ -128,7 +128,7 @@ export class CardViewerComponent implements OnInit {
   }
 
   @HostListener('document:keydown.arrowleft')
-  keyPrev(): void {
+  prev(): void {
     if (this.cardDealer.getViewMode() == ViewMode.Learn) {
       this.cardDealer.moveToMissed(this.carousel?.getCurrentCard()!);
       this.carousel?.rotateLeft();

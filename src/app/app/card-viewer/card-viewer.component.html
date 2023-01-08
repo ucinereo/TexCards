@@ -5,8 +5,9 @@
     </div>
     <div class="bg-dark" style="border-radius: 3px;">
       <div class="justify-content-around d-flex">
-        <button class="btn btn-primary d-flex align-items-center bg-transparent border-0 text-primary" type="button">
-          <i class="material-icons">chevron_left</i>
+        <button (click)="prev()" class="btn btn-primary d-flex align-items-center bg-transparent border-0 text-primary" type="button">
+          <i [hidden]="cardDealer.getViewMode() == viewModeEnum.Learn" class="material-icons">chevron_left</i>
+          <i [hidden]="cardDealer.getViewMode() != viewModeEnum.Learn" class="material-icons">thumb_down</i>
         </button>
         <button class="btn btn-primary d-flex align-items-center bg-transparent border-0 text-primary" type="button">
           <i class="material-icons">shuffle</i>
@@ -19,8 +20,9 @@
           <i [hidden]="cardDealer.getViewMode() != viewModeEnum.Learn" class="material-icons">multiple_stop</i>
           <i [hidden]="cardDealer.getViewMode() != viewModeEnum.Star" class="material-icons">star</i>
         </button>
-        <button class="btn btn-primary d-flex align-items-center bg-transparent border-0 text-primary" type="button">
-          <i class="material-icons">chevron_right</i>
+        <button (click)="next()" class="btn btn-primary d-flex align-items-center bg-transparent border-0 text-primary" type="button">
+          <i [hidden]="cardDealer.getViewMode() == viewModeEnum.Learn" class="material-icons">chevron_right</i>
+          <i [hidden]="cardDealer.getViewMode() != viewModeEnum.Learn" class="material-icons">thumb_up</i>
         </button>
       </div>
     </div>
