@@ -11,6 +11,7 @@ import { KatexOptions, MarkdownService, MermaidAPI } from 'ngx-markdown';
       </markdown>
     </div>
   `,
+  styles: [`:host { padding: 5px; }`],
 })
 export class CardComponent {
 
