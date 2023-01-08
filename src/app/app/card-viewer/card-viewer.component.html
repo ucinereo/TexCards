@@ -29,19 +29,24 @@
   </div>
   <div [hidden]="!showAllDone" class="container">
     <div class="row">
-      <div class="col text-center">
-        <h1>you have studied all cards</h1>
+      <div class="col">
+        <h2 class="text-center">You have studied all cards</h2>
       </div>
     </div>
-    <div class="row">
-      <div [hidden]="cardDealer.getMissedCardCount() == 0" class="col">
-        <button (click)="learnMissedAgain()" class="btn btn-primary">Learn the missed cards again</button>
+    <div class="row mt-2">
+      <div class="col d-flex justify-content-end">
+        <app-pie-chart [percentage]="(flashcardSet!.flashcards!.length - cardDealer.getMissedCardCount()) / flashcardSet!.flashcards!.length * 100"></app-pie-chart>
       </div>
       <div class="col">
-        <button (click)="learnAllAgain();" class="btn btn-primary">Learn all cards again</button>
+        <div class="d-flex justify-content-center h-100 flex-column" style="row-gap: 30px;">
+          <button [disabled]="cardDealer.getMissedCardCount() == 0" (click)="learnMissedAgain()" class="btn btn-primary" type="button" style="max-width: 200px;border-radius: 3px;">Keep on learning</button>
+          <button (click)="learnAllAgain()" class="btn btn-primary" type="button" style="max-width: 200px;border-radius: 3px;">Review all cards</button>
+        </div>
       </div>
-      <div class="col">
-        <button (click)="returnToCards()" class="btn btn-primary">Return to the cards</button>
+    </div>
+    <div class="row mt-3">
+      <div class="col d-flex justify-content-center">
+        <button (click)="returnToCards()" class="btn btn-primary d-flex align-items-center justify-content-center" type="button" style="width: calc(15% + 200px);border-radius: 3px;"><i class="material-icons">keyboard_backspace</i> Go back to all cards</button>
       </div>
     </div>
   </div>
