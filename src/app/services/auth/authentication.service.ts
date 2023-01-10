@@ -38,8 +38,7 @@ export class AuthenticationService {
   }
 
   logOut(): void {
-    localStorage.removeItem("username");
-    localStorage.removeItem("token");
+    localStorage.clear();
   }
 
 }
