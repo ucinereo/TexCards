@@ -2,8 +2,11 @@
   <div class="container sticky-top" style="height: 100%;">
     <div class="row">
       <div class="col col-md-8">
-        <h1 class="text-primary">Edit Flashcardset</h1>
-        <div class="input-group"><input class="form-control" type="text" placeholder="Flashcardset Name" [(ngModel)]="flashcardSetName"/></div>
+        <h1 class="text-primary d-inline">Edit Flashcardset</h1>
+        <i (click)="onDelete()" class="material-icons d-inline text-primary fs-1 align-text-bottom pointer" style="margin-left: 20px;">delete</i>
+        <div class="input-group">
+          <input class="form-control" type="text" placeholder="Flashcardset Name" [(ngModel)]="flashcardSetName"/>
+        </div>
       </div>
       <div class="w-100 d-md-none d-lg-none d-xl-none d-xxl-none"></div>
       <div class="col col-md-4 d-flex align-items-end justify-content-end">

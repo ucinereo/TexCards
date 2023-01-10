@@ -7,6 +7,7 @@ import {Flashcard} from "../../model/flashcard";
 import {NgSelectComponent} from "@ng-select/ng-select";
 import {EditFlashcardSetRequest} from "../../model/edit-flashcard-set-request";
 import {CreateFlashcardSetRequest} from "../../model/create-flashcard-set-request";
+import {DeleteFlashcardSetRequest} from "../../model/delete-flashcard-set-request";
 
 @Component({
   selector: 'app-cardset-editor',
@@ -115,6 +116,13 @@ export class CardsetEditorComponent implements OnInit {
 
   public checkPreviewBounds(): boolean {
     return 0 <= this.focusIndex && this.focusIndex < this.flashcardList.length;
+  }
+
+  public onDelete(): void {
+    let deleteRequest = new DeleteFlashcardSetRequest(this.flashcardSetID!);
+    this.flashcardService.deleteFlashcardSet(deleteRequest).subscribe((response) => {
+      this.router.navigate(["dashboard"]);
+    });
   }
 
   public onSubmit() {
