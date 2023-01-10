@@ -64,7 +64,7 @@ export class CardsetEditorComponent implements OnInit {
     });
     this.flashcardService.getTagList().subscribe(response => {
       response.data.forEach((tag: any, index: number) => {
-        this.tags = [...this.tags, tag];
+        this.tags = [...this.tags, { name: tag }];
       });
     });
   }
@@ -125,22 +125,30 @@ export class CardsetEditorComponent implements OnInit {
     });
   }
 
+  private getTags(): string[] {
+    let tags: string[] = [];
+    this.selectedTags.forEach((element: any) => {
+      tags.push(element.name);
+    });
+    return tags;
+  }
+
   public onSubmit() {
     if (this.flashcardSetID == -1) {
-      let tags = this.selectedTags;
+      let tags = this.getTags();
       let cards = this.flashcardList.slice(0, -1);
       let createNewFlashcardSetRequest = new CreateFlashcardSetRequest(this.flashcardSetName, this.flashcardSetDescription, tags, cards);
-
+      console.log(createNewFlashcardSetRequest);
       this.flashcardService.createNewFlashcardSet(createNewFlashcardSetRequest).subscribe((response) => {
         this.router.navigate(['view/' + response.data]);
       });
     } else {
-      let newTags = this.setMinus(this.selectedTags, this.flashcardSet!.tags);
-      let removedTags = this.setMinus(this.flashcardSet!.tags, this.selectedTags);
+      let newTags = this.setMinus(this.getTags(), this.flashcardSet!.tags);
+      let removedTags = this.setMinus(this.flashcardSet!.tags, this.getTags());
       let newCards = this.flashcardList.filter(card => card.editType == EditType.New).slice(0, -1);
       let modifiedCards = this.flashcardList.filter(card => card.editType == EditType.Modified);
       let editRequest = new EditFlashcardSetRequest(this.flashcardSet!.id, this.flashcardSetName, this.flashcardSetDescription, newTags, removedTags, modifiedCards, newCards, this.removedList);
-
+      console.log(editRequest);
       this.flashcardService.editFlashcardSet(editRequest).subscribe((response =>
         this.router.navigate(['view/' + this.flashcardSet!.id])
       ));
