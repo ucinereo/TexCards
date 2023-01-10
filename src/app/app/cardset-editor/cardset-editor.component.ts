@@ -138,7 +138,7 @@ export class CardsetEditorComponent implements OnInit {
       let tags = this.getTags();
       let cards = this.flashcardList.slice(0, -1);
       let createNewFlashcardSetRequest = new CreateFlashcardSetRequest(this.flashcardSetName, this.flashcardSetDescription, tags, cards);
-      console.log(createNewFlashcardSetRequest);
+
       this.flashcardService.createNewFlashcardSet(createNewFlashcardSetRequest).subscribe((response) => {
         this.router.navigate(['view/' + response.data]);
       });
@@ -148,7 +148,7 @@ export class CardsetEditorComponent implements OnInit {
       let newCards = this.flashcardList.filter(card => card.editType == EditType.New).slice(0, -1);
       let modifiedCards = this.flashcardList.filter(card => card.editType == EditType.Modified);
       let editRequest = new EditFlashcardSetRequest(this.flashcardSet!.id, this.flashcardSetName, this.flashcardSetDescription, newTags, removedTags, modifiedCards, newCards, this.removedList);
-      console.log(editRequest);
+
       this.flashcardService.editFlashcardSet(editRequest).subscribe((response =>
         this.router.navigate(['view/' + this.flashcardSet!.id])
       ));

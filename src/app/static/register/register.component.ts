@@ -24,7 +24,6 @@ export class RegisterComponent implements OnInit {
 
   @HostListener('document:keydown.enter')
   onRegister(): void {
-    console.log(this.username + " " + this.email + " " + this.password);
      if (this.username.length > 0 && this.email.length > 0 && this.password.length > 0) {
        this.authService.register(this.username, this.email, this.password).subscribe(data => {
 
