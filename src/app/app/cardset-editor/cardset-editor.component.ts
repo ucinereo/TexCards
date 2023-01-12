@@ -56,7 +56,7 @@ export class CardsetEditorComponent implements OnInit {
           setTimeout(() => this.setData(), 0);
 
           this.flashcardSet?.tags.forEach((tag: string, index: number) => {
-            this.selectedTags = [...this.selectedTags, tag];
+            this.selectedTags = [...this.selectedTags, { name: tag }];
           });
         });
       }
