@@ -8,6 +8,7 @@ import {Flashcard} from "../../model/flashcard";
 import {CardCarouselComponent} from "../card-carousel/card-carousel.component";
 import {AddStarRequest} from "../../model/add-star-request";
 import {RemoveStarRequest} from "../../model/remove-star-request";
+import {ErrorService} from "../../services/error.service";
 
 @Component({
   selector: 'app-card-viewer',
@@ -42,7 +43,7 @@ export class CardViewerComponent implements OnInit {
         this.cardDealer = new CardDealer(this.flashcardSet?.flashcards);
         this.reloadCardSplit();
       })
-    }, (error) => { });
+    });
   }
 
   @HostListener('document:keydown.space')
@@ -52,20 +53,22 @@ export class CardViewerComponent implements OnInit {
 
   @HostListener('document:keydown.h')
   toggleStar(): void {
-    let card = this.carousel?.getCurrentCard();
+    const card = this.carousel?.getCurrentCard();
     if (card) {
       if (card.star) {
         let request = new RemoveStarRequest(this.flashcardSetID!, card.id);
-        this.flashcardService.removeFlashcardStar(request).subscribe( response => { });
-        card.star = false;
-        if (this.cardDealer.getViewMode() == ViewMode.Star) {
-          this.cardDealer.starUpdate();
-          this.reloadCardSplit();
-        }
+        this.flashcardService.removeFlashcardStar(request).subscribe( response => {
+          card.star = false;
+          if (this.cardDealer.getViewMode() == ViewMode.Star) {
+            this.cardDealer.starUpdate();
+            this.reloadCardSplit();
+          }
+        });
       } else {
         let request = new AddStarRequest(this.flashcardSetID!, card.id);
-        this.flashcardService.addFlashcardStar(request).subscribe(response => { });
-        card.star = true;
+        this.flashcardService.addFlashcardStar(request).subscribe(response => {
+          card.star = true;
+        });
       }
     }
   }

@@ -4,11 +4,12 @@ import { Observable, throwError} from "rxjs";
 import { catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AuthenticationService } from './authentication.service';
+import {ErrorService} from "../error.service";
 
 @Injectable()
 export class BasicAuthInterceptor implements HttpInterceptor {
 
-  constructor(private authService: AuthenticationService, private router: Router) {}
+  constructor(private authService: AuthenticationService, private errorService: ErrorService, private router: Router) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     if (localStorage.getItem('username') && localStorage.getItem('token')) {
@@ -20,32 +21,20 @@ export class BasicAuthInterceptor implements HttpInterceptor {
     }
     return next.handle(request).pipe(
       catchError((err) => {
-        if (this.router.url.match('.*editor.*') && err.status != 401) {
-          return throwError(err);
-        }
-
-        let errorCode = err.status;
-        let errorMsg = err.error.message;
-        if (errorMsg == undefined || errorMsg == "" || errorMsg.includes('/') || errorMsg.includes('.')) {
-          errorMsg = "-";
-        }
-        if (errorCode == undefined || errorCode == "") {
-          errorCode = "500";
-        }
         if (err.status == 401) {
           if (!err.url.includes("auth")) {
             this.authService.logOut();
             this.router.navigate(['login']);
           }
-        } else if (err.status == 500) {
-          this.router.navigate(['error/' + 500 + "/" + errorMsg]);
-        } else if (err.status == 403) {
-          this.router.navigate(['error/' + 403 + "/" + errorMsg]);
-        } else if (err.status == 404) {
-          this.router.navigate(['error/' + 404 + "/" + errorMsg]);
         } else {
-          if (!(err.url.includes("auth") && errorCode == 400))
-          this.router.navigate(['error/' + errorCode + "/" + errorMsg]);
+          let errorMsg = err.error.message;
+          if (err.status == 0) {
+            // indication that backend could not be reached
+            errorMsg = "Could not reach server, check your internet connection!";
+          } else if (errorMsg == undefined || errorMsg == "" || errorMsg.includes('/') || errorMsg.includes('.')) {
+            errorMsg = "-";
+          }
+          this.errorService.emit("error", errorMsg);
         }
         return throwError(err);
       })

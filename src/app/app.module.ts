@@ -27,7 +27,7 @@ import { HomeComponent } from './static/home/home.component';
 import { CardFlipperComponent } from './app/card-flipper/card-flipper.component';
 import { CardCarouselComponent } from './app/card-carousel/card-carousel.component';
 import { FlashcardsetSummaryComponent } from './app/flashcardset-summary/flashcardset-summary.component';
-import {NgSelectModule} from "@ng-select/ng-select";
+import { NgSelectModule } from "@ng-select/ng-select";
 import { FlashcardsetSummaryListComponent } from './app/flashcardset-summary-list/flashcardset-summary-list.component';
 import { ProfileComponent } from './app/profile/profile.component';
 import { PieChartComponent } from './app/pie-chart/pie-chart.component';
