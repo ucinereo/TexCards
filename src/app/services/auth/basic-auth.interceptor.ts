@@ -21,6 +21,11 @@ export class BasicAuthInterceptor implements HttpInterceptor {
     }
     return next.handle(request).pipe(
       catchError((err) => {
+        if (this.router.url.match('.*login.*') || this.router.url.match('.*register.*')) {
+          // custom error handling for login and register page
+          return throwError(err);
+        }
+
         if (err.status == 401) {
           if (!err.url.includes("auth")) {
             this.authService.logOut();

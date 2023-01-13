@@ -15,8 +15,7 @@ export class RegisterComponent implements OnInit {
   email: string = "";
   password: string = "";
 
-  public errorMsg: string = "Error";
-  public registrationError: boolean = false;
+  public errorMsg: string = "";
 
   constructor(private flashcardService: FlashcardService, private authService: AuthenticationService, private router: Router, private titleService: Title) { }
 
@@ -36,7 +35,6 @@ export class RegisterComponent implements OnInit {
          this.router.navigate(['dashboard']);
        }, (error) => {
          this.errorMsg = error.error.message;
-         this.registrationError = true;
        });
      }
   }

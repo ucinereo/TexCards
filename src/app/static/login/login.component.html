@@ -17,7 +17,8 @@
                             <div class="mb-3"><input class="form-control" type="text" name="username" placeholder="Username" style="border-radius: 10px;" [(ngModel)]="username"></div>
                             <div class="mb-3"></div>
                             <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Password" style="border-radius: 10px;" [(ngModel)]="password"></div>
-                            <div class="mb-3"></div><button class="btn btn-primary d-block w-100" type="submit" style="border-radius: 25px;padding-top: 6pxpx;margin-top: 50px;font-size: 20px;" (click)="onSubmit()">log in</button>
+                            <div class="mb-3"><p class="text-danger" style="min-height: 25px">{{ errorMsg }}</p></div>
+                            <div class="mb-3"></div><button class="btn btn-primary d-block w-100" type="submit" style="border-radius: 25px;padding-top: 6px;font-size: 20px;" (click)="onSubmit()">log in</button>
                         </form>
                     </div>
                 </div>

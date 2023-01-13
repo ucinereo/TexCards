@@ -14,7 +14,7 @@ export class LoginComponent implements OnInit {
   username: string = "";
   password: string = "";
 
-  public wrongCredentials: boolean = false;
+  public errorMsg: string = "";
 
   constructor(private authService: AuthenticationService, private flashcardService: FlashcardService, private router: Router, private titleService: Title) { }
 
@@ -31,7 +31,9 @@ export class LoginComponent implements OnInit {
         }
       });
       this.router.navigate(['dashboard']);
-    }, (error) => { this.wrongCredentials = true; });
+    }, (error) => {
+      this.errorMsg = error.error.message;
+    });
   }
 
 

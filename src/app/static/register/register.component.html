@@ -17,7 +17,8 @@
                             <div class="mb-3"><input class="form-control" type="text" name="username" placeholder="Username" style="border-radius: 10px;" [(ngModel)]="username"></div>
                             <div class="mb-3"><input class="form-control" type="email" name="email" placeholder="Email" style="border-radius: 10px;" [(ngModel)]="email"></div>
                             <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Password" style="border-radius: 10px;" [(ngModel)]="password"></div>
-                            <div class="mb-3"></div><button class="btn btn-primary d-block w-100" type="submit" style="border-radius: 25px;margin-top: 50px;font-size: 20px;" (click)="onRegister()">sign up now</button>
+                            <div><p class="text-danger" style="min-height: 25px">{{ errorMsg }}</p></div>
+                            <div class="mb-3"></div><button class="btn btn-primary d-block w-100" type="submit" style="border-radius: 25px;font-size: 20px;" (click)="onRegister()">sign up now</button>
                         </form>
                     </div>
                 </div>
