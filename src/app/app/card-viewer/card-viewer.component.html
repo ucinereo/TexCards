@@ -1,7 +1,7 @@
 <div class="d-flex align-items-center">
   <div [hidden]="showAllDone" class="container">
     <div class="app-card-carousel-wrapper my-4">
-      <app-card-carousel #carousel [cards]="cardSplit" [learnMode]="cardDealer.getViewMode() == viewModeEnum.Learn" (allDone)="allDone()"></app-card-carousel>
+      <app-card-carousel #carousel [learnMode]="cardDealer.getViewMode() == viewModeEnum.Learn" [cards]="cardSplit" (allDone)="allDone()"></app-card-carousel>
     </div>
     <div class="bg-dark" style="border-radius: 3px;">
       <div class="justify-content-around d-flex">
@@ -35,7 +35,7 @@
     </div>
     <div class="row mt-2">
       <div class="col d-flex justify-content-end">
-        <app-pie-chart [percentage]="(flashcardSet!.flashcards!.length - cardDealer.getMissedCardCount()) / flashcardSet!.flashcards!.length * 100"></app-pie-chart>
+        <app-pie-chart [percentage]="(cardSplit.length - cardDealer.getMissedCardCount()) / cardSplit.length * 100"></app-pie-chart>
       </div>
       <div class="col">
         <div class="d-flex justify-content-center h-100 flex-column" style="row-gap: 30px;">

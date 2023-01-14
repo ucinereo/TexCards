@@ -8,7 +8,6 @@ import {Flashcard} from "../../model/flashcard";
 import {CardCarouselComponent} from "../card-carousel/card-carousel.component";
 import {AddStarRequest} from "../../model/add-star-request";
 import {RemoveStarRequest} from "../../model/remove-star-request";
-import {ErrorService} from "../../services/error.service";
 
 @Component({
   selector: 'app-card-viewer',
