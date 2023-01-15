@@ -34,6 +34,14 @@ html, body {
   cursor: pointer;
 }
 
+.outline-none:focus {
+  outline: none;
+}
+
+.border-radius-3 {
+  border-radius: 3px !important;
+}
+
 
 
 

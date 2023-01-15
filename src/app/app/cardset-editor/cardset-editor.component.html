@@ -5,7 +5,7 @@
         <h1 class="text-primary d-inline">Edit Flashcardset</h1>
         <i (click)="onDelete()" class="material-icons d-inline text-primary fs-1 align-text-bottom pointer" style="margin-left: 20px;">delete</i>
         <div class="input-group">
-          <input class="form-control" type="text" placeholder="Flashcardset Name" [(ngModel)]="flashcardSetName"/>
+          <input class="form-control border-radius-3" type="text" placeholder="Flashcardset Name" [(ngModel)]="flashcardSetName"/>
         </div>
       </div>
       <div class="w-100 d-md-none d-lg-none d-xl-none d-xxl-none"></div>
@@ -15,7 +15,7 @@
     </div>
     <div class="row mt-3">
       <div class="col">
-        <div class="input-group input-group-sm"><input class="form-control" type="text" placeholder="Description" [(ngModel)]="flashcardSetDescription"/></div>
+        <div class="input-group input-group-sm"><input class="form-control border-radius-3" type="text" placeholder="Description" [(ngModel)]="flashcardSetDescription"/></div>
       </div>
     </div>
     <div class="row mt-3">
@@ -58,7 +58,13 @@
           </div>
         </div>
         <div class="d-block d-print-none d-sm-block d-md-none d-lg-none d-xl-none d-xxl-none text-end mt-3 fw-bold">
-          <div class="btn-group" role="group">
+          <div class="d-inline-flex w-100 justify-content-end position-relative" role="group">
+            <button (click)="openImportDialog()" class="btn btn-primary d-flex align-items-center text-primary bg-transparent border-0" style="margin-right: auto;" type="button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28px" height="28px" viewBox="0 0 24 24" fill="none">
+                <path d="M5 9.98193V19.9819H19V9.98193H15V7.98193H21V21.9819H3V7.98193H9V9.98193H5Z" fill="currentColor"></path>
+                <path d="M13.0001 2H11.0001V14.0531L8.46451 11.5175L7.05029 12.9317L12 17.8815L16.9498 12.9317L15.5356 11.5175L13.0001 14.053V2Z" fill="currentColor"></path>
+              </svg>
+            </button>
             <button routerLink="/view/{{ flashcardSet?.id }}" class="btn btn-primary d-flex align-items-center text-primary bg-transparent border-0" type="button">
               <i class="material-icons" style="font-size: 28px;">close</i>
             </button>
@@ -76,7 +82,13 @@
           <card [paragraph]="checkPreviewBounds() ? flashcardList[focusIndex].definition : 'Definition Preview'" [align]="checkPreviewBounds() ? flashcardList[focusIndex].alignment : 0"></card>
         </div>
         <div class="text-end mt-3 fw-bold">
-          <div class="btn-group" role="group">
+          <div class="d-inline-flex w-100 justify-content-end position-relative" role="group">
+            <button (click)="openImportDialog()" class="btn btn-primary d-flex align-items-center text-primary bg-transparent border-0" style="margin-right: auto;" type="button">
+              <svg xmlns="http://www.w3.org/2000/svg" width="28px" height="28px" viewBox="0 0 24 24" fill="none">
+                <path d="M5 9.98193V19.9819H19V9.98193H15V7.98193H21V21.9819H3V7.98193H9V9.98193H5Z" fill="currentColor"></path>
+                <path d="M13.0001 2H11.0001V14.0531L8.46451 11.5175L7.05029 12.9317L12 17.8815L16.9498 12.9317L15.5356 11.5175L13.0001 14.053V2Z" fill="currentColor"></path>
+              </svg>
+            </button>
             <button routerLink="/view/{{ flashcardSet?.id }}" class="btn btn-primary d-flex align-items-center text-primary bg-transparent border-0" type="button">
               <i class="material-icons" style="font-size: 28px;">close</i>
             </button>
@@ -84,6 +96,86 @@
               <i class="material-icons" style="font-size: 28px;">check</i>
             </button></div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--form modal-->
+<div class="modal fade" id="importModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-fullscreen-md-down">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Import flashcards</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" style="height: 70vh;">
+        <div class="h-100 d-flex flex-column justify-content-center">
+          <form [formGroup]="iForm">
+            <div class="row">
+              <div class="col d-flex justify-content-center">
+                <div>
+                  <h5>Term-Definition separator</h5>
+                  <div class="form-check">
+                    <input id="tdSep1" class="form-check-input" type="radio" name="tdSep" formControlName="tdSep" value="\t" checked />
+                    <label class="form-check-label" for="tdSep1">Tab</label>
+                  </div>
+                  <div class="form-check">
+                    <input id="tdSep2" class="form-check-input" type="radio" name="tdSep" formControlName="tdSep" value=";" />
+                    <label class="form-check-label" for="tdSep2">Semicolon</label>
+                  </div>
+                  <div class="form-check">
+                    <input id="tdSep3" class="form-check-input" type="radio" name="tdSep" formControlName="tdSep" value="tdCustom"/>
+                    <label class="form-check-label" for="tdSep3">Custom<input formControlName="tdCustomInput" class="bg-transparent text-white outline-none" type="text" placeholder="=" style="border-color: var(--bs-body-color);border-top-width: 0px;border-right-width: 0px;border-bottom-width: 1px;border-left-width: 0px;width: 30px;text-align: left;margin-left: 10px;" />
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="col d-flex justify-content-center">
+                <div>
+                  <h5>Card separator</h5>
+                  <div class="form-check">
+                    <input id="cSep1" class="form-check-input" type="radio" name="cSep" formControlName="cSep" value="\n" checked />
+                    <label class="form-check-label" for="cSep1">Newline</label>
+                  </div>
+                  <div class="form-check">
+                    <input id="cSep2" class="form-check-input" type="radio" name="cSep" formControlName="cSep" value=";" />
+                    <label class="form-check-label" for="cSep2">Semicolon</label>
+                  </div>
+                  <div class="form-check">
+                    <input id="cSep3" class="form-check-input" type="radio" name="cSep" formControlName="cSep" value="cCustom" />
+                    <label class="form-check-label" for="cSep3">Custom<input formControlName="cCustomInput" class="bg-transparent text-white outline-none" type="text" placeholder="\n\n" style="border-color: var(--bs-body-color);border-top-width: 0px;border-right-width: 0px;border-bottom-width: 1px;border-left-width: 0px;width: 30px;text-align: left;margin-left: 10px;" /></label>
+                  </div>
+                </div>
+              </div>
+              <div class="col d-flex justify-content-center">
+                <div>
+                  <h5>Alignment</h5>
+                  <div class="form-check">
+                    <input id="align1" class="form-check-input" type="radio" name="align" formControlName="align" value="1" checked />
+                    <label class="form-check-label" for="align1"><i class="material-icons">format_align_left</i></label>
+                  </div>
+                  <div class="form-check">
+                    <input id="align2" class="form-check-input" type="radio" name="align" formControlName="align" value="2" />
+                    <label class="form-check-label" for="align2"><i class="material-icons">format_align_center</i></label>
+                  </div>
+                  <div class="form-check">
+                    <input id="align3" class="form-check-input" type="radio" name="align" formControlName="align" value="3" />
+                    <label class="form-check-label" for="align3"><i class="material-icons">format_align_right</i></label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+          <div class="flex-grow-1 d-flex justify-content-center align-items-center">
+            <textarea [(ngModel)]="importText" style="resize: none;height: 99%;width: 99%;">
+            </textarea>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-danger" data-bs-dismiss="modal">Close</button>
+        <button (click)="import()" type="button" class="btn btn-primary">Import</button>
       </div>
     </div>
   </div>

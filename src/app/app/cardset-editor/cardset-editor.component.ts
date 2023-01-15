@@ -8,6 +8,11 @@ import {NgSelectComponent} from "@ng-select/ng-select";
 import {EditFlashcardSetRequest} from "../../model/edit-flashcard-set-request";
 import {CreateFlashcardSetRequest} from "../../model/create-flashcard-set-request";
 import {DeleteFlashcardSetRequest} from "../../model/delete-flashcard-set-request";
+import {FormControl, UntypedFormControl, UntypedFormGroup} from "@angular/forms";
+import {MermaidAPI} from "ngx-markdown";
+import Theme = MermaidAPI.Theme;
+
+declare var window: any;
 
 @Component({
   selector: 'app-cardset-editor',
@@ -21,6 +26,20 @@ export class CardsetEditorComponent implements OnInit {
 
   public flashcardSet?: FlashcardSet;
   public flashcardSetID?: number;
+
+  private importModal: any;
+  public importText: string = "";
+  public iForm = new UntypedFormGroup({
+    tdSep: new UntypedFormControl('\\t'),
+    cSep: new UntypedFormControl('\\n'),
+    align: new UntypedFormControl('1'),
+    tdCustom: new UntypedFormControl(''),
+    cCustom: new UntypedFormControl(''),
+    tdCustomInput: new FormControl(),
+    cCustomInput: new FormControl()
+  });
+  public tdCustom: string = "";
+  public cCustom: string = "";
 
   public flashcardSetName: string = "";
   public flashcardSetDescription: string = "";
@@ -67,6 +86,8 @@ export class CardsetEditorComponent implements OnInit {
         this.tags = [...this.tags, { name: tag }];
       });
     });
+
+    this.importModal = new window.bootstrap.Modal(document.getElementById('importModal'));
   }
 
   private setData(): void {
@@ -116,6 +137,53 @@ export class CardsetEditorComponent implements OnInit {
 
   public checkPreviewBounds(): boolean {
     return 0 <= this.focusIndex && this.focusIndex < this.flashcardList.length;
+  }
+
+  public openImportDialog(): void {
+    this.importModal.show();
+  }
+
+  public import(): void {
+    let tdSep = this.iForm.value.tdSep;
+    let cSep = this.iForm.value.cSep;
+    let align = Number(this.iForm.value.align);
+    if (tdSep == "tdCustom") {
+      tdSep = this.iForm.value.tdCustomInput;
+      if (!tdSep) {
+        tdSep = "=";
+      }
+    }
+    if (cSep == "cCustom") {
+      cSep = this.iForm.value.cCustomInput;
+      if (!cSep) {
+        cSep = "\\n\\n";
+      }
+    }
+
+    tdSep = tdSep.replaceAll("\\t", "\t").replaceAll("\\n", "\n");
+    cSep = cSep.replaceAll("\\t", "\t").replaceAll("\\n", "\n");
+
+    let cardStrings: string[] = this.importText.split(cSep);
+    let cards: string[][] = [];
+    cardStrings.forEach(s => {
+      let card: string[] = s.split(tdSep, 2);
+      if (card.length == 1) {
+        card.push("");
+      }
+      if (card[0] != "" || card[1] != "") {
+        cards.push(card);
+      }
+    });
+
+    // remove empty card at the end
+    this.flashcardList.pop();
+    // concat with imported cards, and add empty card at the end
+    this.flashcardList = [...this.flashcardList, ...cards.map(card => new EditFlashcard(new Flashcard(-1, card[0], card[1], align, false, 0), EditType.New)), EditFlashcard.createEmpty()];
+
+    setTimeout(() => this.setData(), 0);
+
+    this.importModal.hide();
+    this.importText = "";
   }
 
   public onDelete(): void {
@@ -176,8 +244,11 @@ class EditFlashcard extends Flashcard {
     return card;
   }
 
-  constructor(flashcard: Flashcard) {
+  constructor(flashcard: Flashcard, editType?: EditType) {
     super(flashcard.id, flashcard.term, flashcard.definition, flashcard.alignment, flashcard.star, flashcard.learnState);
+    if (editType) {
+      this.editType = editType;
+    }
   }
 
 }
