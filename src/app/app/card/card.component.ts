@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { KatexOptions, MarkdownService, MermaidAPI } from 'ngx-markdown';
+import { MermaidAPI } from 'ngx-markdown';
 
 
 

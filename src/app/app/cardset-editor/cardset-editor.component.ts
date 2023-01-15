@@ -4,13 +4,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FlashcardSet } from '../../model/flashcard-set';
 import { FlashcardService } from '../../services/flashcard.service';
 import {Flashcard} from "../../model/flashcard";
-import {NgSelectComponent} from "@ng-select/ng-select";
 import {EditFlashcardSetRequest} from "../../model/edit-flashcard-set-request";
 import {CreateFlashcardSetRequest} from "../../model/create-flashcard-set-request";
 import {DeleteFlashcardSetRequest} from "../../model/delete-flashcard-set-request";
 import {FormControl, UntypedFormControl, UntypedFormGroup} from "@angular/forms";
-import {MermaidAPI} from "ngx-markdown";
-import Theme = MermaidAPI.Theme;
 
 declare var window: any;
 
