@@ -28,8 +28,9 @@ export class FlashcardsetSummaryListComponent {
   }
 
   public applyFilter() {
+    const searchTerm = this.searchTerm.toLowerCase();
     this.filteredFlashcardSets = this.reshapeToColStructure(this._flashcardSets.filter((set: FlashcardSet) => {
-      return set.name.toLowerCase().includes(this.searchTerm) || set.description.toLowerCase().includes(this.searchTerm) || set.author.toLowerCase().includes(this.searchTerm) || set.tags.filter((tag) => tag.toLowerCase().includes(this.searchTerm)).length > 0;
+      return set.name.toLowerCase().includes(searchTerm) || set.description?.toLowerCase().includes(searchTerm) || set.author.toLowerCase().includes(searchTerm) || set.tags!.filter((tag) => tag.toLowerCase().includes(searchTerm)).length > 0;
     }));
   }
 
