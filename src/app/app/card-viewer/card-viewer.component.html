@@ -3,6 +3,14 @@
     <div class="app-card-carousel-wrapper my-4">
       <app-card-carousel #carousel [learnMode]="cardDealer.getViewMode() == viewModeEnum.Learn" [cards]="cardSplit" (allDone)="allDone()"></app-card-carousel>
     </div>
+    <div>
+      <p [hidden]="cardDealer.getViewMode() == viewModeEnum.Learn" class="mb-1 fs-6 text-center">{{ (cardSplit.length > 0? (carousel.getIndex() + 1) : 0) + "/" + cardSplit.length }}</p>
+      <div [hidden]="cardDealer.getViewMode() != viewModeEnum.Learn" class="mb-1 fs-6 text-center">
+        <span class="text-warning">{{ cardDealer.getMissedCardCount() }}</span>
+        <span>/{{ cardSplit.length - carousel.getIndex() }}</span>
+        <span class="text-success">/{{ carousel.getIndex() - cardDealer.getMissedCardCount() }}</span>
+      </div>
+    </div>
     <div class="bg-dark" style="border-radius: 3px;">
       <div class="justify-content-around d-flex">
         <button (click)="prev()" class="btn btn-primary d-flex align-items-center bg-transparent border-0 text-primary" type="button">

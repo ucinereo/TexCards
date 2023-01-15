@@ -134,6 +134,10 @@ export class CardCarouselComponent implements OnInit {
     this.updateCards();
   }
 
+  public getIndex() {
+    return this.current;
+  }
+
   public getCurrentCard() {
     if (0 <= this.current && this.current < this.numOfCards) {
       return this._cards![this.current];
