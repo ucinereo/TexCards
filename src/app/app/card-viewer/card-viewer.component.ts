@@ -47,12 +47,14 @@ export class CardViewerComponent implements OnInit {
 
   @HostListener('document:keydown.space', ['$event'])
   flip(event: KeyboardEvent): void {
+    if (this.showAllDone) { return; }
     event.preventDefault();
     this.carousel?.flip();
   }
 
   @HostListener('document:keydown.h')
   toggleStar(): void {
+    if (this.showAllDone) { return; }
     const card = this.carousel?.getCurrentCard();
     if (card) {
       if (card.star) {
@@ -123,6 +125,7 @@ export class CardViewerComponent implements OnInit {
 
   @HostListener('document:keydown.arrowright')
   next(): void {
+    if (this.showAllDone) { return; }
     if (this.cardDealer.getViewMode() == ViewMode.Learn) {
       this.carousel?.rotateRight();
     } else {
@@ -132,9 +135,11 @@ export class CardViewerComponent implements OnInit {
 
   @HostListener('document:keydown.arrowleft')
   prev(): void {
+    if (this.showAllDone) { return; }
     if (this.cardDealer.getViewMode() == ViewMode.Learn) {
-      this.cardDealer.moveToMissed(this.carousel?.getCurrentCard()!);
-      this.carousel?.rotateLeft();
+      if (this.carousel?.rotateLeft()) {
+        this.cardDealer.moveToMissed(this.carousel?.getCurrentCard()!);
+      }
     } else {
       this.carousel?.rotateRight();
     }

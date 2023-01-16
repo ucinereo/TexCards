@@ -146,8 +146,11 @@ export class CardCarouselComponent implements OnInit {
     }
   }
 
-  public rotateRight():void {
-    if (this.position != 'idle' || this.numOfCards == 0) { return; }
+  /*
+  returns true if action is executed
+  */
+  public rotateRight(): boolean {
+    if (this.position != 'idle' || this.numOfCards == 0) { return false; }
     if (!this.learnMode) {
       this.current--;
       if (this.current < 0) { this.current += this.numOfCards; }
@@ -159,10 +162,14 @@ export class CardCarouselComponent implements OnInit {
     }
     this.position = 'right';
     this._ref.detectChanges();
+    return true;
   }
 
-  public rotateLeft():void {
-    if (this.position != 'idle' || this.numOfCards == 0) { return; }
+  /*
+  returns true if action is executed
+  */
+  public rotateLeft(): boolean {
+    if (this.position != 'idle' || this.numOfCards == 0) { return false; }
     if (!this.learnMode) {
       this.current++;
       if (this.current >= this.numOfCards) { this.current -= this.numOfCards; }
@@ -174,6 +181,7 @@ export class CardCarouselComponent implements OnInit {
     }
     this.position = 'left';
     this._ref.detectChanges();
+    return true;
   }
 
   public flip(): void {
