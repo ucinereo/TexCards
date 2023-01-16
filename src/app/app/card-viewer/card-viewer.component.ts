@@ -45,8 +45,9 @@ export class CardViewerComponent implements OnInit {
     });
   }
 
-  @HostListener('document:keydown.space')
-  flip(): void {
+  @HostListener('document:keydown.space', ['$event'])
+  flip(event: KeyboardEvent): void {
+    event.preventDefault();
     this.carousel?.flip();
   }
 
