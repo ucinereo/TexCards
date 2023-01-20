@@ -3,7 +3,9 @@
     <div class="row">
       <div class="col col-md-8">
         <h1 class="text-primary d-inline">Edit Flashcardset</h1>
-        <i (click)="onDelete()" class="material-icons d-inline text-primary fs-1 align-text-bottom pointer" style="margin-left: 20px;">delete</i>
+        <div [hidden]="!flashcardSet?.owner" style="display: inline;">
+          <i (click)="onDelete()" class="material-icons d-inline text-primary fs-1 align-text-bottom pointer" style="margin-left: 20px;">delete</i>
+        </div>
         <div class="input-group">
           <input class="form-control border-radius-3" type="text" placeholder="Flashcardset Name" [(ngModel)]="flashcardSetName" tabindex="1"/>
         </div>
