@@ -51,14 +51,10 @@ export class CardFlipperComponent implements OnInit {
   }
 
   // this gets called if the content gets changed from the card-carousel-component
-  ngOnChanges(changes: SimpleChanges): void {
-
-    // temporary disable the animation
+  reset(): void {
     this.animationsDisabled = true;
-    if (this.flipped) {
-      this.flip();
-    }
-    // enable the animation again
+    this.flipped = false;
     this.animationsDisabled = false;
   }
+
 }

@@ -222,6 +222,7 @@ export class CardCarouselComponent implements OnInit {
   public resetCurrent(): void {
     if (this.position == 'idle') { return; }
     this.updateCards();
+    this.currentCard?.reset();
     this.position = 'idle';
   }
 }
