@@ -6,8 +6,10 @@
 .tex-carousel {
     position: relative;
     width: 100%;
-    max-width: 60rem;
-    min-height: 30rem;
+    max-width: 30rem;
+    min-height: 40rem;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .tex-carousel-item {
@@ -18,4 +20,41 @@
 
 .card-current {
     transform: translateX(0);
+}
+
+// emulate the .container class to get the correct width for a single card
+@media (min-width: 1400px) {
+    .tex-carousel {
+        max-width: 1320px;
+    }
+}
+
+@media (max-width: 1400px) and (min-width: 1200px) {
+    .tex-carousel {
+        max-width: 1140px;
+    }
+}
+
+@media (max-width: 1200px) and (min-width: 992px) {
+    .tex-carousel {
+        max-width: 960px;
+    }
+}
+
+@media (max-width: 992px) and (min-width: 768px) {
+    .tex-carousel {
+        max-width: 720px;
+    }
+}
+
+@media (max-width: 768px) and (min-width: 576px) {
+    .tex-carousel {
+        max-width: 540px;
+    }
+}
+
+@media (max-width: 576px) {
+    .tex-carousel {
+        max-width: 100%;
+    }
 }
